@@ -1,0 +1,80 @@
+html, body {
+  margin: 1rem;
+  font-size: 16px; }
+
+* {
+  box-sizing: border-box; }
+
+body {
+  color: #fff;
+  background-color: #000;
+  font-family: 'NewRailAlphabet', sans-serif; }
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 0; }
+
+h2 {
+  font-size: 2.8rem;
+  margin-bottom: 0; }
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 0; }
+
+h4 {
+  font-size: 1.4rem;
+  margin-bottom: 0; }
+
+p {
+  font-size: 1rem;
+  margin: 0; }
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto; }
+
+.departureEntry {
+  margin: 1rem 0;
+  background-color: #111; }
+  .departureEntry p {
+    font-size: 2.5rem; }
+
+.departuresHeadings p {
+  font-weight: 600;
+  font-size: 2.3rem; }
+
+.departureRow p, .departuresEnd p {
+  color: orange;
+  font-family: 'dotMatrix', sans-serif; }
+
+.departureRow, .departuresHeadings {
+  display: flex; }
+  .departureRow p a, .departuresHeadings p a {
+    color: inherit;
+    text-decoration: none; }
+  .departureRow p.std, .departuresHeadings p.std {
+    min-width: 120px; }
+  .departureRow p.destinationName, .departuresHeadings p.destinationName {
+    min-width: 580px; }
+  .departureRow p.platform, .departuresHeadings p.platform {
+    min-width: 100px;
+    text-transform: capitalize; }
+  .departureRow p.etd, .departuresHeadings p.etd {
+    min-width: 200px; }
+  .departureRow p.operator, .departuresHeadings p.operator {
+    min-width: 0px; }
+  .departureRow p.delayReason, .departuresHeadings p.delayReason {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+
+.departuresEnd {
+  display: flex;
+  justify-content: space-between;
+  background-color: #111; }
+  .departuresEnd p {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: orange; }
+/*# sourceMappingURL=style.css.map */

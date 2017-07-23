@@ -1,0 +1,112 @@
+html, body {
+  margin: 1rem;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #fff;
+  background-color: #000;
+  font-family: 'NewRailAlphabet', sans-serif; // "Gill Sans", "Gill Sans MT", Calibri, 
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 0;
+}
+h2 {
+  font-size: 2.8rem;
+  margin-bottom: 0;
+}
+h3 {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+h4 {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.departureEntry {
+  margin: 1rem 0;
+  background-color: #111;
+
+  p {
+    font-size: 2.5rem;
+  }
+
+  &:nth-child(even) {
+    
+  }
+}
+
+.departuresHeadings {
+  p {
+    font-weight: 600;
+    font-size: 2.3rem;
+  }
+}
+.departureRow, .departuresEnd {
+  p {
+    color: orange;
+    font-family: 'dotMatrix', sans-serif;
+  }
+}
+.departureRow, .departuresHeadings {
+  display: flex;
+
+  p {
+    //margin-right: 1rem;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+   &.std {
+     min-width: 120px; 
+   }
+   &.destinationName {
+     min-width: 580px; 
+   }
+   &.platform {
+     min-width: 100px; 
+     text-transform: capitalize;
+   }
+   &.etd {
+     min-width: 200px; 
+   }
+   &.operator {
+     min-width: 0px; 
+   }
+   &.delayReason {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+   }
+  }
+}
+
+.departuresEnd {
+  display: flex;
+  justify-content: space-between;
+  background-color: #111;
+
+  p {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: orange;
+  }
+}

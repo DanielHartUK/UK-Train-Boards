@@ -1,0 +1,14 @@
+{
+  "name": "guide",
+  "version": "1.0.0",
+  "dependencies": {
+    "autoprefixer": "^6.5.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "grunt-sass": "^1.2.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-uglify": "^2.0.0"
+  }
+}
