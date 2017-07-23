@@ -49,25 +49,39 @@ p {
   font-family: 'dotMatrix', sans-serif; }
 
 .departureRow, .departuresHeadings {
-  display: flex; }
-  .departureRow p a, .departuresHeadings p a {
+  display: flex;
+  flex-wrap: wrap;
+  height: 46px;
+  overflow: hidden; }
+  .departureRow p a, .departureRow div a, .departuresHeadings p a, .departuresHeadings div a {
     color: inherit;
     text-decoration: none; }
-  .departureRow p.std, .departuresHeadings p.std {
+  .departureRow p.std, .departureRow p.opStdPad, .departureRow div.std, .departureRow div.opStdPad, .departuresHeadings p.std, .departuresHeadings p.opStdPad, .departuresHeadings div.std, .departuresHeadings div.opStdPad {
     min-width: 120px; }
-  .departureRow p.destinationName, .departuresHeadings p.destinationName {
-    min-width: 580px; }
-  .departureRow p.platform, .departuresHeadings p.platform {
+  .departureRow p.destinationName, .departureRow div.destinationName, .departuresHeadings p.destinationName, .departuresHeadings div.destinationName {
+    min-width: 580px;
+    padding-right: 1rem; }
+  .departureRow p.platform, .departureRow div.platform, .departuresHeadings p.platform, .departuresHeadings div.platform {
     min-width: 100px;
     text-transform: capitalize; }
-  .departureRow p.etd, .departuresHeadings p.etd {
+  .departureRow p.etd, .departureRow div.etd, .departuresHeadings p.etd, .departuresHeadings div.etd {
     min-width: 200px; }
-  .departureRow p.operator, .departuresHeadings p.operator {
+  .departureRow p.operator, .departureRow div.operator, .departuresHeadings p.operator, .departuresHeadings div.operator {
     min-width: 0px; }
-  .departureRow p.delayReason, .departuresHeadings p.delayReason {
+  .departureRow p.delayReason, .departureRow div.delayReason, .departuresHeadings p.delayReason, .departuresHeadings div.delayReason {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; }
+  .departureRow .calling, .departuresHeadings .calling {
+    white-space: nowrap;
+    position: relative;
+    transition: 1s linear top;
+    right: -800px;
+    top: -92px; }
+  .departureRow .operator, .departureRow .opStdPad, .departuresHeadings .operator, .departuresHeadings .opStdPad {
+    position: relative;
+    transition: 1s linear top;
+    top: 0px; }
 
 .departuresEnd {
   display: flex;
