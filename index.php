@@ -4,7 +4,7 @@
   $OpenLDBWS = new OpenLDBWS($token);
   if(isset($_GET['station'])) {
     $station = strtoupper($_GET['station']);
-    $response = $OpenLDBWS->GetDepBoardWithDetails(15, $station);
+    $response = $OpenLDBWS->GetDepBoardWithDetails(60, $station);
 
     if(isset($response->GetStationBoardResult)) {
       $validStation = true;
@@ -53,7 +53,7 @@
 <head>
   <?php require_once('src/php/head.php'); ?>
   <title> Live departure board </title>
-  <meta http-equiv="refresh" content="3000">
+  <meta http-equiv="refresh" content="60">
 </head>
 <body onload="startTime()">
   
@@ -167,16 +167,16 @@
             $(el).css('transition', '').css('right', '');
             $(el).parent().find('.opStdPad, .operator').css('transition', '1s linear top').css('top', '46px');
             $(el).css('top', '-46px');
-          }, 5000);
+          }, 10000);
           setTimeout(function() { 
             $(el).css('transition', duration + 's linear').css('right', elLength);
-          }, 7000);
+          }, 12000);
           setTimeout(function() {
             console.log('x')
-            $(el).parent().find('.opStdPad, .operator').css('transition', '').css('top', '');
+            $(el).parent().find('.opStdPad, .operator').css('top', '');
             $(el).css('transition', '').css('top', '');
             calling();
-          }, duration*1000 + 7000);
+          }, duration*1000 + 12000);
         };
         calling();
       });

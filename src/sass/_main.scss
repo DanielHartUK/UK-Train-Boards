@@ -93,7 +93,7 @@ p {
      min-width: 200px; 
    }
    &.operator {
-     min-width: 0px; 
+     min-width: 800px; 
    }
    &.delayReason {
     text-overflow: ellipsis;
@@ -110,7 +110,6 @@ p {
   }
   .operator, .opStdPad {
     position: relative;
-    transition: 1s linear top;
     top: 0px;
   }
 }

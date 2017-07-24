@@ -67,7 +67,7 @@ p {
   .departureRow p.etd, .departureRow div.etd, .departuresHeadings p.etd, .departuresHeadings div.etd {
     min-width: 200px; }
   .departureRow p.operator, .departureRow div.operator, .departuresHeadings p.operator, .departuresHeadings div.operator {
-    min-width: 0px; }
+    min-width: 800px; }
   .departureRow p.delayReason, .departureRow div.delayReason, .departuresHeadings p.delayReason, .departuresHeadings div.delayReason {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -80,7 +80,6 @@ p {
     top: -92px; }
   .departureRow .operator, .departureRow .opStdPad, .departuresHeadings .operator, .departuresHeadings .opStdPad {
     position: relative;
-    transition: 1s linear top;
     top: 0px; }
 
 .departuresEnd {
