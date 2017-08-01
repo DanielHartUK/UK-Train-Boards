@@ -1,5 +1,6 @@
 config.php
 node_modules/
 grunt.command
-assets/webfonts/
+assets/webfonts/newrail
 .DS_Store
+scrap.php

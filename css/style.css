@@ -8,11 +8,12 @@ html, body {
 body {
   color: #fff;
   background-color: #000;
-  font-family: 'NewRailAlphabet', sans-serif; }
+  font-family: 'NewRailAlphabet', Helvetica, sans-serif; }
 
 h1 {
   font-size: 4rem;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  margin-top: 0; }
 
 h2 {
   font-size: 2.8rem;
@@ -63,9 +64,11 @@ p {
     padding-right: 1rem; }
   .departureRow p.platform, .departureRow div.platform, .departuresHeadings p.platform, .departuresHeadings div.platform {
     min-width: 100px;
-    text-transform: capitalize; }
+    text-transform: capitalize;
+    text-align: right; }
   .departureRow p.etd, .departureRow div.etd, .departuresHeadings p.etd, .departuresHeadings div.etd {
-    min-width: 200px; }
+    min-width: 200px;
+    text-align: right; }
   .departureRow p.operator, .departureRow div.operator, .departuresHeadings p.operator, .departuresHeadings div.operator {
     min-width: 800px; }
   .departureRow p.delayReason, .departureRow div.delayReason, .departuresHeadings p.delayReason, .departuresHeadings div.delayReason {
@@ -81,6 +84,16 @@ p {
   .departureRow .operator, .departureRow .opStdPad, .departuresHeadings .operator, .departuresHeadings .opStdPad {
     position: relative;
     top: 0px; }
+  .departureRow .departureUpdated, .departuresHeadings .departureUpdated {
+    animation: departureUpdated 2s 10 step-end; }
+
+@keyframes departureUpdated {
+  0% {
+    color: orange; }
+  50% {
+    color: transparent; }
+  100% {
+    color: orange; } }
 
 .departuresEnd {
   display: flex;

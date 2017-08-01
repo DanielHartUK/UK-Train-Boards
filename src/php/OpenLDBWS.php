@@ -1,4 +1,5 @@
 <?php
+// From: https://github.com/railalefan/phpOpenLDBWS
   class OpenLDBWS
   {
     private $soapClient = NULL;

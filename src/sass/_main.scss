@@ -10,12 +10,13 @@ html, body {
 body {
   color: #fff;
   background-color: #000;
-  font-family: 'NewRailAlphabet', sans-serif; // "Gill Sans", "Gill Sans MT", Calibri, 
+  font-family: 'NewRailAlphabet', Helvetica, sans-serif;
 }
 
 h1 {
   font-size: 4rem;
   margin-bottom: 0;
+  margin-top: 0;
 }
 h2 {
   font-size: 2.8rem;
@@ -71,7 +72,6 @@ p {
   overflow: hidden;
 
   p, div {
-    //margin-right: 1rem;
 
     a {
       color: inherit;
@@ -88,9 +88,11 @@ p {
    &.platform {
      min-width: 100px; 
      text-transform: capitalize;
+     text-align: right;
    }
    &.etd {
      min-width: 200px; 
+     text-align: right;
    }
    &.operator {
      min-width: 800px; 
@@ -112,6 +114,15 @@ p {
     position: relative;
     top: 0px;
   }
+  .departureUpdated {
+    animation: departureUpdated 2s 10 step-end;
+  }
+}
+
+@keyframes departureUpdated {
+  0% { color: orange; }
+  50% { color: transparent; }
+  100% { color: orange; }
 }
 
 .departuresEnd {
