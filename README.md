@@ -10,3 +10,6 @@ This project plans to recreate passenger information boards used in UK railway s
 
 ## Notes
 - The New Rail Alphabet is a paid font and thus is not included in this repository. Since Rail Alphabet is based on Helvetica, purchasing this font is probably not neccesary unless you're exceptionally dedicated (It's quite expensive). 
+
+## License
+[MIT](https://github.com/DanielHartUK/UK-Railway-Stations-Information-Boards/blob/master/license.md)
