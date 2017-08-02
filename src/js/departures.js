@@ -1,22 +1,39 @@
 var sIDs = []; // Array of service ids
 var rowsPerPage = 27; // Number of rows to display on each page/screen
-var pages = 4; // Number of pages
+var pages = 5; // Number of pages
 var departures = rowsPerPage * pages; // Number of departures to get
-var page = getQueryVariable("page"); // Page to display
+if(getQueryVariable("page")) {
+  var page = getQueryVariable("page"); // Page to display
+} else {
+  var page = 1; // Page to display
+}
 var rows; // Row counter
 var stationCode = getQueryVariable("station");
+var responseError = false;
 function getTrains() {
   sIDs = [];
   rows = 0;
   var rowI = 0;
   $.get("src/php/getDepartures.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
-    if(trainServices.length > 0) {
+    console.log(trainServices)
+    if(trainServices === "No response") {
+      rows += 3;
+      responseError = true;
+      $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">No reponse recieved.</p></div></div>');
+      $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">Check station code is correct</p></div></div>');
+      $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">and rate limit is not exceeded.</p></div></div>');
+    } else if(trainServices === "No departures") {
+      rows++;
+      if($('.noDepartures').length === 0) {
+        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">No departures</p></div></div>');
+      }
+    } else if(trainServices.length > 0) {
       $.each(trainServices, function(key, service) {
         rowI++;
         if(rowI <= rowsPerPage * (page - 1)) {
-          
+          // Do nothing
         } else if (rowI > rowsPerPage * page) {
-          return false;
+          return false; // Exit each loop
         } else {
           var sanID = sanitizeID(service.serviceID);
           rows++;
@@ -106,14 +123,11 @@ function getTrains() {
           }
         }
       });
-    } else {
-      $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="delayReason">Station not specified or incorrect</p></div></div>');
     }
-    $.each($('.departureEntry:not(.empty, .error)'), function(i, e) {
+    $.each($('.departureEntry:not(.empty, .error, .noDepartures)'), function(i, e) {
       var dataID = $(e)[0].dataset.serviceid; 
       if(dataID != NaN && sIDs.indexOf(dataID) === -1) {
         e.remove();
-        console.log('removed');
       }  
     })
     // Add empty rows if needed
@@ -127,21 +141,22 @@ function getTrains() {
         $('.departuresList').find('.departureEntry.empty')[0].remove();
       rows--;
     }
+    
+    var actualPages = Math.ceil(trainServices.length / rowsPerPage);
+    $('.page').text("Page " + page + " of " + actualPages);
   });
 }
 getTrains();
-// Sync
+// Wait for time to be 10, 20, etc. seconds to start refreshing board, so pages are synced up if using mutliple displays
 var sync = setInterval(function() {
-  if(getSecs() % 10 === 0) {
+  if(responseError === false && getSecs() % 10 === 0) {
     clearInterval(sync);
-    console.log("sync")
     setInterval(getTrains, 10000); // Refresh every 10 seconds
+  } else if(responseError) {
+    clearInterval(sync);
   }
 }, 100)
 
-$(document).ready(function() {
-  $('.page').text("Page " + page + " of " + pages);
-});
 
 
 

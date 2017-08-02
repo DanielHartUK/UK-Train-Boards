@@ -57,6 +57,8 @@ p {
   .departureRow p a, .departureRow div a, .departuresHeadings p a, .departuresHeadings div a {
     color: inherit;
     text-decoration: none; }
+  .departureRow p.centre, .departureRow div.centre, .departuresHeadings p.centre, .departuresHeadings div.centre {
+    text-align: center; }
   .departureRow p.std, .departureRow p.opStdPad, .departureRow div.std, .departureRow div.opStdPad, .departuresHeadings p.std, .departuresHeadings p.opStdPad, .departuresHeadings div.std, .departuresHeadings div.opStdPad {
     min-width: 120px; }
   .departureRow p.destinationName, .departureRow div.destinationName, .departuresHeadings p.destinationName, .departuresHeadings div.destinationName {
@@ -71,10 +73,12 @@ p {
     text-align: right; }
   .departureRow p.operator, .departureRow div.operator, .departuresHeadings p.operator, .departuresHeadings div.operator {
     min-width: 800px; }
-  .departureRow p.delayReason, .departureRow div.delayReason, .departuresHeadings p.delayReason, .departuresHeadings div.delayReason {
+  .departureRow p.delayReason, .departureRow p.errorMessage, .departureRow div.delayReason, .departureRow div.errorMessage, .departuresHeadings p.delayReason, .departuresHeadings p.errorMessage, .departuresHeadings div.delayReason, .departuresHeadings div.errorMessage {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; }
+  .departureRow p.errorMessage, .departureRow div.errorMessage, .departuresHeadings p.errorMessage, .departuresHeadings div.errorMessage {
+    width: 100%; }
   .departureRow .calling, .departuresHeadings .calling {
     white-space: nowrap;
     position: relative;

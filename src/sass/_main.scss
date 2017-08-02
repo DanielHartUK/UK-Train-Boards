@@ -78,30 +78,37 @@ p {
       text-decoration: none;
     }
 
-   &.std, &.opStdPad {
-     min-width: 120px; 
-   }
-   &.destinationName {
-     min-width: 580px; 
-     padding-right: 1rem;
-   }
-   &.platform {
-     min-width: 100px; 
-     text-transform: capitalize;
-     text-align: right;
-   }
-   &.etd {
-     min-width: 200px; 
-     text-align: right;
-   }
-   &.operator {
-     min-width: 800px; 
-   }
-   &.delayReason {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-   }
+    &.centre {
+      text-align: center;
+    }
+
+    &.std, &.opStdPad {
+      min-width: 120px; 
+    }
+    &.destinationName {
+      min-width: 580px; 
+      padding-right: 1rem;
+    }
+    &.platform {
+      min-width: 100px; 
+      text-transform: capitalize;
+      text-align: right;
+    }
+    &.etd {
+      min-width: 200px; 
+      text-align: right;
+    }
+    &.operator {
+      min-width: 800px; 
+    }
+    &.delayReason, &.errorMessage {
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     overflow: hidden;
+    }
+    &.errorMessage {
+      width: 100%;
+    }
   }
   .calling {
     white-space: nowrap;

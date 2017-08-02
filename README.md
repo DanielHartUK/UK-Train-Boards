@@ -10,7 +10,7 @@ This project plans to recreate passenger information boards used in UK railway s
 - No favicon is currently set.
 - Error handling for no response, incorrect station, etc. has not yet been implemented.
 - If a cancelled service is later reinstated, it may appear further down the board than where it should be if sorted chronilogically.
-- Not all services have platform numbers, this is more common at stations like Euston. This isn't a issue with this project, rather that information not being available in National Rail's feed for some reason that I'm yet to discover.
+- Not all services have platform numbers, blame National Rail, not me.
 
 
 ## Notes

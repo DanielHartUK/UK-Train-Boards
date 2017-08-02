@@ -43,8 +43,17 @@
         $trainServicesResponse = array($trainServicesResponse);
       }
     }
-    header("Content-Type: application/json");
-    echo json_encode($trainServicesResponse);
+    if(isset($trainServicesResponse)) { // Has departures
+      header("Content-Type: application/json");
+      echo json_encode($trainServicesResponse);
+    } else if (isset($response) && !empty($response)) { // Reponse but no departures
+      header("Content-Type: application/json");
+      echo json_encode("No departures");
+    } else { // No response
+      header("Content-Type: application/json");
+      echo json_encode("No response");
+    }
+
   } else {
     echo "No station code supplied";
   }
