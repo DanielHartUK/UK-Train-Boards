@@ -1,6 +1,10 @@
 var sIDs = []; // Array of service ids
 var rowsPerPage = 27; // Number of rows to display on each page/screen
-var pages = 5; // Number of pages
+if(getQueryVariable("page")) {
+  var pages = getQueryVariable("pages"); // Number of pages to fetch
+} else {
+  var pages = 1; // Number of pages to fetch
+}
 var departures = rowsPerPage * pages; // Number of departures to get
 if(getQueryVariable("page")) {
   var page = getQueryVariable("page"); // Page to display
@@ -14,17 +18,17 @@ function getTrains() {
   sIDs = [];
   rows = 0;
   var rowI = 0;
-  $.get("php/getDepartures.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
+  $.get("php/getArrivals.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
     if(trainServices === "No response") {
       rows += 3;
       responseError = true;
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">No reponse recieved.</p></div></div>');
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">Check station code is correct</p></div></div>');
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">and rate limit is not exceeded.</p></div></div>');
-    } else if(trainServices === "No departures") {
+    } else if(trainServices === "No arrivals") {
       rows++;
       if($('.noDepartures').length === 0) {
-        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">No departures</p></div></div>');
+        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">No arrivals</p></div></div>');
       }
     } else if(trainServices.length > 0) {
       $.each(trainServices, function(key, service) {
@@ -41,22 +45,22 @@ function getTrains() {
             var serviceEntryHTML = '<div class="departureEntry" id="'+ sanID +'" data-serviceID="'+ service.serviceID +'">';
             serviceEntryHTML += '<div class="departureRow">';
             serviceEntryHTML += '<p class="std">';
-            if(service.std != null) {
-              serviceEntryHTML += service.std;
+            if(service.sta != null) {
+              serviceEntryHTML += service.sta;
             }
             serviceEntryHTML += '</p>'; // Close std
             serviceEntryHTML += '<p class="destinationName">';
-            if(service.destination.location != null) {
-              if(service.destination.location.length > 1) {
+            if(service.origin.location != null) {
+              if(service.origin.location.length > 1) {
                 var i = 0;
-                $.each(service.destination.location, function(key, value) {
+                $.each(service.origin.location, function(key, value) {
                   if(i != 0)
                     serviceEntryHTML += " &amp; ";
                   serviceEntryHTML += '<a href="?station=' + value.crs + '">' + value.locationName + '</a>';
                   i++;
                 });  
               } else {
-                serviceEntryHTML += '<a href="?station=' + service.destination.location.crs + '">' + service.destination.location.locationName + '</a>';
+                serviceEntryHTML += '<a href="?station=' + service.origin.location.crs + '">' + service.origin.location.locationName + '</a>';
               }
             }
             serviceEntryHTML += '</p>'; // Close destinationName
@@ -68,8 +72,8 @@ function getTrains() {
             }
             serviceEntryHTML += '</p>';// Close platform
             serviceEntryHTML += '<p class="etd">';
-            if(service.etd != null) {
-              serviceEntryHTML += service.etd;
+            if(service.eta != null) {
+              serviceEntryHTML += service.eta;
             }
             serviceEntryHTML += '</p>'; // Close etd
             serviceEntryHTML += '</div>'; // Close departureRow
@@ -82,18 +86,18 @@ function getTrains() {
             var newHTML = "";
   
             // Check destination
-            if(service.destination.location != null) {
+            if(service.origin.location != null) {
               newHTML = "";
-              if(service.destination.location.length > 1) {
+              if(service.origin.location.length > 1) {
                 var i = 0;
-                $.each(service.destination.location, function(key, value) {
+                $.each(service.origin.location, function(key, value) {
                   if(i != 0)
                     newHTML += " &amp; ";
                   newHTML += '<a href="?station=' + value.crs + '">' + value.locationName + '</a>';
                   i++;
                 });  
               } else {
-                newHTML += '<a href="?station=' + service.destination.location.crs + '">' + service.destination.location.locationName + '</a>';
+                newHTML += '<a href="?station=' + service.origin.location.crs + '">' + service.origin.location.locationName + '</a>';
               }
             }
             if($(r).find('.destinationName').html() != newHTML.replace(" & ", " &amp; ")) {
@@ -113,8 +117,8 @@ function getTrains() {
   
             // Check expected
             newHTML = "";
-            if(service.etd != null) {
-              newHTML = service.etd;
+            if(service.eta != null) {
+              newHTML = service.eta;
             }
             if($(r).find('.etd').html() != newHTML) {
               $(r).find('.etd').html(newHTML); 

@@ -31,9 +31,51 @@ p {
   font-size: 1rem;
   margin: 0; }
 
+button, input, optgroup, select, textarea {
+  font-family: 'NewRailAlphabet', Helvetica, sans-serif; }
+
 .main {
   max-width: 1000px;
   margin: 0 auto; }
+
+.flex {
+  display: flex;
+  justify-content: center;
+  margin: 0 -1rem; }
+
+form.options label, form.options input {
+  font-size: 1.5rem; }
+
+form.options label {
+  padding: 1rem;
+  display: block;
+  flex-grow: 1; }
+
+form.options input {
+  width: 100%;
+  padding: 0.5rem; }
+
+.boards {
+  margin-bottom: 1rem; }
+  .boards label {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid white;
+    margin: 1rem;
+    padding: 1rem;
+    color: white;
+    cursor: pointer;
+    max-width: 33.333%; }
+    .boards label input[type=radio] {
+      position: absolute;
+      top: -9999px;
+      visibility: hidden; }
+    .boards label:hover, .boards label:focus {
+      background-color: rgba(255, 255, 255, 0.2); }
+    .boards label.selected {
+      background-color: rgba(255, 255, 255, 0.3); }
+    .boards label img {
+      width: 100%;
+      height: auto; }
 
 .departureEntry {
   margin: 1rem 0;

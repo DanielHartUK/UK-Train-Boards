@@ -32,7 +32,8 @@ module.exports = function(grunt) {
       script: {
         files: {
           'js/script.min.js': 'src/js/script.js',
-          'js/departures.min.js': 'src/js/departures.js'
+          'js/departures.min.js': 'src/js/departures.js',
+          'js/arrivals.min.js': 'src/js/arrivals.js'
         }
       }
     },

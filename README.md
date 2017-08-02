@@ -1,11 +1,6 @@
 # UK Railway Stations Information Boards
 This project plans to recreate passenger information boards used in UK railway stations. A PHP server is required (with PHP JSON and SOAP), as well as a [National Rail LDBWS token](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/).
 
-## Usage
-+ Departures
-- Navigate to [server]/?station=[station code]&page=[page number to display]
-(e.g. example.com/?station=Lan&page=1)
-
 ## Known Issues
 - No favicon is currently set.
 - Error handling for no response, incorrect station, etc. has not yet been implemented.

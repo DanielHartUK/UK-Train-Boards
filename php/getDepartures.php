@@ -1,6 +1,6 @@
 <?php
-  require("../../config.php");
-  require("OpenLDBWS.php");
+  require("../config.php");
+  require("../src/php/OpenLDBWS.php");
   $OpenLDBWS = new OpenLDBWS($token);
   if(isset($_GET['station'])) {
     $station = strtoupper($_GET['station']);
@@ -10,11 +10,6 @@
       $numRows = 20;
     }
     $response = $OpenLDBWS->GetDepartureBoard($numRows, $station);
-    if(isset($response->GetStationBoardResult)) {
-      $validStation = true;
-    } else {
-      $validStation = false;
-    }
 
     if(isset($response->GetStationBoardResult->trainServices->service))
       $a1 = $response->GetStationBoardResult->trainServices->service;
@@ -53,7 +48,6 @@
       header("Content-Type: application/json");
       echo json_encode("No response");
     }
-
   } else {
     echo "No station code supplied";
   }

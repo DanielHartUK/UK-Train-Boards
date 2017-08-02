@@ -58,3 +58,9 @@ function getQueryVariable(variable) {
   }
   return(false);
 }
+
+function searchArray(query, array) {
+  for(var i = 0; i < array.length; i++) {
+
+  }
+}
