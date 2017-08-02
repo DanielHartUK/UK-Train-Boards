@@ -4,3 +4,4 @@ grunt.command
 assets/webfonts/newrail
 .DS_Store
 scrap.php
+phpIndex.php
