@@ -24,7 +24,9 @@
   </div>
 
   <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+  <script src="js/moment.js" type="text/javascript"></script>
   <script src="js/script.min.js" type="text/javascript"></script>
   <script src="js/departures.min.js" type="text/javascript"></script>
+  <script> 
 </body>
 </html>

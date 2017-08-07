@@ -6,6 +6,8 @@ This project plans to recreate passenger information boards used in UK railway s
 - Error handling for no response, incorrect station, etc. has not yet been implemented.
 - If a cancelled service is later reinstated, it may appear further down the board than where it should be if sorted chronilogically.
 - Not all services have platform numbers, blame National Rail, not me.
+- The platform text-to-speech callouts will probably not work if a train divides more than once, though I don't think this currently happens anywhere in the UK.
+- Platform TTS callouts will currently only function for services which are on time 5 minutes from their scheduled departure.
 
 
 ## Notes

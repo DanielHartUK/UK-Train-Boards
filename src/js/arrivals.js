@@ -158,9 +158,4 @@ var sync = setInterval(function() {
   } else if(responseError) {
     clearInterval(sync);
   }
-}, 100)
-
-
-
-
-
+}, 100);

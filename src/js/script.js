@@ -18,6 +18,10 @@ function getSecs() {
   return new Date().getSeconds();
 }
 
+function getHM(addMins) {
+  return moment().add(addMins, 'm').format('H:mm')
+}
+
 $('.delayReason').each(function() {
   var text = $(this).text();
   var textArray = text.match(/\S[\s\S]{0,30}\S(?=\s|$)/g);
@@ -59,8 +63,17 @@ function getQueryVariable(variable) {
   return(false);
 }
 
-function searchArray(query, array) {
-  for(var i = 0; i < array.length; i++) {
-
-  }
+function speak(text, vol, rate, pitch) {
+  var msg = new SpeechSynthesisUtterance();
+  msg.text = text;
+  msg.volume = vol;
+  msg.rate = rate;
+  msg.pitch = pitch;
+  msg.lang = "en-UK";
+  msg.onend = function() { console.log('finished')};
+  window.speechSynthesis.speak(msg);
+  console.log(msg);
 }
+
+
+

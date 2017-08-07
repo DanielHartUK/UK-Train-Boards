@@ -17,6 +17,8 @@
         <input type="number" name="pages" id="pages" required value="1" ></label>
         <label for="page">Page to display: <br>
         <input type="number" name="page" id="page" required value="1" ></label>
+        <label for="callouts">Platform callouts: <br>
+        <input type="checkbox" name="callouts" id="callouts" value="true"></label>
       </div>
       <h3> Board </h3>
       <div class="flex boards">
@@ -47,8 +49,13 @@
       var pages = $('input[name=pages]').val();
       var page = $('input[name=page]').val();
       var boardType = $('input[name=board]:checked').val();
+      if($('input[name=callouts]:checked').length) {
+        var callouts = true;
+      } else {
+        var callouts = false;
+      }  
       if(boardType === "departures") {
-        window.location.assign("/departures.php?station=" + station + "&pages=" + pages + "&page=" + page);
+        window.location.assign("/departures.php?station=" + station + "&pages=" + pages + "&page=" + page + "&speak=" + callouts);
       } else if (boardType === "arrivals") {
         window.location.assign("/arrivals.php?station=" + station + "&pages=" + pages + "&page=" + page);
       }
@@ -57,17 +64,6 @@
       $('label.selected').removeClass('selected');
       $(this).parent().addClass('selected');
     })
-    /*var stations;
-    $.getJSON("assets/stationCodes.json", function(response) {
-      stations = response.stations;
-    });
-    $('#station').keyup(function() {
-      var val = $('#station').val();
-      if(val.length > 2) {
-        var firstLetter = val.charAt(0);
-        console.log(searchArray(val, stations[firstLetter]));
-      }
-    })*/
   </script>
 </body>
 </html>

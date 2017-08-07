@@ -10,7 +10,7 @@ if(getQueryVariable("page")) {
 var rows; // Row counter
 var stationCode = getQueryVariable("station");
 var responseError = false;
-function getTrains() {
+function getTrains(callback) {
   sIDs = [];
   rows = 0;
   var rowI = 0;
@@ -38,7 +38,7 @@ function getTrains() {
           rows++;
           sIDs.push(service.serviceID);
           if($('#' + sanID).length === 0) { 
-            var serviceEntryHTML = '<div class="departureEntry" id="'+ sanID +'" data-serviceID="'+ service.serviceID +'">';
+            var serviceEntryHTML = '<div class="departureEntry" id="'+ sanID +'" data-serviceID="'+ service.serviceID +'" data-operator="'+ service.operator +'">';
             serviceEntryHTML += '<div class="departureRow">';
             serviceEntryHTML += '<p class="std">';
             if(service.std != null) {
@@ -143,9 +143,11 @@ function getTrains() {
     
     var actualPages = Math.ceil(trainServices.length / rowsPerPage);
     $('.page').text("Page " + page + " of " + actualPages);
+
+    if(typeof callback === "function")
+      callback();
   });
 }
-getTrains();
 // Wait for time to be 10, 20, etc. seconds to start refreshing board, so pages are synced up if using mutliple displays
 var sync = setInterval(function() {
   if(responseError === false && getSecs() % 10 === 0) {
@@ -156,7 +158,94 @@ var sync = setInterval(function() {
   }
 }, 100)
 
+// Get detailed departures
+var departuresDetailed = new Object;
+function getTrainsDetailed(callback) {
+  $.get("php/getDeparturesDetailed.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
+    $.each(trainServices, function(key, service) {
+      departuresDetailed[sanitizeID(service.serviceID)] = service;
+    })
+    $.each(departuresDetailed, function(key) {
+      if($('#' + key).length === 0) {
+        delete departuresDetailed[key];
+      }
+    })
+    if(typeof callback === "function") {
+      callback();
+    }
+  });
+}
 
+function checkDepartures() {
+  $('.departureEntry:not(.empty, .error)').each(function() {
+    var departureTime = $(this).find('.std').text();
+    var expectedTime = $(this).find('.etd').text();
+    if(departureTime === getHM(5) && expectedTime == "On time") {
+      var sID = $(this).attr('id');
+      var platform = $(this).find('.platform').text();
+      var destination = $(this).find('.destinationName').text();
+      var operator = $(this).data('operator');
+      if(typeof departuresDetailed[sID] != "undefined") {
+        var callingPoints = "";
+        var ia = 0;
+        $.each(departuresDetailed[sID].subsequentCallingPoints, function(k, scp) {
+          if(Array.isArray(scp)) { // Train splits
+            $.each(scp, function (k, cpl) {
+              var cplLength = cpl.callingPoint.length;
+              var i = 0;
+              $.each(cpl.callingPoint, function(k, cp) {
+                if(i > 0 && i != cplLength - 1) {
+                  callingPoints += ", ";
+                } else if(i === cplLength - 1) {
+                  callingPoints += ", and ";
+                }
+                callingPoints += cp.locationName;
+                i++;
+              });
+              if(ia != scp.length - 1) {
+                callingPoints += ", and ";
+              }
+              ia++;
+            })
+          } else if(Array.isArray(scp.callingPoint)) { // Many calling points
+            var cpLength = scp.callingPoint.length;
+            var i = 0;
+            $.each(scp.callingPoint, function(k, cp) {
+              if(i > 0 && i != cpLength - 1) {
+                callingPoints += ", ";
+              } else if(i === cpLength - 1) {
+                callingPoints += ", and ";
+              }
+              callingPoints += cp.locationName;
+              i++;
+            });
+          } else { // Destination only
+            callingPoints += scp.callingPoint.locationName + " only.";
+          }
+        });
+        speakService(platform, departureTime, operator, destination, callingPoints);
+      } else {
+        speakService(platform, departureTime, operator, destination, null);
+      }
+    }
+  })
+}
 
+function speakService(platform, departureTime, operator, destination, callingPoints) {
+  if(callingPoints != null) {
+    text = "Platform " + platform + " for the " + departureTime + " " + operator + " service to " + destination + ", calling at: " + callingPoints;
+  } else {
+    text = "Platform " + platform + " for the " + departureTime + " " + operator + " service to " + destination;
+  }
+  speak(text, 1, 0.85, 0.8);
+}
+
+if(getQueryVariable("speak") === "true") {
+  getTrains(function() { getTrainsDetailed( function() { checkDepartures() }) });
+  setInterval(getTrainsDetailed, 60000);
+  setInterval(checkDepartures, 60000);
+} else {
+  getTrains();
+}
 
 
