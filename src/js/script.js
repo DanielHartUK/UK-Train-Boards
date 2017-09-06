@@ -51,14 +51,46 @@ function sanitizeID(id) {
   return id.replace(/[^a-zA-Z0-9]/g,'');
 }
 
+function isVowel(letter) {
+  letter = letter.toLowerCase();
+  return letter === "a" || letter === "e" || letter === "i" || letter === "o" || letter === "u";
+}
+
+function scrollAnimation(el, speed) {
+  var elWidth = el.outerWidth();
+  if(elWidth > el.parent().width()) {
+    var aniTime = elWidth/(speed * 1000);
+    el.css('transition', aniTime + 's linear').css('left', '-' + elWidth + 'px');
+    setTimeout(function() {
+      el.css('transition', '').css('left', elWidth + 'px');
+    }, aniTime * 1000)
+    return aniTime;
+  }
+}
+
+// From: https://stackoverflow.com/a/6632771
+function splitString(len, input) {
+  var curr = len;
+  var prev = 0;
+  output = [];
+  while (input[curr]) {
+    if (input[curr++] == ' ') {
+      output.push(input.substring(prev,curr));
+      prev = curr;
+      curr += len;
+    }
+  }
+  output.push(input.substr(prev));
+  return output;
+}
 
 // From: https://css-tricks.com/snippets/javascript/get-url-variables/
 function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
   var vars = query.split("&");
   for (var i=0;i<vars.length;i++) {
-          var pair = vars[i].split("=");
-          if(pair[0] == variable){return pair[1];}
+    var pair = vars[i].split("=");
+    if(pair[0] == variable){return pair[1];}
   }
   return(false);
 }

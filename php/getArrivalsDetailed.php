@@ -9,7 +9,7 @@
     } else {
       $numRows = 20;
     }
-    $response = $OpenLDBWS->GetDepartureBoard($numRows, $station);
+    $response = $OpenLDBWS->GetArrBoardWithDetails($numRows, $station);
 
     if(isset($response->GetStationBoardResult->trainServices->service))
       $a1 = $response->GetStationBoardResult->trainServices->service;
@@ -28,8 +28,8 @@
     }
   
     function sortTime($a, $b) {
-      if($a->std==$b->std) return 0;
-      return ($a->std < $b->std) ? -1 : 1;
+      if($a->sta==$b->sta) return 0;
+      return ($a->sta < $b->sta) ? -1 : 1;
     }
     if(isset($trainServicesResponse)) {
       if(count($trainServicesResponse) > 1) {
@@ -43,7 +43,7 @@
       echo json_encode($trainServicesResponse);
     } else if (isset($response) && !empty($response)) { // Reponse but no departures
       header("Content-Type: application/json");
-      echo json_encode($response);
+      echo json_encode("No departures");
     } else { // No response
       header("Content-Type: application/json");
       echo json_encode("No response");

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <?php require_once('src/php/head.php'); ?>
+  <?php require_once('php/head.php'); ?>
   <title> UK Railway Stations Information Boards </title>
 </head>
 <body>
@@ -31,8 +31,8 @@
           <input type="radio" name="board" value="arrivals" required> Arrivals
         </label>
         <!--<label>
-          <img src="assets/boardImages/arrivals.jpg" alt="Platform board"><br>
-          <input type="radio" name="board" value="platform" required> Platform departures
+          <img src="assets/boardImages/platform.jpg" alt="Platform board"><br>
+          <input type="radio" name="board" value="platform" required> Detailed departures
         </label>-->
       </div>
 
@@ -58,6 +58,8 @@
         window.location.assign("/departures.php?station=" + station + "&pages=" + pages + "&page=" + page + "&speak=" + callouts);
       } else if (boardType === "arrivals") {
         window.location.assign("/arrivals.php?station=" + station + "&pages=" + pages + "&page=" + page);
+      } else if (boardType === "platform") {
+        window.location.assign("/platformDeparture.php?station=" + station + "&pages=" + pages + "&page=" + page);
       }
     });
     $('input[type=radio][name=board]').change(function() {

@@ -1,6 +1,6 @@
 <?php
   require("../config.php");
-  require("../src/php/OpenLDBWS.php");
+  require("OpenLDBWS.php");
   $OpenLDBWS = new OpenLDBWS($token);
   if(isset($_GET['station'])) {
     $station = strtoupper($_GET['station']);

@@ -1,0 +1,912 @@
+[  
+   {  
+      "std":"16:22",
+      "etd":"On time",
+      "platform":"12",
+      "operator":"London Midland",
+      "operatorCode":"LM",
+      "serviceType":"train",
+      "serviceID":"orFvrYxysNKbaa53yRs70Q==",
+      "origin":{  
+         "location":{  
+            "locationName":"Lichfield City",
+            "crs":"LIC"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"Redditch",
+            "crs":"RDC"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"Five Ways",
+                  "crs":"FWY",
+                  "st":"16:25",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"University",
+                  "crs":"UNI",
+                  "st":"16:29",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Selly Oak",
+                  "crs":"SLY",
+                  "st":"16:31",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Bournville",
+                  "crs":"BRV",
+                  "st":"16:34",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Kings Norton",
+                  "crs":"KNN",
+                  "st":"16:37",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Northfield",
+                  "crs":"NFD",
+                  "st":"16:40",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Longbridge",
+                  "crs":"LOB",
+                  "st":"16:43",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Barnt Green",
+                  "crs":"BTG",
+                  "st":"16:49",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Alvechurch",
+                  "crs":"ALV",
+                  "st":"16:54",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Redditch",
+                  "crs":"RDC",
+                  "st":"17:03",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   },
+   {  
+      "std":"16:22",
+      "etd":"On time",
+      "platform":"11A",
+      "operator":"CrossCountry",
+      "operatorCode":"XC",
+      "serviceType":"train",
+      "serviceID":"Bdpd6y3lftO+pGwKQUQRxg==",
+      "rsid":"XC622000",
+      "origin":{  
+         "location":{  
+            "locationName":"Birmingham New Street",
+            "crs":"BHM"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"Stansted Airport",
+            "crs":"SSD"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"Coleshill Parkway",
+                  "crs":"CEH",
+                  "st":"16:35",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Nuneaton",
+                  "crs":"NUN",
+                  "st":"16:51",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Leicester",
+                  "crs":"LEI",
+                  "st":"17:14",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Melton Mowbray",
+                  "crs":"MMO",
+                  "st":"17:34",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Oakham",
+                  "crs":"OKM",
+                  "st":"17:46",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Stamford",
+                  "crs":"SMD",
+                  "st":"17:59",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Peterborough",
+                  "crs":"PBO",
+                  "st":"18:13",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"March",
+                  "crs":"MCH",
+                  "st":"18:33",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Ely",
+                  "crs":"ELY",
+                  "st":"18:52",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Cambridge",
+                  "crs":"CBG",
+                  "st":"19:08",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Audley End",
+                  "crs":"AUD",
+                  "st":"19:23",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Stansted Airport",
+                  "crs":"SSD",
+                  "st":"19:40",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   },
+   {  
+
+   },
+   {  
+      "std":"16:25",
+      "etd":"On time",
+      "platform":"6B",
+      "operator":"Arriva Trains Wales",
+      "operatorCode":"AW",
+      "serviceType":"train",
+      "serviceID":"fj8JSbX7EHkbNetl2/ASNA==",
+      "rsid":"AW301803",
+      "origin":{  
+         "location":{  
+            "locationName":"Birmingham International",
+            "crs":"BHI"
+         }
+      },
+      "destination":{  
+         "location":[  
+            {  
+               "locationName":"Aberystwyth",
+               "crs":"AYW"
+            },
+            {  
+               "locationName":"Pwllheli",
+               "crs":"PWL"
+            }
+         ]
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":[  
+            {  
+               "callingPoint":[  
+                  {  
+                     "locationName":"Smethwick Galton Bridge",
+                     "crs":"SGB",
+                     "st":"16:31",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Wolverhampton",
+                     "crs":"WVH",
+                     "st":"16:42",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Telford Central",
+                     "crs":"TFC",
+                     "st":"16:59",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Wellington (Shropshire)",
+                     "crs":"WLN",
+                     "st":"17:05",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Shrewsbury",
+                     "crs":"SHR",
+                     "st":"17:19",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Welshpool",
+                     "crs":"WLP",
+                     "st":"17:50",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Newtown (Powys)",
+                     "crs":"NWT",
+                     "st":"18:04",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Caersws",
+                     "crs":"CWS",
+                     "st":"18:12",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Machynlleth",
+                     "crs":"MCN",
+                     "st":"18:41",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Dovey Junction",
+                     "crs":"DVY",
+                     "st":"18:57",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Borth",
+                     "crs":"BRH",
+                     "st":"19:07",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Aberystwyth",
+                     "crs":"AYW",
+                     "st":"19:21",
+                     "et":"On time"
+                  }
+               ],
+               "serviceType":"train",
+               "serviceChangeRequired":false,
+               "assocIsCancelled":false
+            },
+            {  
+               "callingPoint":[  
+                  {  
+                     "locationName":"Machynlleth",
+                     "crs":"MCN",
+                     "st":"18:41",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Dovey Junction",
+                     "crs":"DVY",
+                     "st":"19:10",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Penhelig",
+                     "crs":"PHG",
+                     "st":"19:20",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Aberdovey",
+                     "crs":"AVY",
+                     "st":"19:23",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Tywyn",
+                     "crs":"TYW",
+                     "st":"19:32",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Tonfanau",
+                     "crs":"TNF",
+                     "st":"19:37",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Llwyngwril",
+                     "crs":"LLW",
+                     "st":"19:44",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Fairbourne",
+                     "crs":"FRB",
+                     "st":"19:51",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Morfa Mawddach",
+                     "crs":"MFA",
+                     "st":"19:54",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Barmouth",
+                     "crs":"BRM",
+                     "st":"20:03",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Llanaber",
+                     "crs":"LLA",
+                     "st":"20:08",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Talybont",
+                     "crs":"TLB",
+                     "st":"20:13",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Dyffryn Ardudwy",
+                     "crs":"DYF",
+                     "st":"20:16",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Llanbedr",
+                     "crs":"LBR",
+                     "st":"20:20",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Pensarn",
+                     "crs":"PES",
+                     "st":"20:22",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Llandanwg",
+                     "crs":"LDN",
+                     "st":"20:24",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Harlech",
+                     "crs":"HRL",
+                     "st":"20:30",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Tygwyn",
+                     "crs":"TYG",
+                     "st":"20:35",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Talsarnau",
+                     "crs":"TAL",
+                     "st":"20:37",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Llandecwyn",
+                     "crs":"LLC",
+                     "st":"20:40",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Penrhyndeudraeth",
+                     "crs":"PRH",
+                     "st":"20:43",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Minffordd",
+                     "crs":"MFF",
+                     "st":"20:47",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Porthmadog",
+                     "crs":"PTM",
+                     "st":"20:55",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Criccieth",
+                     "crs":"CCC",
+                     "st":"21:03",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Penychain",
+                     "crs":"PNC",
+                     "st":"21:09",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Abererch",
+                     "crs":"ABH",
+                     "st":"21:12",
+                     "et":"On time"
+                  },
+                  {  
+                     "locationName":"Pwllheli",
+                     "crs":"PWL",
+                     "st":"21:18",
+                     "et":"On time"
+                  }
+               ],
+               "serviceType":"train",
+               "serviceChangeRequired":false,
+               "assocIsCancelled":false
+            }
+         ]
+      }
+   },
+   {  
+      "std":"16:27",
+      "etd":"On time",
+      "platform":"2A",
+      "operator":"London Midland",
+      "operatorCode":"LM",
+      "serviceType":"train",
+      "serviceID":"DHHQ6G0pM5eQF4iEk4Ws2w==",
+      "rsid":"LM082800",
+      "origin":{  
+         "location":{  
+            "locationName":"Wolverhampton",
+            "crs":"WVH"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"Walsall",
+            "crs":"WSL"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"Duddeston",
+                  "crs":"DUD",
+                  "st":"16:32",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Aston",
+                  "crs":"AST",
+                  "st":"16:34",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Witton",
+                  "crs":"WTT",
+                  "st":"16:37",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Perry Barr",
+                  "crs":"PRY",
+                  "st":"16:39",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Hamstead",
+                  "crs":"HSD",
+                  "st":"16:43",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Tame Bridge Parkway",
+                  "crs":"TAB",
+                  "st":"16:47",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Bescot Stadium",
+                  "crs":"BSC",
+                  "st":"16:50",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Walsall",
+                  "crs":"WSL",
+                  "st":"16:54",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   },
+   {  
+      "std":"16:30",
+      "etd":"On time",
+      "platform":"11B",
+      "operator":"CrossCountry",
+      "operatorCode":"XC",
+      "serviceType":"train",
+      "serviceID":"GmLgokDzHTV1h0Wmd/gbTw==",
+      "rsid":"XC572000",
+      "origin":{  
+         "location":{  
+            "locationName":"Nottingham",
+            "crs":"NOT"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"Cardiff Central",
+            "crs":"CDF",
+            "via":"via Gloucester"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"University",
+                  "crs":"UNI",
+                  "st":"16:36",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Ashchurch for Tewkesbury",
+                  "crs":"ASC",
+                  "st":"17:04",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Cheltenham Spa",
+                  "crs":"CNM",
+                  "st":"17:13",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Gloucester",
+                  "crs":"GCR",
+                  "st":"17:23",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Lydney",
+                  "crs":"LYD",
+                  "st":"17:43",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Newport (South Wales)",
+                  "crs":"NWP",
+                  "st":"18:09",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Cardiff Central",
+                  "crs":"CDF",
+                  "st":"18:29",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   },
+   {  
+      "std":"16:30",
+      "etd":"On time",
+      "platform":"7A",
+      "operator":"CrossCountry",
+      "operatorCode":"XC",
+      "serviceType":"train",
+      "serviceID":"U636ZS1hPLNQSfjUYrRHww==",
+      "rsid":"XC222000",
+      "origin":{  
+         "location":{  
+            "locationName":"Southampton Central",
+            "crs":"SOU"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"Edinburgh",
+            "crs":"EDB",
+            "via":"via Leeds"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"Derby",
+                  "crs":"DBY",
+                  "st":"17:05",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Sheffield",
+                  "crs":"SHF",
+                  "st":"17:42",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Wakefield Westgate",
+                  "crs":"WKF",
+                  "st":"18:17",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Leeds",
+                  "crs":"LDS",
+                  "st":"18:34",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"York",
+                  "crs":"YRK",
+                  "st":"19:01",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Darlington",
+                  "crs":"DAR",
+                  "st":"19:31",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Durham",
+                  "crs":"DHM",
+                  "st":"19:48",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Newcastle",
+                  "crs":"NCL",
+                  "st":"20:01",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Alnmouth",
+                  "crs":"ALM",
+                  "st":"20:26",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Edinburgh",
+                  "crs":"EDB",
+                  "st":"21:28",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   },
+   {  
+      "std":"16:30",
+      "etd":"On time",
+      "platform":"3",
+      "operator":"Virgin Trains",
+      "operatorCode":"VT",
+      "serviceType":"train",
+      "serviceID":"mGeqNr256P2UYkTBIUOGTQ==",
+      "rsid":"VT584001",
+      "origin":{  
+         "location":{  
+            "locationName":"Shrewsbury",
+            "crs":"SHR"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"London Euston",
+            "crs":"EUS"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"Birmingham International",
+                  "crs":"BHI",
+                  "st":"16:39",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Coventry",
+                  "crs":"COV",
+                  "st":"16:50",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Watford Junction",
+                  "crs":"WFJ",
+                  "st":"17:39",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"London Euston",
+                  "crs":"EUS",
+                  "st":"17:56",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   },
+   {  
+      "std":"16:31",
+      "etd":"On time",
+      "platform":"4B",
+      "operator":"CrossCountry",
+      "operatorCode":"XC",
+      "serviceType":"train",
+      "serviceID":"tzhPfmFov0JSwgZO6o+AWw==",
+      "rsid":"XC416000",
+      "origin":{  
+         "location":{  
+            "locationName":"Bristol Temple Meads",
+            "crs":"BRI"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"Manchester Piccadilly",
+            "crs":"MAN",
+            "via":"via Stoke-on-Trent"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"Wolverhampton",
+                  "crs":"WVH",
+                  "st":"16:48",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Stafford",
+                  "crs":"STA",
+                  "st":"17:00",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Stoke-on-Trent",
+                  "crs":"SOT",
+                  "st":"17:17",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Stockport",
+                  "crs":"SPT",
+                  "st":"17:50",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Manchester Piccadilly",
+                  "crs":"MAN",
+                  "st":"18:00",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   },
+   {  
+      "std":"16:32",
+      "etd":"On time",
+      "platform":"12",
+      "operator":"London Midland",
+      "operatorCode":"LM",
+      "serviceType":"train",
+      "serviceID":"gJgKZsCXjwIk0FjS0Z2ByQ==",
+      "origin":{  
+         "location":{  
+            "locationName":"Lichfield Trent Valley",
+            "crs":"LTV"
+         }
+      },
+      "destination":{  
+         "location":{  
+            "locationName":"Longbridge",
+            "crs":"LOB"
+         }
+      },
+      "subsequentCallingPoints":{  
+         "callingPointList":{  
+            "callingPoint":[  
+               {  
+                  "locationName":"Five Ways",
+                  "crs":"FWY",
+                  "st":"16:35",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"University",
+                  "crs":"UNI",
+                  "st":"16:39",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Selly Oak",
+                  "crs":"SLY",
+                  "st":"16:41",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Bournville",
+                  "crs":"BRV",
+                  "st":"16:44",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Kings Norton",
+                  "crs":"KNN",
+                  "st":"16:47",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Northfield",
+                  "crs":"NFD",
+                  "st":"16:50",
+                  "et":"On time"
+               },
+               {  
+                  "locationName":"Longbridge",
+                  "crs":"LOB",
+                  "st":"16:53",
+                  "et":"On time"
+               }
+            ],
+            "serviceType":"train",
+            "serviceChangeRequired":false,
+            "assocIsCancelled":false
+         }
+      }
+   }
+]

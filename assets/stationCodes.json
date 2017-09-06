@@ -1477,7 +1477,6 @@
       { "Name": "London Paddington", "Code": "PAD" },
       { "Name": "London Road (Brighton)", "Code": "LRB" },
       { "Name": "London Road (Guildford)", "Code": "LRD" },
-      { "Name": "London St Pancras (Intl)", "Code": "SPX" },
       { "Name": "London St Pancras International", "Code": "STP" },
       { "Name": "London Victoria", "Code": "VIC" },
       { "Name": "London Waterloo", "Code": "WAT" },

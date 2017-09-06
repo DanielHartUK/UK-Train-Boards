@@ -10,22 +10,28 @@ if(getQueryVariable("page")) {
 var rows; // Row counter
 var stationCode = getQueryVariable("station");
 var responseError = false;
+var x;
 function getTrains(callback) {
   sIDs = [];
   rows = 0;
   var rowI = 0;
   $.get("php/getDepartures.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
+  // $.get("assets/getDeparturesTest2.json", function(trainServices) {
+    $('.departureEntry.error').remove();
     if(trainServices === "No response") {
       rows += 3;
       responseError = true;
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">No reponse recieved.</p></div></div>');
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">Check station code is correct</p></div></div>');
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">and rate limit is not exceeded.</p></div></div>');
-    } else if(trainServices === "No departures") {
-      rows++;
+    } else if(trainServices.GetStationBoardResult != null) {
+      rows += 9;
       if($('.noDepartures').length === 0) {
-        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">No departures</p></div></div>');
-      }
+        for(i = 0; i < 7; i++) {
+          $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre"></p></div></div>');
+        }
+        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">Welcome to</p></div></div>');
+        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">' + trainServices.GetStationBoardResult.locationName + '</p></div></div>');      }
     } else if(trainServices.length > 0) {
       $.each(trainServices, function(key, service) {
         rowI++;
@@ -122,6 +128,8 @@ function getTrains(callback) {
           }
         }
       });
+      var actualPages = Math.ceil(trainServices.length / rowsPerPage);
+      $('.page').text("Page " + page + " of " + actualPages);
     }
     $.each($('.departureEntry:not(.empty, .error, .noDepartures)'), function(i, e) {
       var dataID = $(e)[0].dataset.serviceid; 
@@ -141,8 +149,7 @@ function getTrains(callback) {
       rows--;
     }
     
-    var actualPages = Math.ceil(trainServices.length / rowsPerPage);
-    $('.page').text("Page " + page + " of " + actualPages);
+
 
     if(typeof callback === "function")
       callback();

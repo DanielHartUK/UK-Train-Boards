@@ -19,17 +19,21 @@ function getTrains() {
   rows = 0;
   var rowI = 0;
   $.get("php/getArrivals.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
+    $('.departureEntry.error').remove();
     if(trainServices === "No response") {
       rows += 3;
       responseError = true;
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">No reponse recieved.</p></div></div>');
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">Check station code is correct</p></div></div>');
       $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">and rate limit is not exceeded.</p></div></div>');
-    } else if(trainServices === "No arrivals") {
-      rows++;
+    } else if(trainServices.GetStationBoardResult != null) {
+      rows += 9;
       if($('.noDepartures').length === 0) {
-        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">No arrivals</p></div></div>');
-      }
+        for(i = 0; i < 7; i++) {
+          $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre"></p></div></div>');
+        }
+        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">Welcome to</p></div></div>');
+        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">' + trainServices.GetStationBoardResult.locationName + '</p></div></div>');      }
     } else if(trainServices.length > 0) {
       $.each(trainServices, function(key, service) {
         rowI++;
@@ -126,6 +130,8 @@ function getTrains() {
           }
         }
       });
+      var actualPages = Math.ceil(trainServices.length / rowsPerPage);
+      $('.page').text("Page " + page + " of " + actualPages);
     }
     $.each($('.departureEntry:not(.empty, .error, .noDepartures)'), function(i, e) {
       var dataID = $(e)[0].dataset.serviceid; 
@@ -144,9 +150,6 @@ function getTrains() {
         $('.departuresList').find('.departureEntry.empty')[0].remove();
       rows--;
     }
-    
-    var actualPages = Math.ceil(trainServices.length / rowsPerPage);
-    $('.page').text("Page " + page + " of " + actualPages);
   });
 }
 getTrains();

@@ -1,6 +1,6 @@
 html, body {
-  margin: 1rem;
-  font-size: 16px; }
+  font-size: 16px;
+  margin: 1rem; }
 
 * {
   box-sizing: border-box; }
@@ -35,7 +35,7 @@ button, input, optgroup, select, textarea {
   font-family: 'NewRailAlphabet', Helvetica, sans-serif; }
 
 .main {
-  max-width: 1000px;
+  max-width: 62.5rem;
   margin: 0 auto; }
 
 .flex {
@@ -59,7 +59,7 @@ form.options input {
   margin-bottom: 1rem; }
   .boards label {
     background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid white;
+    border: 0.125rem solid white;
     margin: 1rem;
     padding: 1rem;
     color: white;
@@ -67,7 +67,7 @@ form.options input {
     max-width: 33.333%; }
     .boards label input[type=radio] {
       position: absolute;
-      top: -9999px;
+      top: -624.938rem;
       visibility: hidden; }
     .boards label:hover, .boards label:focus {
       background-color: rgba(255, 255, 255, 0.2); }
@@ -82,56 +82,108 @@ form.options input {
   background-color: #111; }
   .departureEntry p {
     font-size: 2.5rem; }
+  .departureEntry.heading {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 5.7025rem; }
+    .departureEntry.heading .departureTime {
+      flex-basis: 30%; }
+    .departureEntry.heading .headingRight {
+      flex-basis: 70%;
+      text-align: right; }
+      .departureEntry.heading .headingRight.timePlat.animate p {
+        position: relative; }
+      .departureEntry.heading .headingRight.timePlat.animate p:first-child {
+        animation: timePlat 10s infinite step-end; }
+      .departureEntry.heading .headingRight.timePlat.animate p:last-child {
+        animation: timePlat 10s infinite step-end; }
+
+@keyframes timePlat {
+  0% {
+    bottom: 0%; }
+  50% {
+    bottom: 100%; }
+  100% {
+    bottom: 0%; } }
+
+.departuresDetailed .departureEntry p {
+  font-size: 3.5rem; }
+
+.departuresDetailed .departureEntry.bold p {
+  font-size: 5rem; }
 
 .departuresHeadings p {
   font-weight: 600;
   font-size: 2.3rem; }
 
-.departureRow p, .departuresEnd p {
+.departureEntry p, .departureRow p, .departuresEnd p {
   color: orange;
   font-family: 'dotMatrix', sans-serif; }
+  .departureEntry p.serviceInformation, .departureRow p.serviceInformation, .departuresEnd p.serviceInformation {
+    white-space: nowrap;
+    position: relative;
+    left: -0%;
+    display: inline-block; }
 
-.departureRow, .departuresHeadings {
+.departureRow, .departuresHeadings, .callingRow {
   display: flex;
   flex-wrap: wrap;
-  height: 46px;
+  height: 2.875rem;
   overflow: hidden; }
-  .departureRow p a, .departureRow div a, .departuresHeadings p a, .departuresHeadings div a {
+  .departureRow p a, .departureRow div a, .departuresHeadings p a, .departuresHeadings div a, .callingRow p a, .callingRow div a {
     color: inherit;
     text-decoration: none; }
-  .departureRow p.centre, .departureRow div.centre, .departuresHeadings p.centre, .departuresHeadings div.centre {
+  .departureRow p.centre, .departureRow div.centre, .departuresHeadings p.centre, .departuresHeadings div.centre, .callingRow p.centre, .callingRow div.centre {
     text-align: center; }
-  .departureRow p.std, .departureRow p.opStdPad, .departureRow div.std, .departureRow div.opStdPad, .departuresHeadings p.std, .departuresHeadings p.opStdPad, .departuresHeadings div.std, .departuresHeadings div.opStdPad {
-    min-width: 120px; }
-  .departureRow p.destinationName, .departureRow div.destinationName, .departuresHeadings p.destinationName, .departuresHeadings div.destinationName {
-    min-width: 580px;
-    padding-right: 1rem; }
-  .departureRow p.platform, .departureRow div.platform, .departuresHeadings p.platform, .departuresHeadings div.platform {
-    min-width: 100px;
+  .departureRow p.std, .departureRow p.opStdPad, .departureRow div.std, .departureRow div.opStdPad, .departuresHeadings p.std, .departuresHeadings p.opStdPad, .departuresHeadings div.std, .departuresHeadings div.opStdPad, .callingRow p.std, .callingRow p.opStdPad, .callingRow div.std, .callingRow div.opStdPad {
+    min-width: 7.5rem; }
+  .departureRow p.destinationName, .departureRow div.destinationName, .departuresHeadings p.destinationName, .departuresHeadings div.destinationName, .callingRow p.destinationName, .callingRow div.destinationName {
+    padding-right: 1rem;
+    width: 36.25rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+  .departureRow p.callingLocation, .departureRow div.callingLocation, .departuresHeadings p.callingLocation, .departuresHeadings div.callingLocation, .callingRow p.callingLocation, .callingRow div.callingLocation {
+    width: 51.5rem;
+    padding-right: 1rem;
+    text-overflow: ellipsis; }
+  .departureRow p.platform, .departureRow div.platform, .departuresHeadings p.platform, .departuresHeadings div.platform, .callingRow p.platform, .callingRow div.platform {
+    min-width: 6.25rem;
     text-transform: capitalize;
     text-align: right; }
-  .departureRow p.etd, .departureRow div.etd, .departuresHeadings p.etd, .departuresHeadings div.etd {
-    min-width: 200px;
+  .departureRow p.etd, .departureRow div.etd, .departuresHeadings p.etd, .departuresHeadings div.etd, .callingRow p.etd, .callingRow div.etd {
+    min-width: 12.5rem;
     text-align: right; }
-  .departureRow p.operator, .departureRow div.operator, .departuresHeadings p.operator, .departuresHeadings div.operator {
-    min-width: 800px; }
-  .departureRow p.delayReason, .departureRow p.errorMessage, .departureRow div.delayReason, .departureRow div.errorMessage, .departuresHeadings p.delayReason, .departuresHeadings p.errorMessage, .departuresHeadings div.delayReason, .departuresHeadings div.errorMessage {
+  .departureRow p.callingTime, .departureRow div.callingTime, .departuresHeadings p.callingTime, .departuresHeadings div.callingTime, .callingRow p.callingTime, .callingRow div.callingTime {
+    text-align: right;
+    width: 11rem; }
+  .departureRow p.operator, .departureRow div.operator, .departuresHeadings p.operator, .departuresHeadings div.operator, .callingRow p.operator, .callingRow div.operator {
+    min-width: 50rem; }
+  .departureRow p.delayReason, .departureRow p.errorMessage, .departureRow div.delayReason, .departureRow div.errorMessage, .departuresHeadings p.delayReason, .departuresHeadings p.errorMessage, .departuresHeadings div.delayReason, .departuresHeadings div.errorMessage, .callingRow p.delayReason, .callingRow p.errorMessage, .callingRow div.delayReason, .callingRow div.errorMessage {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; }
-  .departureRow p.errorMessage, .departureRow div.errorMessage, .departuresHeadings p.errorMessage, .departuresHeadings div.errorMessage {
+  .departureRow p.errorMessage, .departureRow div.errorMessage, .departuresHeadings p.errorMessage, .departuresHeadings div.errorMessage, .callingRow p.errorMessage, .callingRow div.errorMessage {
     width: 100%; }
-  .departureRow .calling, .departuresHeadings .calling {
+  .departureRow .calling, .departuresHeadings .calling, .callingRow .calling {
     white-space: nowrap;
     position: relative;
     transition: 1s linear top;
-    right: -800px;
-    top: -92px; }
-  .departureRow .operator, .departureRow .opStdPad, .departuresHeadings .operator, .departuresHeadings .opStdPad {
+    right: -50rem;
+    top: -5.75rem; }
+  .departureRow .operator, .departureRow .opStdPad, .departuresHeadings .operator, .departuresHeadings .opStdPad, .callingRow .operator, .callingRow .opStdPad {
     position: relative;
-    top: 0px; }
-  .departureRow .departureUpdated, .departuresHeadings .departureUpdated {
+    top: 0rem; }
+  .departureRow .departureUpdated, .departuresHeadings .departureUpdated, .callingRow .departureUpdated {
     animation: departureUpdated 2s 10 step-end; }
+
+.calling .departureEntry.hidden {
+  display: none; }
+
+.calling .callingRow {
+  height: auto; }
 
 @keyframes departureUpdated {
   0% {
@@ -149,4 +201,9 @@ form.options input {
     font-size: 2.5rem;
     font-weight: 500;
     color: orange; }
+
+@media all and (max-width: 1079px) {
+  html, body {
+    margin: 1rem;
+    font-size: 11.4px; } }
 /*# sourceMappingURL=style.css.map */

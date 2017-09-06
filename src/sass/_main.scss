@@ -1,6 +1,6 @@
-html, body {
-  margin: 1rem;
+html, body {  
   font-size: 16px;
+  margin: 1rem;
 }
 
 * {
@@ -39,7 +39,7 @@ button, input, optgroup, select, textarea {
 }
 
 .main {
-  max-width: 1000px;
+  max-width: 62.5rem;
   margin: 0 auto;
 }
 
@@ -72,7 +72,7 @@ form.options {
 
   label {
     background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid white;
+    border: 0.125rem solid white;
     margin: 1rem;
     padding: 1rem;
     color: white;
@@ -81,7 +81,7 @@ form.options {
 
     input[type=radio] {
       position: absolute;
-      top: -9999px;
+      top: -624.938rem;
       visibility: hidden;
     }
 
@@ -90,7 +90,7 @@ form.options {
     }
     &.selected {
       background-color: rgba(255, 255, 255, 0.3);
-    }
+     }
 
     img {
       width: 100%;
@@ -106,9 +106,55 @@ form.options {
   p {
     font-size: 2.5rem;
   }
+  &.heading {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 5.7025rem;
 
-  &:nth-child(even) {
-    
+    .departureTime {
+      flex-basis: 30%;
+    }
+    .headingRight {
+      flex-basis: 70%;
+      text-align: right;
+
+      &.timePlat {
+        &.animate {
+          p {
+            position: relative;
+          }
+          p:first-child {
+            animation: timePlat 10s infinite step-end;
+          }
+          p:last-child {
+            animation: timePlat 10s infinite step-end;
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes timePlat {
+  0% {
+    bottom: 0%;
+  }
+  50% {
+    bottom: 100%;
+  }
+  100% {
+    bottom: 0%;
+  }
+}
+.departuresDetailed .departureEntry {
+  p {
+    font-size: 3.5rem;
+  }
+  &.bold {
+    p {
+      font-size: 5rem;
+    }
   }
 }
 
@@ -118,16 +164,23 @@ form.options {
     font-size: 2.3rem;
   }
 }
-.departureRow, .departuresEnd {
+.departureEntry, .departureRow, .departuresEnd {
   p {
     color: orange;
     font-family: 'dotMatrix', sans-serif;
+
+    &.serviceInformation {
+      white-space: nowrap;
+      position: relative;
+      left: -0%;
+      display: inline-block;
+    }
   }
 }
-.departureRow, .departuresHeadings {
+.departureRow, .departuresHeadings, .callingRow {
   display: flex;
   flex-wrap: wrap;
-  height: 46px;
+  height: 2.875rem;
   overflow: hidden;
 
   p, div {
@@ -142,23 +195,35 @@ form.options {
     }
 
     &.std, &.opStdPad {
-      min-width: 120px; 
+      min-width: 7.5rem; 
     }
     &.destinationName {
-      min-width: 580px; 
       padding-right: 1rem;
+      width: 36.25rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    &.callingLocation {
+      width: 51.5rem;
+      padding-right: 1rem;
+      text-overflow: ellipsis;
     }
     &.platform {
-      min-width: 100px; 
+      min-width: 6.25rem; 
       text-transform: capitalize;
       text-align: right;
     }
     &.etd {
-      min-width: 200px; 
+      min-width: 12.5rem; 
       text-align: right;
     }
+    &.callingTime {
+      text-align: right;
+      width: 11rem;
+    }
     &.operator {
-      min-width: 800px; 
+      min-width: 50rem; 
     }
     &.delayReason, &.errorMessage {
      text-overflow: ellipsis;
@@ -173,15 +238,29 @@ form.options {
     white-space: nowrap;
     position: relative;
     transition: 1s linear top;
-    right: -800px;
-    top: -92px;
+    right: -50rem;
+    top: -5.75rem;
   }
   .operator, .opStdPad {
     position: relative;
-    top: 0px;
+    top: 0rem;
   }
   .departureUpdated {
     animation: departureUpdated 2s 10 step-end;
+  }
+}
+
+.calling {
+  .departureEntry {
+    &.hidden {
+      display: none;
+    }
+    &:nth-child(n+18) {
+      //display: none;
+    }
+  }
+  .callingRow {
+    height: auto;
   }
 }
 
@@ -200,5 +279,12 @@ form.options {
     font-size: 2.5rem;
     font-weight: 500;
     color: orange;
+  }
+}
+
+@media all and (max-width: 1079px) {
+  html, body {
+    margin: 1rem;
+    font-size: 11.4px;
   }
 }

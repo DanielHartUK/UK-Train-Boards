@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <?php require_once('src/php/head.php'); ?>
+  <?php require_once('php/head.php'); ?>
   <title> Live departure board </title>
 </head>
 <body onload="startTime()">
@@ -27,6 +27,5 @@
   <script src="js/moment.js" type="text/javascript"></script>
   <script src="js/script.min.js" type="text/javascript"></script>
   <script src="js/departures.min.js" type="text/javascript"></script>
-  <script> 
 </body>
 </html>
