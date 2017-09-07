@@ -17,7 +17,7 @@ function getTrains(callback) {
   var rowI = 0;
   $.get("php/getDepartures.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
   // $.get("assets/getDeparturesTest2.json", function(trainServices) {
-    $('.departureEntry.error').remove();
+    $('.departureEntry.error, .departureEntry.noDepartures').remove();
     if(trainServices === "No response") {
       rows += 3;
       responseError = true;

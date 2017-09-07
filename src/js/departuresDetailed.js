@@ -17,7 +17,7 @@ function getTrains(callback) {
     trainSplits = [];
     r = trainServices;
     //console.log(trainServices);
-    $('.departureEntry.error').remove();
+    $('.departureEntry.error, .departureEntry.noDepartures').remove();
     if(trainServices === "No response") {
       rows += 3;
       responseError = true;
