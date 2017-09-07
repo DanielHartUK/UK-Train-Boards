@@ -10,7 +10,7 @@ This project plans to recreate passenger information boards used in UK railway s
 
 
 ## Notes
-- The departure (and eventually arrival) board is designed for a 1080x1920 display. The boards can easilly be adapted for a shorter display by reducing the number of rows that are loaded.
+- Portrait orientation boards (Departures, Arrivals, etc.) are designed for a 1080x1920 display. The boards can easilly be adapted for a shorter display by reducing the number of rows that are loaded.
 - The New Rail Alphabet is a paid font and thus is not included in this repository. Since Rail Alphabet is based on Helvetica, purchasing this font is probably not neccesary unless you're exceptionally dedicated (It's quite expensive). 
 
 ## License
