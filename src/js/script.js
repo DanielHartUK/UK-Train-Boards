@@ -56,15 +56,20 @@ function isVowel(letter) {
   return letter === "a" || letter === "e" || letter === "i" || letter === "o" || letter === "u";
 }
 
-function scrollAnimation(el, speed) {
+function scrollAnimation(el, speed, callback) {
   var elWidth = el.outerWidth();
   if(elWidth > el.parent().width()) {
     var aniTime = elWidth/(speed * 1000);
-    el.css('transition', aniTime + 's linear').css('left', '-' + elWidth + 'px');
+    console.log('x')
+    el.css('transition', aniTime + 's linear 0s').css('left', '-' + elWidth + 'px');
     setTimeout(function() {
-      el.css('transition', '').css('left', elWidth + 'px');
+      el.css('transition', '').css('left', '1000px');
+      if(typeof callback === "function") {
+        callback();
+      }
     }, aniTime * 1000)
-    return aniTime;
+  } else {
+    el.css('transition', '').css('left', '0');
   }
 }
 

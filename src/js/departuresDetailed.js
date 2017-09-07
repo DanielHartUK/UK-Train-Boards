@@ -12,8 +12,8 @@ var calRows;
 var trainSplits = [];
 $.get("assets/alternativeStationNames.json", function(result) { altNames = result.alternativeNames; });
 function getTrains(callback) {
-  //$.get("php/getDeparturesDetailed.php?station="+ stationCode, function(trainServices) {
-  $.get("assets/getDeparturesDetailedTest1.json", function(trainServices) {
+  $.get("php/getDeparturesDetailed.php?station="+ stationCode, function(trainServices) {
+  //$.get("assets/getDeparturesDetailedTest1.json", function(trainServices) {
     trainSplits = [];
     r = trainServices;
     //console.log(trainServices);
@@ -30,12 +30,13 @@ function getTrains(callback) {
         $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">No departures</p></div></div>');
       }
     } else if(trainServices.length > 0) {
+      $('.main').removeClass('changed');
       service = trainServices[screen - 1];
-      if($('.main').attr('id', sanitizeID(service.serviceID)) != sanitizeID(service.serviceID)) {
-        $('.main').attr('id', sanitizeID(service.serviceID));
-      } else {
 
-      }
+      if($('.main').attr('id') != sanitizeID(service.serviceID)) { // Change
+        $('.main').attr('id', sanitizeID(service.serviceID)).addClass('changed');
+        callback = scrollServiceInfo;
+      } 
 
       $('.departuresList .departureTime').html(service.std);
       $('.departuresList .departureTimeEstimated').html(service.etd);
@@ -163,16 +164,28 @@ function callingPoints(callingPoint) {
   }
 }
 
+function scrollServiceInfo() {
+  console.log('ssi')
+  var el = $('.serviceInformation');
+  var elWidth = el.outerWidth();
+  if(elWidth > el.parent().width()) {
+    var el = $('.serviceInformation');
+    el.css('left', '1000px');
+    scrollAnimation(el, 0.2, scrollServiceInfo);
+  } else {
+    el.css('transition', '').css('left', '0');
+  }
+}
+
 // Animate destination name if it cannot fit on one line
 var aDN;
 var aniDestI = 1;
 function splitDestName(destName) {
   var x = splitString(20, destName);
-  console.log(x.length)
   var destHTML = "";
   $.each(x, function(k, v) {
     destHTML += "<p>" + v + "</p>";
-  })
+  });
   $('.departuresList .destinationName').html(destHTML);
   if(x.length > 1) {
     aDN = setInterval(animateDestName, 5000);
@@ -194,7 +207,6 @@ var cPage = 1;
 var calRowsVisible;
 function callingListAnimation() {
   var callingRows = $('.calling .departureEntry:not(.empty)').length;
-  console.log(callingRows)
   if(callingRows > maxRows) {
     $('.callingPage').text('Page ' + cPage + ' of ' + Math.ceil(callingRows/maxRows));
     $('.calling .departureEntry').addClass('hidden');
@@ -205,6 +217,7 @@ function callingListAnimation() {
       cPage = 1;
     }
   } else {
+    cPage = 1;
     $('.callingPage').text('Page ' + cPage + ' of ' + Math.ceil(callingRows/maxRows))
   }
   calRowsVisible = $('.calling .departureEntry:not(.hidden)').length;
@@ -218,7 +231,7 @@ function callingListAnimation() {
 var sync = setInterval(function() {
   if(responseError === false && getSecs() % 10 === 0) {
     clearInterval(sync);
-    //setInterval(getTrains, 10000); // Refresh every 10 seconds
+    setInterval(getTrains, 10000); // Refresh every 10 seconds
   } else if(responseError) {
     clearInterval(sync);
   }
@@ -296,7 +309,7 @@ function checkDepartures() {
     }
   })
 }
-
+/*
 function speakService(platform, departureTime, operator, destination, callingPoints) {
   if(callingPoints != null) {
     text = "Platform " + platform + " for the " + departureTime + " " + operator + " service to " + destination + ", calling at: " + callingPoints;
@@ -304,14 +317,14 @@ function speakService(platform, departureTime, operator, destination, callingPoi
     text = "Platform " + platform + " for the " + departureTime + " " + operator + " service to " + destination;
   }
   speak(text, 1, 0.85, 0.8);
-}
+}*/
 
 if(getQueryVariable("speak") === "true") {
-  getTrains(function() { getTrainsDetailed( function() { checkDepartures() }) });
+  getTrains(function() { scrollServiceInfo(); getTrainsDetailed( function() { checkDepartures() }) });
   setInterval(getTrainsDetailed, 60000);
   setInterval(checkDepartures, 60000);
 } else {
-  getTrains();
+  getTrains(scrollServiceInfo);
 }
 
 

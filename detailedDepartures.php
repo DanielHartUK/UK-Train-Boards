@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <?php require_once('src/php/head.php'); ?>
+  <?php require_once('php/head.php'); ?>
   <title> Live departure board with details </title>
 </head>
 <body>
@@ -17,7 +17,7 @@
       <div class="departureEntry bold heading">
         <p class="destinationName"></p>
       </div>
-      <div class="departureEntry heading">
+      <div class="departureEntry heading callingHeading">
         <p> Calling at: </p>
         <p class="callingPage">Page 1 of 1</p>
       </div>
@@ -25,7 +25,7 @@
 
       </div>
       <div class="departureEntry" style="overflow: hidden;">
-        <p class="serviceInformation"> </p>
+        <p class="serviceInformation animated"> </p>
       </div>
       <div class="departureEntry empty"><p>&nbsp;</p></div>
     </div>
