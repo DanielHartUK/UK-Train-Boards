@@ -12,6 +12,7 @@ class rtt{
     protected $username;
     protected $password;
     protected $railReferences = "../assets/railReferences.json";
+    private $stream;
 
     function __construct($username, $password){
         if(empty($username) || empty($password)){
@@ -19,6 +20,20 @@ class rtt{
         } else {
             $this->username = $username;
             $this->password = $password;
+
+            //then try to open file stream
+            if(file_exists($this->railReferences)){
+                try{
+                    $handle = fopen($this->railReferences, "r");
+                    $this->stream = json_decode(fread($handle, filesize($this->railReferences)), true);
+                } catch (Exception $e) {
+                    $this->stream = "[]";
+                } finally {
+                    return; 
+                }
+            } else {
+                throw new exception("Missing Rail References");
+            }
         } 
     }
 
@@ -37,18 +52,14 @@ class rtt{
     }
 
     private function tiplocToCrs($tiploc){
-        if(empty($crs) || empty($this->railReferences)) return false;
-
-        if(file_exists($thos->railReferences)){
-            foreach(json_decode(fopen($this->railReferences, "r"), true) as $key => $value){
-                if($tiploc == $value['TiplocCode']){
-                    return $value['CrsCode'];
-                }
+        if(empty($tiploc) || empty($this->railReferences)) return false;
+  
+        foreach($this->stream as $key => $value){
+            if($tiploc == $value['TiplocCode']){
+                return $value['CrsCode'];
             }
-            return false;
-        } else {
-            return false;
-        }        
+        }
+        return false;       
     }   
 
     private function convertFormat($value, $detail, $type){
@@ -75,8 +86,8 @@ class rtt{
 
             //Set up the JSON
             $temp = [
-                ($type == "ARRIVALS" ? "eta" : "std") => ($type == "ARRIVALS" ? $value->locationDetail->gbttBookedArrival : $value->locationDetail->gbttBookedDeparture),
-                "etd" => ($type == "ARRIVALS" ? null : $value->locationDetail->realtimeDeparture),
+                ($type == "ARRIVALS" ? "sta" : "std") => ($type == "ARRIVALS" ? $value->locationDetail->gbttBookedArrival : $value->locationDetail->gbttBookedDeparture),
+                ($type == "ARRIVALS" ? "eta" : "etd") => ($type == "ARRIVALS" ? $value->locationDetail->realtimeArrival : $value->locationDetail->realtimeDeparture),
                 "platform" => $value->locationDetail->platform,
                 "operator" => $value->atocName, 
                 "operatorCode" => $value->atocCode, 
@@ -111,7 +122,7 @@ class rtt{
         $type = strtoupper($type);
         if(empty($crs)) return false;
 
-        $data = $this->doCurl("search/" . $crs . "/" . strtolower($type));
+        $data = $this->doCurl("search/" . $crs . (strtolower($type) == "/arrivals" ? $type : null));
         $sanitised = [];
 
         if(!empty($data->services{0})){      

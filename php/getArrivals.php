@@ -1,14 +1,19 @@
 <?php
-  require("../config.php");
-  require("OpenLDBWS.php");
-  $OpenLDBWS = new OpenLDBWS($token);
-  if(isset($_GET['station'])) {
+header("Content-Type: application/json");
+require("../config.php");
+
+if(!empty($_GET["station"])){
+  if(isset($_GET['rows']) && $_GET['rows']) {
+    $numRows = $_GET['rows'];
+  } else {
+    $numRows = 20;
+  }
+  //check which API we are using
+  if(API == strtoupper("LDWS")){
+    require("OpenLDBWS.php");
+    $OpenLDBWS = new OpenLDBWS($token);
     $station = strtoupper($_GET['station']);
-    if(isset($_GET['rows']) && $_GET['rows']) {
-      $numRows = $_GET['rows'];
-    } else {
-      $numRows = 20;
-    }
+
     $response = $OpenLDBWS->GetArrivalBoard($numRows, $station);
 
     if(isset($response->GetStationBoardResult->trainServices->service))
@@ -28,8 +33,8 @@
     }
 
     function sortTime($a, $b) {
-      if($a->sta==$b->sta) return 0;
-      return ($a->sta < $b->sta) ? -1 : 1;
+      if($a->std==$b->std) return 0;
+      return ($a->std < $b->std) ? -1 : 1;
     }
     if(isset($trainServicesResponse)) {
       if(count($trainServicesResponse) > 1) {
@@ -39,15 +44,22 @@
       }
     }
     if(isset($trainServicesResponse)) { // Has departures
-      header("Content-Type: application/json");
       echo json_encode($trainServicesResponse);
     } else if (isset($response) && !empty($response)) { // Reponse but no departures
-      header("Content-Type: application/json");
       echo json_encode($response);
     } else { // No response
-      header("Content-Type: application/json");
       echo json_encode("No response");
     }
+  } elseif (API == strtoupper("RTT")) {
+    require("rtt.php");
+
+    $rtt = new rtt($username, $password);
+    echo json_encode($rtt->getServices($_GET['station'], "arrivals", "low", $numRows));
+
   } else {
-    echo "No station code supplied";
+    echo "Error in config file";
   }
+  
+} else {
+  echo "No station code supplied";
+}
