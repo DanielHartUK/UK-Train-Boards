@@ -7,7 +7,6 @@ This project plans to recreate passenger information boards used in UK railway s
 - copy `config_example.php` to `config.php`, making sure to configure your API, and keys
 
 ## Known Issues
-- No favicon is currently set.
 - If a cancelled service is later reinstated, it may appear further down the board than where it should be if sorted chronologically.
 - Not all services have platform numbers, blame National Rail, not me.
 - The platform text-to-speech callouts will probably not work if a train divides more than once, though I don't think this currently happens anywhere in the UK.
