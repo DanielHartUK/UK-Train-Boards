@@ -1,5 +1,5 @@
 html, body {
-  font-size: 16px;
+  font-size: 5.3px;
   margin: 1rem; }
 
 * {
@@ -140,7 +140,7 @@ form.options input {
   font-size: 2.3rem; }
 
 .departureEntry p, .departureRow p, .departuresEnd p {
-  color: orange;
+  color: #FFA500;
   font-family: 'dotMatrix', sans-serif; }
   .departureEntry p.serviceInformation, .departureRow p.serviceInformation, .departuresEnd p.serviceInformation {
     white-space: nowrap;
@@ -208,11 +208,11 @@ form.options input {
 
 @keyframes departureUpdated {
   0% {
-    color: orange; }
+    color: #FFA500; }
   50% {
     color: transparent; }
   100% {
-    color: orange; } }
+    color: #FFA500; } }
 
 .departuresEnd {
   display: flex;
@@ -221,10 +221,88 @@ form.options input {
   .departuresEnd p {
     font-size: 2.5rem;
     font-weight: 500;
-    color: orange; }
+    color: #FFA500; }
 
-@media all and (max-width: 1079px) {
+.platformBoard p {
+  font-size: 4rem; }
+
+.platformBoard a {
+  color: inherit;
+  text-decoration: none; }
+
+.platformBoard .row {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  position: relative; }
+  .platformBoard .row p.depNo, .platformBoard .row p.std, .platformBoard .row p.destinationName {
+    margin-right: 2rem; }
+  .platformBoard .row p.depNo {
+    width: 5.625rem; }
+  .platformBoard .row p.std {
+    width: 8.5rem; }
+  .platformBoard .row p.etd {
+    width: 14rem;
+    text-align: right; }
+  .platformBoard .row p.destinationName {
+    width: calc(100% - 8.5rem - 14rem - 4rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .platformBoard .row p.callingTitle {
+    width: 21.625rem; }
+  .platformBoard .row div.wipe {
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 0%;
+    z-index: -1;
+    background-color: #111111; }
+    .platformBoard .row div.wipe.active {
+      z-index: 999;
+      transition: 3s linear width;
+      width: 100%; }
+    .platformBoard .row div.wipe::after {
+      color: #FFA500;
+      font-family: 'dotMatrix', sans-serif;
+      font-weight: bold;
+      content: " ";
+      display: block;
+      height: 100%;
+      position: relative;
+      left: 100%;
+      width: 73px;
+      background-image: url("../assets/wipe.svg");
+      background-size: contain;
+      background-repeat: no-repeat; }
+  .platformBoard .row div.callingListCont {
+    width: 94.375rem;
+    overflow: hidden; }
+    .platformBoard .row div.callingListCont p {
+      white-space: nowrap;
+      position: relative;
+      display: inline-block; }
+
+.platformBoard.futDep .row p.destinationName {
+  width: calc(100% - 5.625rem - 8.5rem - 14rem - 6rem); }
+
+.platformBoard .time {
+  display: block;
+  margin: 1rem auto;
+  text-align: center; }
+  .platformBoard .time p {
+    display: inline-block;
+    padding: 0 1rem;
+    background-color: #111;
+    color: #FFA500;
+    font-family: 'dotMatrix', sans-serif;
+    font-weight: bold; }
+
+@media all and (min-width: 768px) {
   html, body {
-    margin: 1rem;
     font-size: 11.4px; } }
+
+@media all and (min-width: 1080px) {
+  html, body {
+    font-size: 16px; } }
 /*# sourceMappingURL=style.css.map */

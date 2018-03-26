@@ -60,10 +60,9 @@ function scrollAnimation(el, speed, callback) {
   var elWidth = el.outerWidth();
   if(elWidth > el.parent().width()) {
     var aniTime = elWidth/(speed * 1000);
-    console.log('x')
     el.css('transition', aniTime + 's linear 0s').css('left', '-' + elWidth + 'px');
     setTimeout(function() {
-      el.css('transition', '').css('left', '1000px');
+      el.css('transition', '').css('left', el.parent().width() + 'px');
       if(typeof callback === "function") {
         callback();
       }

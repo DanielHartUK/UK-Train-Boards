@@ -12,8 +12,8 @@ var calRows;
 var trainSplits = [];
 $.get("assets/alternativeStationNames.json", function(result) { altNames = result.alternativeNames; });
 function getTrains(callback) {
-  $.get("php/getDeparturesDetailed.php?station="+ stationCode, function(trainServices) {
-  //$.get("assets/getDeparturesDetailedTest1.json", function(trainServices) {
+  // $.get("php/getDeparturesDetailed.php?station="+ stationCode, function(trainServices) {
+  $.get("assets/getDeparturesDetailedTest1.json", function(trainServices) {
     trainSplits = [];
     r = trainServices;
     //console.log(trainServices);
@@ -85,7 +85,6 @@ function getTrains(callback) {
         callingPoints(service.subsequentCallingPoints.callingPointList.callingPoint)
       }
       callingListAnimation();
-      //cLA = setInterval(callingListAnimation, 5000);
 
       var serviceInfoHTML = "";
       if(isVowel(service.operator[0])) {
@@ -169,7 +168,6 @@ function scrollServiceInfo() {
   var el = $('.serviceInformation');
   var elWidth = el.outerWidth();
   if(elWidth > el.parent().width()) {
-    var el = $('.serviceInformation');
     el.css('left', '1000px');
     scrollAnimation(el, 0.2, scrollServiceInfo);
   } else {
