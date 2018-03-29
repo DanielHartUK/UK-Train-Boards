@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <?php require_once('php/head.php'); ?>
+  <?php require_once('../php/head.php'); ?>
   <title> Live departure board </title>
 </head>
 <body onload="startTime()">

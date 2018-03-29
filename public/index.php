@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <?php require_once('php/head.php'); ?>
+  <?php require_once('../php/head.php'); ?>
   <title> UK Railway Stations Information Boards </title>
 </head>
 <body>

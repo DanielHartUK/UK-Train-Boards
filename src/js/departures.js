@@ -10,29 +10,76 @@ if(getQueryVariable("page")) {
 var rows; // Row counter
 var stationCode = getQueryVariable("station");
 var responseError = false;
+var tsCache;
 var x;
 function getTrains(callback) {
   sIDs = [];
   rows = 0;
   var rowI = 0;
-  $.get("php/getDepartures.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
+  $.get("get/getDepartures.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
+    console.log(trainServices);
+
   // $.get("assets/getDeparturesTest2.json", function(trainServices) {
     $('.departureEntry.error, .departureEntry.noDepartures').remove();
-    if(trainServices === "No response") {
-      rows += 3;
-      responseError = true;
-      $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">No reponse recieved.</p></div></div>');
-      $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">Check station code is correct</p></div></div>');
-      $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">and rate limit is not exceeded.</p></div></div>');
-    } else if(trainServices.GetStationBoardResult != null) {
-      rows += 9;
+    responseError = false;
+    $('.errorIcon').hide();
+    if(trainServices.GetStationBoardResult != null) {
       if($('.noDepartures').length === 0) {
-        for(i = 0; i < 7; i++) {
+        if(trainServices.GetStationBoardResult.nrccMessages != null) {
+          rows += 9;
+          for(i = 0; i < 6; i++) {
+            $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre"></p></div></div>');
+          }
+          $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre"><strong>Special Notices</strong></p></div></div>');
+          $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">==========================================</p></div></div>');
           $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre"></p></div></div>');
-        }
-        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">Welcome to</p></div></div>');
-        $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">' + trainServices.GetStationBoardResult.locationName + '</p></div></div>');      }
-    } else if(trainServices.length > 0) {
+          nrccMessage = trainServices.GetStationBoardResult.nrccMessages.message._;
+          if(nrccMessage.match(/<a\s+(?:[^>]*?\s+)?href="([^"]*)">([^"]*)<\/a>/gi) != null) {
+            nrccMessage = nrccMessage.replace(/in (?=<a\s+(?:[^>]*?\s+)?href="([^"]*)">([^"]*)<\/a>)/gi, "at ");
+            nrccMessage = nrccMessage.replace(/<a\s+(?:[^>]*?\s+)?href="([^"]*)">([^"]*)<\/a>/gi, $(nrccMessage.match(/<a\s+(?:[^>]*?\s+)?href="([^"]*)">([^"]*)<\/a>/gi)[0]).attr('href').match(/http:\/\/([^\/,\s]+\.[^\/,\s]+?)(?=\/|,|\s|$|\?|#)/gi)[0].replace("http://", ""));
+          }
+          nrccMessage = nrccMessage.replace(/<[^>]*>/g, "") + " ";
+          while(nrccMessage.length > 0) {
+            var maxLength = 50;
+            var trimmedString = nrccMessage.substr(0, maxLength); //trim the string to the maximum length
+            if(trimmedString.lastIndexOf(" ") != -1) {
+              lastInd = trimmedString.lastIndexOf(" ");
+            } else {
+              lastInd = trimmedString.length - 1;
+            }
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, lastInd))//re-trim if we are in the middle of a word
+            if(trimmedString == "") {
+              trimmedString = nrccMessage;
+            }
+            nrccMessage = nrccMessage.replace(trimmedString, "");
+            if(trimmedString != " ") {
+              $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">' + trimmedString + '</p></div></div>'); 
+              rows++;
+            }
+          }
+        } else {
+          rows += 9;
+          for(i = 0; i < 7; i++) {
+            $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre"></p></div></div>');
+          }
+          $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">Welcome to</p></div></div>');
+          $('.departuresList').append('<div class="departureEntry noDepartures"><div class="departureRow"><p class="errorMessage centre">' + trainServices.GetStationBoardResult.locationName + '</p></div></div>');  
+        }    
+      }
+    } else if(trainServices === "No response") {
+      responseError = true;
+      $('.errorIcon').show();
+      if(tsCache != null) {
+        trainServices = tsCache;
+      } else {
+        rows += 3;
+        $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">No reponse recieved.</p></div></div>');
+        $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">Check station code is correct</p></div></div>');
+        $('.departuresList').append('<div class="departureEntry error"><div class="departureRow"><p class="errorMessage">and rate limit is not exceeded.</p></div></div>');
+      }
+    }
+    if(trainServices != "No response" && trainServices.length > 0) {
+      tsCache = trainServices;
       $.each(trainServices, function(key, service) {
         rowI++;
         if(rowI <= rowsPerPage * (page - 1)) {
@@ -148,9 +195,6 @@ function getTrains(callback) {
         $('.departuresList').find('.departureEntry.empty')[0].remove();
       rows--;
     }
-    
-
-
     if(typeof callback === "function")
       callback();
   });
@@ -159,7 +203,7 @@ function getTrains(callback) {
 var sync = setInterval(function() {
   if(responseError === false && getSecs() % 10 === 0) {
     clearInterval(sync);
-    setInterval(getTrains, 10000); // Refresh every 10 seconds
+    x = setInterval(getTrains, 10000); // Refresh every 10 seconds
   } else if(responseError) {
     clearInterval(sync);
   }

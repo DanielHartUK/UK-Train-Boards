@@ -6,7 +6,7 @@ function startTime() {
     var s = today.getSeconds();
     m = checkTime(m);
     s = checkTime(s);
-    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+    $('#time').html(h + ':' + m + ':<span>' + s + '</span');
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {

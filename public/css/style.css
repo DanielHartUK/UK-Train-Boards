@@ -1,12 +1,12 @@
 html, body {
-  font-size: 5.3px;
-  margin: 1rem; }
+  font-size: 5.3px; }
 
 * {
   box-sizing: border-box; }
 
 body {
   color: #fff;
+  margin: 1rem;
   background-color: #000;
   font-family: 'NewRailAlphabet', Helvetica, sans-serif; }
 
@@ -150,7 +150,9 @@ form.options input {
 
 .departureRow, .departuresHeadings, .callingRow {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
   height: 2.875rem;
   overflow: hidden; }
   .departureRow p a, .departureRow div a, .departuresHeadings p a, .departuresHeadings div a, .callingRow p a, .callingRow div a {
@@ -159,7 +161,8 @@ form.options input {
   .departureRow p.centre, .departureRow div.centre, .departuresHeadings p.centre, .departuresHeadings div.centre, .callingRow p.centre, .callingRow div.centre {
     text-align: center; }
   .departureRow p.std, .departureRow p.opStdPad, .departureRow div.std, .departureRow div.opStdPad, .departuresHeadings p.std, .departuresHeadings p.opStdPad, .departuresHeadings div.std, .departuresHeadings div.opStdPad, .callingRow p.std, .callingRow p.opStdPad, .callingRow div.std, .callingRow div.opStdPad {
-    min-width: 7.5rem; }
+    min-width: 5.5rem;
+    margin-right: 0.5rem; }
   .departureRow p.destinationName, .departureRow div.destinationName, .departuresHeadings p.destinationName, .departuresHeadings div.destinationName, .callingRow p.destinationName, .callingRow div.destinationName {
     padding-right: 1rem;
     width: 36.25rem;
@@ -222,6 +225,10 @@ form.options input {
     font-size: 2.5rem;
     font-weight: 500;
     color: #FFA500; }
+  .departuresEnd #time {
+    font-weight: 700; }
+    .departuresEnd #time span.seconds {
+      font-weight: 600; }
 
 .platformBoard p {
   font-size: 4rem; }
@@ -305,4 +312,5 @@ form.options input {
 @media all and (min-width: 1080px) {
   html, body {
     font-size: 16px; } }
+
 /*# sourceMappingURL=style.css.map */

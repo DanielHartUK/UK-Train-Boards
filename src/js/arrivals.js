@@ -18,7 +18,7 @@ function getTrains() {
   sIDs = [];
   rows = 0;
   var rowI = 0;
-  $.get("php/getArrivals.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
+  $.get("get/getArrivals.php?station="+ stationCode +"&rows=" + departures, function(trainServices) {
     $('.departureEntry.error, .departureEntry.noDepartures').remove();
     if(trainServices === "No response") {
       rows += 3;

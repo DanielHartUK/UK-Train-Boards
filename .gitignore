@@ -1,7 +1,8 @@
-config.php
+php/config.php
 node_modules/
 grunt.command
-assets/webfonts/newrail
+public/assets/webfonts/newrail
 .DS_Store
 scrap.php
 phpIndex.php
+untitled folder/*

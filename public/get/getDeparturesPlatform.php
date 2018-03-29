@@ -1,13 +1,14 @@
 <?php
-  require("../config.php");
-  require("OpenLDBWS.php");
+  // Gets 
+  require("../../php/config.php");
+  require("../../php/OpenLDBWS.php");
   $OpenLDBWS = new OpenLDBWS($token);
   if(isset($_GET['station'])) {
     $station = strtoupper($_GET['station']);
     if(isset($_GET['rows']) && $_GET['rows']) {
       $numRows = $_GET['rows'];
     } else {
-      $numRows = 20;
+      $numRows = 150;
     }
     $response = $OpenLDBWS->GetDepartureBoard($numRows, $station);
     $responseDetailed = $OpenLDBWS->GetDepBoardWithDetails($numRows, $station);
@@ -81,13 +82,14 @@
 
     // Replace with detailed departure where available
     foreach($trainServicesResponse as $service) {
-      foreach($platformArray[$service->platform] as $platServiceID => $platService) {
-        if($platService->serviceID === $service->serviceID) {
-          $platformArray[$service->platform][$platServiceID] = $service;
+      if($platformArray[$service->platform] != null) {
+        foreach($platformArray[$service->platform] as $platServiceID => $platService) {
+          if($platService->serviceID === $service->serviceID) {
+            $platformArray[$service->platform][$platServiceID] = $service;
+          }
         }
       }
     }
-
 
     if(isset($platformArray)) { // Has departures
       header("Content-Type: application/json");

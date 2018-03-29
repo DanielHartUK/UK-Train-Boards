@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'css/style.css': 'src/sass/style.scss',
+          'public/css/style.css': 'src/sass/style.scss',
         },
       },
     },
@@ -31,10 +31,11 @@ module.exports = function(grunt) {
     uglify: {
       script: {
         files: {
-          'js/script.min.js': 'src/js/script.js',
-          'js/departures.min.js': 'src/js/departures.js',
-          'js/departuresDetailed.min.js': 'src/js/departuresDetailed.js',
-          'js/arrivals.min.js': 'src/js/arrivals.js'
+          'public/js/script.min.js': 'src/js/script.js',
+          'public/js/departures.min.js': 'src/js/departures.js',
+          'public/js/departuresDetailed.min.js': 'src/js/departuresDetailed.js',
+          'public/js/arrivals.min.js': 'src/js/arrivals.js',
+          'public/js/platformDepartures.min.js': 'src/js/platformDepartures.js'
         }
       }
     },
