@@ -16,7 +16,9 @@ function getTrains(callback) {
   sIDs = [];
   rows = 0;
   var rowI = 0;
-  $.get("get/get.php?station="+ stationCode +"&rows=" + departures + "?type=departures", function(trainServices) {
+  var url = "get/get.php?station="+ stationCode +"&rows=" + departures + "&type=" + type;
+  console.log(url)
+  $.get(url, function(trainServices) {
     console.log(trainServices);
 
   // $.get("assets/getDeparturesTest2.json", function(trainServices) {

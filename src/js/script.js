@@ -4,14 +4,23 @@ function startTime() {
     var h = today.getHours();
     var m = today.getMinutes();
     var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    $('#time').html(h + ':' + m + ':<span>' + s + '</span');
+    h = spanify(checkTime(h));
+    m = spanify(checkTime(m));
+    s = spanify(checkTime(s));
+    $('.clock').html('<span class="clock__group">' + h + '</span>:<span class="clock__group">' + m + '</span>:<span class="clock__group clock__group--small">' + s + '</span');
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
+    return i + "";
+}
+
+function spanify(s) {
+  var r = "";
+  for (var i = 0; i < s.length; i++) {
+    r = r + '<span class="clock__number">' + s.charAt(i) + '</span>';
+  }
+  return r;
 }
 
 function getSecs() {

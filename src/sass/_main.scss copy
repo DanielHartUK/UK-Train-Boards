@@ -1,0 +1,452 @@
+html, body {  
+  font-size: 5.3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #fff;
+  margin: 1rem;
+  background-color: #000;
+  font-family: 'NewRailAlphabet', Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+h2 {
+  font-size: 2.8rem;
+  margin-bottom: 0;
+}
+h3 {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+h4 {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+p {
+  font-size: 1rem;
+  margin: 0;
+}
+button, input, optgroup, select, textarea {
+  font-family: 'NewRailAlphabet', Helvetica, sans-serif;
+}
+
+.main {
+  max-width: 62.5rem;
+  margin: 0 auto;
+
+  &.changed {
+    .departuresList {
+      .departureEntry {
+        &.heading > * {
+          opacity: 0;
+          animation: fadeIn 0.5s linear forwards;
+        }
+        &.callingHeading p, p.serviceInformation {
+          opacity: 0;
+          animation: fadeIn 0.5s 0.25s linear forwards;
+        }
+      }
+      .calling .departureEntry p {
+        opacity: 0;
+        animation: fadeIn 0.5s 0.25s linear forwards;
+      }
+    }
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.flex {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0 -1rem;
+}
+
+form.options {
+  .inputGroup {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  label, input {
+    font-size: 1.5rem;
+  }
+  label {
+    padding: 1rem;
+    display: block;
+    flex-grow: 1;
+  }
+  input {
+    width: 100%;
+    padding: 0.5rem;
+
+    &#station {
+    }
+  }
+
+}
+.boards {
+  margin-bottom: 1rem;
+
+  label {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 0.125rem solid white;
+    margin: 1rem;
+    padding: 1rem;
+    color: white;
+    cursor: pointer;
+    max-width: 33.333%;
+
+    input[type=radio] {
+      position: absolute;
+      top: -624.938rem;
+      visibility: hidden;
+    }
+
+    &:hover, &:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    &.selected {
+      background-color: rgba(255, 255, 255, 0.3);
+     }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.departureEntry {
+  margin: 1rem 0;
+  background-color: #111;
+
+  p {
+    font-size: 2.5rem;
+  }
+  &.heading {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 5.7025rem;
+
+    .departureTime {
+      flex-basis: 30%;
+    }
+    .headingRight {
+      flex-basis: 70%;
+      text-align: right;
+
+      &.timePlat {
+        &.animate {
+          p {
+            position: relative;
+          }
+          p:first-child {
+            animation: timePlat 10s infinite step-end;
+          }
+          p:last-child {
+            animation: timePlat 10s infinite step-end;
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes timePlat {
+  0% {
+    bottom: 0%;
+  }
+  50% {
+    bottom: 100%;
+  }
+  100% {
+    bottom: 0%;
+  }
+}
+.departuresDetailed .departureEntry {
+  p {
+    font-size: 3.5rem;
+  }
+  &.bold {
+    p {
+      font-size: 5rem;
+    }
+  }
+}
+
+.departuresHeadings {
+  p {
+    font-weight: 600;
+    font-size: 2.3rem;
+  }
+}
+.departureEntry, .departureRow, .departuresEnd {
+  p {
+    color: #FFA500;
+    font-family: 'dotMatrix', sans-serif;
+
+    &.serviceInformation {
+      white-space: nowrap;
+      position: relative;
+      left: -0%;
+      display: inline-block;
+    }
+  }
+}
+.departureRow, .departuresHeadings, .callingRow {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  height: 2.875rem;
+  overflow: hidden;
+
+  p, div {
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    &.centre {
+      text-align: center;
+    }
+
+    &.std, &.opStdPad {
+      min-width: 5.5rem;
+      margin-right: 0.5rem;
+    }
+    &.destinationName {
+      padding-right: 1rem;
+      width: 36.25rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    &.callingLocation {
+      width: 51.5rem;
+      padding-right: 1rem;
+      text-overflow: ellipsis;
+    }
+    &.platform {
+      min-width: 6.25rem; 
+      text-transform: capitalize;
+      text-align: right;
+    }
+    &.etd {
+      min-width: 12.5rem; 
+      text-align: right;
+    }
+    &.callingTime {
+      text-align: right;
+      width: 11rem;
+    }
+    &.operator {
+      min-width: 50rem; 
+    }
+    &.delayReason, &.errorMessage {
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     overflow: hidden;
+    }
+    &.errorMessage {
+      width: 100%;
+    }
+  }
+  .calling {
+    white-space: nowrap;
+    position: relative;
+    transition: 1s linear top;
+    right: -50rem;
+    top: -5.75rem;
+  }
+  .operator, .opStdPad {
+    position: relative;
+    top: 0rem;
+  }
+  .departureUpdated {
+    animation: departureUpdated 2s 10 step-end;
+  }
+}
+
+.calling {
+  .departureEntry {
+    &.hidden {
+      display: none;
+    }
+    &:nth-child(n+18) {
+      //display: none;
+    }
+  }
+  .callingRow {
+    height: auto;
+  }
+}
+
+@keyframes departureUpdated {
+  0% { color: #FFA500; }
+  50% { color: transparent; }
+  100% { color: #FFA500; }
+}
+
+.departuresEnd {
+  display: flex;
+  justify-content: space-between;
+  background-color: #111;
+
+  p {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #FFA500;
+  }
+  #time {
+    font-weight: 700;
+    span {
+      min-width: 4.5rem;
+      display: inline-block;
+      text-align: center;
+
+      &:first-child {
+        text-align: right;
+      }
+      &:last-child {
+        text-align: left;
+      }
+      .seconds {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.platformBoard {
+  //max-width: 116rem;
+
+  p {
+    font-size: 4rem;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    //height: 2.875rem;
+    overflow: hidden;
+    position: relative;
+
+    p {
+      &.depNo, &.std, &.destinationName {
+        margin-right: 2rem;
+      }
+      &.depNo {
+        width: 5.625rem;
+      }
+      &.std {
+        width: 8.5rem;
+      }
+      &.etd {
+        width: 14rem;
+        text-align: right;
+      }
+      &.destinationName {
+        width: calc(100% - 8.5rem - 14rem - 4rem);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &.callingTitle {
+        width: 21.625rem;
+      }
+    }
+    div {
+      &.wipe {
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 0%;
+        z-index: -1;
+        background-color: #111111;
+
+        &.active {
+          z-index: 999;
+          transition: 3s linear width;
+          width: 100%;
+        }
+
+        &::after {
+          color: #FFA500;
+          font-family: 'dotMatrix', sans-serif;
+          font-weight: bold;
+          content: " ";
+          display: block;
+          height: 100%;
+          position: relative;
+          left: 100%;
+          width: 73px;
+          background-image: url('../assets/wipe.svg');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+
+      }
+      &.callingListCont {
+        width: 94.375rem;
+        overflow: hidden;
+
+        p {
+          white-space: nowrap;
+          position: relative;
+          display: inline-block;
+        }
+      }
+    }
+  }
+  &.futDep {
+    .row p {
+      &.destinationName {
+        width: calc(100% - 5.625rem - 8.5rem - 14rem - 6rem);
+      }
+    }
+  }
+  .time {
+    display: block;
+    margin: 1rem auto;
+    text-align: center;
+
+    p {
+      display: inline-block;
+      padding: 0 1rem;
+      background-color: #111;
+      color: #FFA500;
+      font-family: 'dotMatrix', sans-serif;
+      font-weight: bold;
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  html, body {
+    font-size: 11.4px;
+  }
+}
+
+@media all and (min-width: 1080px) {
+  html, body {
+    font-size: 16px;
+  }
+}

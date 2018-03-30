@@ -1,5 +1,5 @@
 <?php
-  require("../../config.php");
+  require("../../php/config.php");
   require("../../php/OpenLDBWS.php");
   $OpenLDBWS = new OpenLDBWS($token);
   if(isset($_GET['station'])) {

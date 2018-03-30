@@ -10,14 +10,11 @@
       $numRows = 20;
     }
     $response = $OpenLDBWS->GetDepartureBoard($numRows, $station);
-    //print_r($response);
     if(isset($response->GetStationBoardResult->trainServices->service))
       $a1 = $response->GetStationBoardResult->trainServices->service;
     if(isset($response->GetStationBoardResult->busServices->service))
       $a2 = $response->GetStationBoardResult->busServices->service;
   
-    //echo $a1;
-   // echo $a2;
     if(isset($a2) && is_array($a2) != 1 && isset($a1)) {
       array_push($a1, $a2);
       $trainServicesResponse = $a1;
