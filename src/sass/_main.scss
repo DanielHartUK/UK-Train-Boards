@@ -1,16 +1,27 @@
 html, body {  
   font-size: 5.3px;
+  height: 100%;
 }
 
 @media all and (min-width: 768px) {
   html, body {
-    font-size: 11.4px;
+    font-size: 14.2222px;
   }
 }
 
 @media all and (min-width: 1080px) {
   html, body {
-    font-size: 16px;
+    font-size: 20px;
+  }
+}
+@media all and (min-width: 1440px) {
+  html, body {
+    font-size: 26.6666px;
+  }
+}
+@media all and (min-width: 2160px) {
+  html, body {
+    font-size: 40px;
   }
 }
 
@@ -22,17 +33,21 @@ body {
   --bkColor: #000;
   --rowColor: #111;
   --titleColor: #fff;
-  --dotMatrixColor: #FFA500;
+  --ledOnColor: #FFA500;
+  --ledOffColor: #151515;
+  --ledSize: 0.25rem;
 
 
-  margin: 1rem;
+  padding: 0.75rem;
   color: var(--titleColor);
   background-color: var(--bkColor);
   font-family: 'NewRailAlphabet', Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 0;
   margin-top: 0;
 }
@@ -52,51 +67,62 @@ p {
   font-size: 1rem;
   margin: 0;
 }
+strong {
+  font-weight: 500;
+}
 button, input, optgroup, select, textarea {
   font-family: 'NewRailAlphabet', Helvetica, sans-serif;
 }
 
 .main {
-
-
   .departures {
     width: 100%;
     border: 0;
     border-collapse: collapse;
+    table-layout: fixed;
 
     tr {
-      border-bottom: 1rem solid var(--bkColor);
+      border-bottom: 1.25rem solid var(--bkColor);
 
       th, td {
         border: 0;
+        padding: 0;
         text-align: left;
 
         &:nth-child(1), &:nth-child(2) {
-          border-right: 1rem solid transparent;
+          padding-right: 1rem;
         }
         &:nth-child(3), &:nth-child(4) {
-          border-left: 1rem solid transparent;
+          padding-left: 1rem;
+        }
+        &:last-child {
+          padding-right: 0;
         }
         &.dTime {
         }
         &.dDest {
         }
         &.dPlat {
+          text-transform: capitalize;
         }
         &.dExp {
         }
       }
     }
     thead {
+      tr {
+        //border: 0;
+      }
       th {
-        font-size: 2.3rem;
+        font-size: 2rem;
         &#dTime {
-          width: 6rem;
+          width: 6.5rem;
         }
         &#dDest {
+          min-width: 12rem;
         }
         &#dPlat {
-          width: 6rem;
+          width: 7.5rem;
         }
         &#dExp {
           width: 11rem;
@@ -115,20 +141,41 @@ button, input, optgroup, select, textarea {
     }
     tbody, tfoot {
       tr {
-        background-color: var(--rowColor);
+        position: relative;
+        z-index: 1;
       }
       td {
-        color: orange;
+        color: var(--ledOnColor);
         font-family: 'DotMatrix', sans-serif;
         font-size: 2.5rem;
+        position: relative;
+        z-index: 1;
+        background: var(--ledOffColor);
+        background-size: 0.25rem;
+        background-repeat-y: no-repeat;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-top: 0.05rem;
+
+        &.dataChanged {
+          animation: departureUpdated 2s 10 step-end;
+        }
+
+        @media all and (min-width: 1080px) {
+          line-height: 2.25rem;
+          background: url(../assets/ledcol.svg);
+        }
       }
     }
     tfoot {
       tr {
         font-weight: 500;
+        border-bottom: 0;
 
         td {
-          &.clock {
+          .clock {
+            float: right;
             text-align: right;
           }
         }
@@ -136,9 +183,31 @@ button, input, optgroup, select, textarea {
     }
   }
 }
+
+@keyframes departureUpdated {
+  0% { color: var(--ledOnColor); }
+  50% { color: transparent; }
+  100% { color: var(--ledOnColor); }
+}
+
+.page {
+  .page__number {
+    display: inline-block;
+    min-width: 2.25rem;
+    text-align: center;
+  }
+}
+
 .clock {
   font-weight: 700;
   .clock__group {
+    width: 4.5rem;
+    display: inline-block;
+    display: inline-block;
+    margin: 0 0.25rem;
+    &:last-child {
+      margin-right: 0;
+    }
     &--small {
       font-weight: 600;
     }
@@ -147,5 +216,14 @@ button, input, optgroup, select, textarea {
     display: inline-block;
     min-width: 2.25rem;
     text-align: center;
+  }
+}
+
+.status {
+  display: inline-block;
+  margin: 0 1rem;
+
+  &--disconnected::after {
+    content: "X";
   }
 }
