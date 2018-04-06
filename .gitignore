@@ -7,3 +7,4 @@ public/assets/testJSON
 package-lock.json
 package.json
 *.sublime-workspace
+Gruntfile.js
