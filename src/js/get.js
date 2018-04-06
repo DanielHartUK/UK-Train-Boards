@@ -27,7 +27,7 @@ if(getQueryVariable("page")) {
 }
 
 services = ""; // TODO LET THIS
- rowCounter = 0; // Row counter
+let rowCounter = 0; // Row counter
 
 let sIDs = []; // Array of service ids
 let responseError = false;
@@ -59,8 +59,7 @@ let parameterError;
 function processTrains(response) {
   let servicesUpdated = false;
   serviceIDs = [];
-  parameterError = true;
-  console.log(response);
+  parameterError = true;  
   switch(response) {
     // Errors
     case "Invalid station code":
@@ -91,16 +90,19 @@ function processTrains(response) {
     // Assuming response is valid
     default:
       parameterError = false;
-      if(response != services) {
+      response.GetStationBoardResult != null && response.GetStationBoardResult.generatedAt != null ? response.GetStationBoardResult.generatedAt = null: false;
+      if(JSON.stringify(response) != JSON.stringify(services)) {
         services = response; // If changed, cache the response
-        servicesUpdated = true;
+        servicesUpdated = true;        
       }
       break;
   }
   $('.dataChanged').removeClass('dataChanged');
 
   if(services != null && servicesUpdated === true) {
+    rowCounter = 0;
     if(services.GetStationBoardResult != null) { // No services
+      $(`${TABLEELEMENT} tbody`).empty();
       if(services.GetStationBoardResult.nrccMessages != null) {
         addEmptyRows(4);
         showNRCCNotices('Special Notice', services.GetStationBoardResult.nrccMessages.message);
@@ -113,24 +115,22 @@ function processTrains(response) {
     } else {
       setPage(page, Math.ceil(services.length / ROWSPERPAGE));
       if(TYPE == 'departures') {
-        for(i = ROWSPERPAGE * (page - 1); i < services.length && i < ROWSPERPAGE; i++) {
-          services[i].serviceID = sanitizeID(services[i].serviceID);
-          let s = services[i];
-          serviceIDs.push(s.serviceID);
-          processService(s.serviceID, s.serviceType, s.std, s.destination.location, s.platform, s.etd);
+        for(i = ROWSPERPAGE * (page - 1); i < services.length && i < ROWSPERPAGE * page; i++) {
+          var s = services[i];
+          serviceIDs.push(sanitizeID(s.serviceID));
+          processService(sanitizeID(s.serviceID), s.serviceType, s.std, s.destination.location, s.platform, s.etd);
         }
       } else if(TYPE == 'arrivals') {
-        for(i = ROWSPERPAGE * (page - 1); i < services.length && i < ROWSPERPAGE; i++) {
-          services[i].serviceID = sanitizeID(services[i].serviceID);
-          let s = services[i];
-          serviceIDs.push(s.serviceID);
-          processService(s.serviceID, s.serviceType, s.sta, s.destination.location, s.platform, s.eta);
+        for(i = ROWSPERPAGE * (page - 1); i < services.length && i < ROWSPERPAGE * page; i++) {
+          var s = services[i];
+          serviceIDs.push(sanitizeID(s.serviceID));
+          processService(sanitizeID(s.serviceID), s.serviceType, s.sta, s.destination.location, s.platform, s.eta);
         }
       }
-      removeDeparted();
-    }
+      removeDeparted(true);
+    }    
+    addEmptyRows(ROWSPERPAGE - rowCounter);
   }
-  addEmptyRows(ROWSPERPAGE - rowCounter);
 }
 
 /**
@@ -240,23 +240,25 @@ function processService(id, type, time, destination, platform, expected) {
                                         <td headers="dDest" class="dDest">${destination}</td>
                                         <td headers="dPlat" class="dPlat">${platform}</td>
                                         <td headers="dExp" class="dExp">${expected}</td>
-                                      </tr>`);
-    rowCounter++;
+                                      </tr>`);    
   } else { // Update existing
+    $(`#${id} td.dTime`).html() != time ? $(`#${id} td.dTime`).html(time) : false;
     $(`#${id} td.dDest`).html() != destination ? $(`#${id} td.dDest`).html(destination).addClass('dataChanged') : false;
     $(`#${id} td.dPlat`).html() != platform ? $(`#${id} td.dPlat`).html(platform).addClass('dataChanged') : false;
-  }
+    $(`#${id} td.dExp`).html() != expected ? $(`#${id} td.dExp`).html(expected) : false;    
+  }  
+  rowCounter++;
 }
 
 /**
- * Removes services that have left
+ * Removes services that have left, and optionally empty rows
+ * @param {bool} removeEmpty - set true to remove empty rows
  *
  * @returns void
  */
 function removeDeparted() {
   $('.departures tbody tr').each((index, el)=> {
-    if($(el).attr('id') != null && serviceIDs.indexOf($(el).attr('id')) === -1) {
-      console.log('Removed: ', $(el).attr('id'));
+    if(serviceIDs.indexOf($(el).attr('id')) === -1) {      
       $(el).remove();
     }
   });
@@ -308,7 +310,7 @@ function setStatus(el, code, reason) {
 function addEmptyRows(r) {
   if(r > 0) {
     for(let i = 0; i < r; i++) {
-      $(`${TABLEELEMENT} tbody`).append(`<tr><td colspan="4">&nbsp;</td></tr>`);
+      $(`${TABLEELEMENT} tbody`).append(`<tr><td colspan="4">&nbsp;</td></tr>`);      
       rowCounter++;
     }
   }

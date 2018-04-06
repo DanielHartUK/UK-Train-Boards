@@ -2,7 +2,8 @@ php/config.php
 node_modules/
 grunt.command
 public/assets/webfonts/newrail
+public/assets/testJSON
 .DS_Store
-scrap.php
-phpIndex.php
-untitled folder/*
+package-lock.json
+package.json
+*.sublime-workspace

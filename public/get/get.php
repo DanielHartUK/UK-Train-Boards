@@ -100,9 +100,6 @@ function checkStation($station) {
  * Chronilogically sort two services arrays
  */
 function sortTime($a, $b) {
-  // echo json_encode("a " . $a->std[0]);
-  // echo json_encode("b " . $b->std[0]);
-  // echo json_encode(($a->std[0] != 2 && $b->std[0] != 0));
   if(isset($a->std)) { // departures
     if($a->std==$b->std) return 0;
     return ($a->std < $b->std) ? -1 : 1;
