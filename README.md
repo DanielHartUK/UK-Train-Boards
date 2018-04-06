@@ -20,6 +20,7 @@ This project plans to recreate passenger information boards used in UK railway s
 - Services may be sorted incorrectly if services that are scheduled for before and after midnight are displayed at the same time and services are of different types.
 
 ## Notes
+- The boards urls have changed from V1. 
 - The boards are designed for a 1080x1920 display, although they should adapt to any screen size (a reload may be required).
 - The New Rail Alphabet is a paid font and thus is not included in this repository. Since Rail Alphabet is based on Helvetica, purchasing this font is probably not necessary unless you're exceptionally dedicated (It's quite expensive). 
  
