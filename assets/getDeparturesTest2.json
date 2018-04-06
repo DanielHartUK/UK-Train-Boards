@@ -1,8 +1,0 @@
-{  
-   "GetStationBoardResult":{  
-      "generatedAt":"2017-09-06T18:00:42.6539803+01:00",
-      "locationName":"Heysham Port",
-      "crs":"HHB",
-      "platformAvailable":true
-   }
-}

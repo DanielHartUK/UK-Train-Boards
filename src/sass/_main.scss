@@ -1,6 +1,28 @@
 html, body {  
   font-size: 5.3px;
-  margin: 1rem;
+  height: 100%;
+}
+
+@media all and (min-width: 768px) {
+  html, body {
+    font-size: 14.2222px;
+  }
+}
+
+@media all and (min-width: 1080px) {
+  html, body {
+    font-size: 20px;
+  }
+}
+@media all and (min-width: 1440px) {
+  html, body {
+    font-size: 26.6666px;
+  }
+}
+@media all and (min-width: 2160px) {
+  html, body {
+    font-size: 40px;
+  }
 }
 
 * {
@@ -8,13 +30,27 @@ html, body {
 }
 
 body {
-  color: #fff;
-  background-color: #000;
+  --bkColor: #000;
+  --rowColor: #111;
+  --titleColor: #fff;
+  --ledOnColor: #FFA500;
+  --ledOffColor: #151515;
+  --ledSize: 0.25rem;
+
+
+  padding: 0.75rem;
+  color: var(--titleColor);
+  background-color: var(--bkColor);
   font-family: 'NewRailAlphabet', Helvetica, sans-serif;
+
+  &.board {
+    display: flex;
+    align-items: center;
+  }
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 0;
   margin-top: 0;
 }
@@ -34,36 +70,11 @@ p {
   font-size: 1rem;
   margin: 0;
 }
+strong {
+  font-weight: 500;
+}
 button, input, optgroup, select, textarea {
   font-family: 'NewRailAlphabet', Helvetica, sans-serif;
-}
-
-.main {
-  max-width: 62.5rem;
-  margin: 0 auto;
-
-  &.changed {
-    .departuresList {
-      .departureEntry {
-        &.heading > * {
-          opacity: 0;
-          animation: fadeIn 0.5s linear forwards;
-        }
-        &.callingHeading p, p.serviceInformation {
-          opacity: 0;
-          animation: fadeIn 0.5s 0.25s linear forwards;
-        }
-      }
-      .calling .departureEntry p {
-        opacity: 0;
-        animation: fadeIn 0.5s 0.25s linear forwards;
-      }
-    }
-  }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .flex {
@@ -94,7 +105,6 @@ form.options {
     &#station {
     }
   }
-
 }
 .boards {
   margin-bottom: 1rem;
@@ -128,304 +138,156 @@ form.options {
   }
 }
 
-.departureEntry {
-  margin: 1rem 0;
-  background-color: #111;
+.main {
+  .departures {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
 
-  p {
-    font-size: 2.5rem;
-  }
-  &.heading {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    overflow: hidden;
-    max-height: 5.7025rem;
+    tr {
+      border-bottom: 1.25rem solid var(--bkColor);
 
-    .departureTime {
-      flex-basis: 30%;
+      th, td {
+        border: 0;
+        padding: 0;
+        text-align: left;
+
+        &:nth-child(1), &:nth-child(2) {
+          padding-right: 1rem;
+        }
+        &:nth-child(3), &:nth-child(4) {
+          padding-left: 1rem;
+        }
+        &:last-child {
+          padding-right: 0;
+        }
+        &.dTime {
+        }
+        &.dDest {
+        }
+        &.dPlat {
+          text-transform: capitalize;
+        }
+        &.dExp {
+        }
+      }
     }
-    .headingRight {
-      flex-basis: 70%;
-      text-align: right;
+    thead {
+      tr {
+        //border: 0;
+      }
+      th {
+        font-size: 2rem;
+        &#dTime {
+          width: 6.5rem;
+        }
+        &#dDest {
+          min-width: 12rem;
+        }
+        &#dPlat {
+          width: 7.5rem;
+        }
+        &#dExp {
+          width: 11rem;
+        }
+      }
+    }
+    thead, tbody {
+      th, td {
+        &:nth-child(1), &:nth-child(2) {
+          text-align: left;
+        }
+        &:nth-child(3), &:nth-child(4) {
+          text-align: right;
+        }
+      }
+    }
+    tbody, tfoot {
+      tr {
+        position: relative;
+        z-index: 1;
+      }
+      td {
+        color: var(--ledOnColor);
+        font-family: 'DotMatrix', sans-serif;
+        font-size: 2.5rem;
+        position: relative;
+        z-index: 1;
+        background: var(--ledOffColor);
+        background-size: 0.25rem;
+        background-repeat-y: no-repeat;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-top: 0.05rem;
 
-      &.timePlat {
-        &.animate {
-          p {
-            position: relative;
-          }
-          p:first-child {
-            animation: timePlat 10s infinite step-end;
-          }
-          p:last-child {
-            animation: timePlat 10s infinite step-end;
+        &.dataChanged {
+          animation: departureUpdated 2s 10 step-end;
+        }
+
+        @media all and (min-width: 1080px) {
+          line-height: 2.25rem;
+          background: url(../assets/ledcol.svg);
+        }
+      }
+    }
+    tfoot {
+      tr {
+        font-weight: 500;
+        border-bottom: 0;
+
+        td {
+          .clock {
+            float: right;
+            text-align: right;
           }
         }
       }
     }
-  }
-}
-@keyframes timePlat {
-  0% {
-    bottom: 0%;
-  }
-  50% {
-    bottom: 100%;
-  }
-  100% {
-    bottom: 0%;
-  }
-}
-.departuresDetailed .departureEntry {
-  p {
-    font-size: 3.5rem;
-  }
-  &.bold {
-    p {
-      font-size: 5rem;
-    }
-  }
-}
-
-.departuresHeadings {
-  p {
-    font-weight: 600;
-    font-size: 2.3rem;
-  }
-}
-.departureEntry, .departureRow, .departuresEnd {
-  p {
-    color: #FFA500;
-    font-family: 'dotMatrix', sans-serif;
-
-    &.serviceInformation {
-      white-space: nowrap;
-      position: relative;
-      left: -0%;
-      display: inline-block;
-    }
-  }
-}
-.departureRow, .departuresHeadings, .callingRow {
-  display: flex;
-  flex-wrap: wrap;
-  height: 2.875rem;
-  overflow: hidden;
-
-  p, div {
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    &.centre {
-      text-align: center;
-    }
-
-    &.std, &.opStdPad {
-      min-width: 7.5rem; 
-    }
-    &.destinationName {
-      padding-right: 1rem;
-      width: 36.25rem;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    &.callingLocation {
-      width: 51.5rem;
-      padding-right: 1rem;
-      text-overflow: ellipsis;
-    }
-    &.platform {
-      min-width: 6.25rem; 
-      text-transform: capitalize;
-      text-align: right;
-    }
-    &.etd {
-      min-width: 12.5rem; 
-      text-align: right;
-    }
-    &.callingTime {
-      text-align: right;
-      width: 11rem;
-    }
-    &.operator {
-      min-width: 50rem; 
-    }
-    &.delayReason, &.errorMessage {
-     text-overflow: ellipsis;
-     white-space: nowrap;
-     overflow: hidden;
-    }
-    &.errorMessage {
-      width: 100%;
-    }
-  }
-  .calling {
-    white-space: nowrap;
-    position: relative;
-    transition: 1s linear top;
-    right: -50rem;
-    top: -5.75rem;
-  }
-  .operator, .opStdPad {
-    position: relative;
-    top: 0rem;
-  }
-  .departureUpdated {
-    animation: departureUpdated 2s 10 step-end;
-  }
-}
-
-.calling {
-  .departureEntry {
-    &.hidden {
-      display: none;
-    }
-    &:nth-child(n+18) {
-      //display: none;
-    }
-  }
-  .callingRow {
-    height: auto;
   }
 }
 
 @keyframes departureUpdated {
-  0% { color: #FFA500; }
+  0% { color: var(--ledOnColor); }
   50% { color: transparent; }
-  100% { color: #FFA500; }
+  100% { color: var(--ledOnColor); }
 }
 
-.departuresEnd {
-  display: flex;
-  justify-content: space-between;
-  background-color: #111;
-
-  p {
-    font-size: 2.5rem;
-    font-weight: 500;
-    color: #FFA500;
-  }
-}
-
-.platformBoard {
-  //max-width: 116rem;
-
-  p {
-    font-size: 4rem;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    //height: 2.875rem;
-    overflow: hidden;
-    position: relative;
-
-    p {
-      &.depNo, &.std, &.destinationName {
-        margin-right: 2rem;
-      }
-      &.depNo {
-        width: 5.625rem;
-      }
-      &.std {
-        width: 8.5rem;
-      }
-      &.etd {
-        width: 14rem;
-        text-align: right;
-      }
-      &.destinationName {
-        width: calc(100% - 8.5rem - 14rem - 4rem);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      &.callingTitle {
-        width: 21.625rem;
-      }
-    }
-    div {
-      &.wipe {
-        position: absolute;
-        display: block;
-        height: 100%;
-        width: 0%;
-        z-index: -1;
-        background-color: #111111;
-
-        &.active {
-          z-index: 999;
-          transition: 3s linear width;
-          width: 100%;
-        }
-
-        &::after {
-          color: #FFA500;
-          font-family: 'dotMatrix', sans-serif;
-          font-weight: bold;
-          content: " ";
-          display: block;
-          height: 100%;
-          position: relative;
-          left: 100%;
-          width: 73px;
-          background-image: url('../assets/wipe.svg');
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
-
-      }
-      &.callingListCont {
-        width: 94.375rem;
-        overflow: hidden;
-
-        p {
-          white-space: nowrap;
-          position: relative;
-          display: inline-block;
-        }
-      }
-    }
-  }
-  &.futDep {
-    .row p {
-      &.destinationName {
-        width: calc(100% - 5.625rem - 8.5rem - 14rem - 6rem);
-      }
-    }
-  }
-  .time {
-    display: block;
-    margin: 1rem auto;
+.page {
+  .page__number {
+    display: inline-block;
+    min-width: 2.25rem;
     text-align: center;
+  }
+}
 
-    p {
-      display: inline-block;
-      padding: 0 1rem;
-      background-color: #111;
-      color: #FFA500;
-      font-family: 'dotMatrix', sans-serif;
-      font-weight: bold;
+.clock {
+  font-weight: 700;
+  .clock__group {
+    width: 4.5rem;
+    display: inline-block;
+    display: inline-block;
+    margin: 0 0.25rem;
+    &:last-child {
+      margin-right: 0;
+    }
+    &--small {
+      font-weight: 600;
     }
   }
-}
-
-@media all and (min-width: 768px) {
-  html, body {
-    font-size: 11.4px;
+  .clock__number {
+    display: inline-block;
+    min-width: 2.25rem;
+    text-align: center;
   }
 }
 
-@media all and (min-width: 1080px) {
-  html, body {
-    font-size: 16px;
+.status {
+  display: inline-block;
+  margin: 0 1rem;
+
+  &--disconnected::after {
+    content: "X";
   }
 }

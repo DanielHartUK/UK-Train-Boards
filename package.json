@@ -1,15 +1,16 @@
 {
-  "name": "guide",
+  "name": "UKRSIB",
   "version": "1.0.0",
   "dependencies": {
     "autoprefixer": "^6.5.2",
     "grunt": "^1.0.1",
+    "grunt-contrib-uglify-es": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-postcss": "^0.8.0",
     "grunt-sass": "^1.2.1",
-    "speech-synthesis": "^0.3.2"
+    "uglify-js": "^3.3.17"
   },
   "devDependencies": {
-    "grunt-contrib-uglify": "^2.0.0"
+    "grunt-contrib-uglify": "^2.3.0"
   }
 }
