@@ -71,11 +71,11 @@ function processTrains(response) {
       return;
       break;
     case "No type supplied":
-      setStatus('.status', -1, `No type supplied. Specify board type as URL parameter 'type'. Acceptible values are departures, arrivals, departuresDetailed, and arrivalsDetailed.`);
+      setStatus('.status', -1, `No type supplied. Specify board type as URL parameter 'type'. Acceptible values are departures or arrivals.`);
       return;
       break;
     case "No type and station code supplied":
-      setStatus('.status', -1, `No type or station code supplied. Specify type and station code as URL parameters 'type' and 'station'. Acceptible values are departures, arrivals, departuresDetailed, and arrivalsDetailed. Codes should be three letters. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
+      setStatus('.status', -1, `No type or station code supplied. Specify type and station code as URL parameters 'type' and 'station'. Acceptible values are departures or arrivals. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
       return;
       break;
     case "Error":
@@ -124,7 +124,7 @@ function processTrains(response) {
         for(i = ROWSPERPAGE * (page - 1); i < services.length && i < ROWSPERPAGE * page; i++) {
           var s = services[i];
           serviceIDs.push(sanitizeID(s.serviceID));
-          processService(sanitizeID(s.serviceID), s.serviceType, s.sta, s.destination.location, s.platform, s.eta);
+          processService(sanitizeID(s.serviceID), s.serviceType, s.sta, s.origin.location, s.platform, s.eta);
         }
       }
       removeDeparted(true);

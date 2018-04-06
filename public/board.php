@@ -1,8 +1,7 @@
 <?php 
   if(isset($_GET['type'])) {
-    switch ($_GET['type']) {
+    switch (strtolower($_GET['type'])) {
       case 'departures':
-      default:
         $type = 'departures';
         $title = 'Departures';
         $locTitle = 'Destination';
@@ -12,12 +11,21 @@
         $title = 'Arrivals';
         $locTitle = 'Origin';
         break;
+      default:
+        $type = null;
+        $title = 'Departures';
+        $locTitle = 'Destination';
+        break;
     }
+  } else {
+    $type = null;
+    $title = 'Departures';
+    $locTitle = 'Destination';
   }
 ?>
 <!DOCTYPE HTML>
 <html>
-<head>
+<head class="board">
   <?php require_once('../php/head.php'); ?>
   <title> Station <?php echo $title; ?> </title>
 </head>

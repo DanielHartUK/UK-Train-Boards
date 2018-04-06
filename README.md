@@ -12,6 +12,7 @@ This project plans to recreate passenger information boards used in UK railway s
 
 ## Removals
 - Detailed depatures board has not been reimplemented in V2. If you require this then stick to the V1 branch of this project. 
+- Text-to-speech platform callouts have been removed.
 
 ## Known Issues
 - If a cancelled service is later reinstated, it may appear further down the board than where it should be if sorted chronologically.
