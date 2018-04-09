@@ -116,9 +116,8 @@ function onPlayerReady(event) {
   }
 }
 
-let ytVisible;
+let ytVisible = false;
 function startYT() {
-  console.log('ytStart')
   if(typeof YTID != 'undefined' && YTID != null) {
     $('.ytPlayerCont').show();
     rowsperpage = calcRows();
@@ -129,8 +128,7 @@ function startYT() {
   }
 }
 function stopYT() {
-  console.log('ytStop')
-  if(typeof YTID != 'undefined' && YTID != null) {
+  if(typeof YTID != 'undefined' && YTID != null && ytVisible) {
     $('.ytPlayerCont').hide();
     rowsperpage = calcRows();
     ytVisible = false;

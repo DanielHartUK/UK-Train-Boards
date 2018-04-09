@@ -1,8 +1,5 @@
-const STATIONCODE = getQueryVariable("station");
-// let rowsperpage = 24; // Number of rows to display on each page/screen
-
 const PAGES = 5; // Number of pages
-const REFRESHTIME = 5; // Refresh every n seconds.
+const REFRESHTIME = 10; // Refresh every n seconds.
 const TABLEELEMENT = "#departures";
 
 /**
@@ -14,7 +11,6 @@ function calcRows() {
   $(`${TABLEELEMENT} tbody`).append(`<tr class="tempRow"><td style="text-align: center;" colspan="4">&nbsp;</td></tr>`);
   let rowHeight = $('.tempRow').outerHeight();
   $('.tempRow').remove();
-  console.log( Math.floor(($('body').height() - $('.main').outerHeight()) / rowHeight));
   return Math.floor(($('body').height() - $('.main').outerHeight()) / rowHeight);
 }
 
@@ -27,7 +23,8 @@ if(getQueryVariable("page")) {
   page = 1; // Page to display
 }
 
-services = ""; // TODO LET THIS
+const STATIONCODE = getQueryVariable("station");
+let services = "";
 let rowCounter = 0; // Row counter
 let sIDs = []; // Array of service ids
 let responseError = false;
@@ -46,7 +43,6 @@ function getTrains(stationCode, rows, type, callback) {
     console.error('No callback specified');
   } else {
     let url = `get/get.php?station=${stationCode}&rows=${rows}&type=${type}`;
-    // let url = `get/get.json`;
     $.get(url, (trainServices)=> {
       callback(trainServices);
     });
@@ -104,7 +100,6 @@ function processTrains(response) {
   $('.dataChanged').removeClass('dataChanged');
 
   if(services != "" && services != null && servicesUpdated === true) {
-    console.log('change');
     rowCounter = 0;
     if(services.GetStationBoardResult != null) { // No services
       $(`${TABLEELEMENT} tbody`).empty();
@@ -119,8 +114,7 @@ function processTrains(response) {
         rowCounter += 2;
       }
     } else {
-      if(ytVisible)
-        stopYT();
+      stopYT();
       setPage(page, Math.ceil(services.length / rowsperpage));
       if(TYPE == 'departures') {
         for(i = rowsperpage * (page - 1); i < services.length && i < rowsperpage * page; i++) {
