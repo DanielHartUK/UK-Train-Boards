@@ -1,8 +1,8 @@
 const STATIONCODE = getQueryVariable("station");
-// let ROWSPERPAGE = 24; // Number of rows to display on each page/screen
+// let rowsperpage = 24; // Number of rows to display on each page/screen
 
 const PAGES = 5; // Number of pages
-const REFRESHTIME = 10; // Refresh every n seconds.
+const REFRESHTIME = 5; // Refresh every n seconds.
 const TABLEELEMENT = "#departures";
 
 /**
@@ -14,11 +14,12 @@ function calcRows() {
   $(`${TABLEELEMENT} tbody`).append(`<tr class="tempRow"><td style="text-align: center;" colspan="4">&nbsp;</td></tr>`);
   let rowHeight = $('.tempRow').outerHeight();
   $('.tempRow').remove();
+  console.log( Math.floor(($('body').height() - $('.main').outerHeight()) / rowHeight));
   return Math.floor(($('body').height() - $('.main').outerHeight()) / rowHeight);
 }
 
-const ROWSPERPAGE = calcRows();
-const TOTALROWS = ROWSPERPAGE * PAGES; // Number of departures to get
+let rowsperpage = calcRows();
+const TOTALROWS = rowsperpage * PAGES; // Number of departures to get
 let page;
 if(getQueryVariable("page")) {
   page = getQueryVariable("page"); // Page to display
@@ -28,10 +29,8 @@ if(getQueryVariable("page")) {
 
 services = ""; // TODO LET THIS
 let rowCounter = 0; // Row counter
-
 let sIDs = []; // Array of service ids
 let responseError = false;
-
 
 /**
  * Fetch train services
@@ -47,7 +46,7 @@ function getTrains(stationCode, rows, type, callback) {
     console.error('No callback specified');
   } else {
     let url = `get/get.php?station=${stationCode}&rows=${rows}&type=${type}`;
-    // let url = `assets/getDeparturesTest1.json`;
+    // let url = `get/get.json`;
     $.get(url, (trainServices)=> {
       callback(trainServices);
     });
@@ -84,6 +83,7 @@ function processTrains(response) {
       break;
     case 'No response':
     case null:
+      stopYT();
       parameterError = false;
       if(services != "" && services != null) 
         setStatus('.status', -1, `Disconnected. Check internet connection. Your token may be incorrect or rate limit has been exceeded.`);
@@ -104,28 +104,32 @@ function processTrains(response) {
   $('.dataChanged').removeClass('dataChanged');
 
   if(services != "" && services != null && servicesUpdated === true) {
+    console.log('change');
     rowCounter = 0;
     if(services.GetStationBoardResult != null) { // No services
       $(`${TABLEELEMENT} tbody`).empty();
+      startYT();
       if(services.GetStationBoardResult.nrccMessages != null) {
-        addEmptyRows(4);
+        addEmptyRows(Math.max(0, rowsperpage / 2 - 4));
         showNRCCNotices('Special Notice', services.GetStationBoardResult.nrccMessages.message);
       } else {
-        addEmptyRows(ROWSPERPAGE / 2 - 1);
+        addEmptyRows(Math.max(0, rowsperpage / 2 - 1));
         $(`${TABLEELEMENT} tbody`).append(`<tr><td style="text-align: center;" colspan="4">Welcome to</td></tr>
                                           <tr><td style="text-align: center;" colspan="4">${services.GetStationBoardResult.locationName}</td></tr>`);
         rowCounter += 2;
       }
     } else {
-      setPage(page, Math.ceil(services.length / ROWSPERPAGE));
+      if(ytVisible)
+        stopYT();
+      setPage(page, Math.ceil(services.length / rowsperpage));
       if(TYPE == 'departures') {
-        for(i = ROWSPERPAGE * (page - 1); i < services.length && i < ROWSPERPAGE * page; i++) {
+        for(i = rowsperpage * (page - 1); i < services.length && i < rowsperpage * page; i++) {
           var s = services[i];
           serviceIDs.push(sanitizeID(s.serviceID));
           processService(sanitizeID(s.serviceID), s.serviceType, s.std, s.destination.location, s.platform, s.etd);
         }
       } else if(TYPE == 'arrivals') {
-        for(i = ROWSPERPAGE * (page - 1); i < services.length && i < ROWSPERPAGE * page; i++) {
+        for(i = rowsperpage * (page - 1); i < services.length && i < rowsperpage * page; i++) {
           var s = services[i];
           serviceIDs.push(sanitizeID(s.serviceID));
           processService(sanitizeID(s.serviceID), s.serviceType, s.sta, s.origin.location, s.platform, s.eta);
@@ -133,7 +137,8 @@ function processTrains(response) {
       }
       removeDeparted(true);
     }    
-    addEmptyRows(ROWSPERPAGE - rowCounter);
+    addEmptyRows(Math.max(0, rowsperpage - rowCounter));
+    addEmptyRows(calcRows());
   }
 }
 
@@ -299,7 +304,7 @@ function setStatus(el, code, reason) {
         addEmptyRows(4);
         reason = [reason, "See console for more details."];
         showNotices('Error', reason);
-        addEmptyRows(ROWSPERPAGE - rowCounter);
+        addEmptyRows(rowsperpage - rowCounter);
         break;
       case -1:
         console.error(reason);
@@ -384,7 +389,7 @@ let sync = setInterval(()=> {
     getTrains(STATIONCODE, TOTALROWS, TYPE, processTrains);
     setInterval(()=> {
       getTrains(STATIONCODE, TOTALROWS, TYPE, processTrains);
-    }, 10000);
+    }, REFRESHTIME * 1000);
   } else if(parameterError) {
     clearInterval(sync);
   }

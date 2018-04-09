@@ -25,12 +25,13 @@
 ?>
 <!DOCTYPE HTML>
 <html>
-<head class="board">
+<head>
   <?php require_once('../php/head.php'); ?>
   <title> Station <?php echo $title; ?> </title>
 </head>
-<body onload="startClock('.clock')">
+<body onload="startClock('.clock')" class="board">
   <div class="main">
+    <?php if(isset($_GET['yt'])) { echo '<div class="aspectRatio aspectRatio--sixteenByNine ytPlayerCont"><div class="aspectRatio__element" id="ytPlayer"></div></div>'; } ?>
     <h1> <?php echo $title; ?> </h1>
     <table id="departures" class="departures">
       <thead>
@@ -42,7 +43,6 @@
         </tr>
       </thead>
       <tbody>
-
       </tbody>
       <tfoot>
         <tr class="departures__footer">
@@ -55,11 +55,13 @@
       </tfoot>
     </table>
   </div>
-
+  <script> 
+    const TYPE = '<?php echo $type; ?>'; 
+    <?php if(isset($_GET['yt']) && $_GET['yt'] != null) { echo 'const YTID = \'' . $_GET['yt'] . '\';'; } ?>
+  </script>
   <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
   <script src="js/moment.js" type="text/javascript"></script>
   <script src="js/script.min.js" type="text/javascript"></script>
-  <script> const TYPE = '<?php echo $type; ?>'; </script>
   <script src="js/get.min.js" type="text/javascript"></script>
 </body>
 </html>

@@ -74,8 +74,8 @@ function removeModifierClasses(el) {
  * @returns string
  */
 function randomLetter() {
-    var chars = "abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ";
-    return chars.substr( Math.floor(Math.random() * 62), 1);
+  var chars = "abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ";
+  return chars.substr( Math.floor(Math.random() * 62), 1);
 }
 
 /**
@@ -87,83 +87,57 @@ function randomLetter() {
 function sanitizeID(id) {
   return id.replace(/^[^a-zA-Z]|[^a-zA-Z0-9-_:.]/g, '');
 }
-/*
-
-$('.delayReason').each(() => {
-  var text = $(this).text();
-  var textArray = text.match(/\S[\s\S]{0,30}\S(?=\s|$)/g);
-
-  var x = 0;
-  var el = this;
-  if(x + 1 == textArray.length) {
-    $(el).text(textArray[x] + ".");
-  } else {
-    $(el).text(textArray[x] + "...");
-  }  
-  setInterval(() => {
-    if((x + 1) == textArray.length) {
-      x = 0;
-    } else {
-      x++;
-    }
-    if(x + 1 == textArray.length) {
-      $(el).text(textArray[x] + ".");
-    } else {
-      $(el).text(textArray[x] + "...");
-    }
-  }, 4000);
-});
 
 
+// YouTube Player API
+let tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+let firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+let player;
+let ytReady = false;
 
-function scrollAnimation(el, speed, callback) {
-  var elWidth = el.outerWidth();
-  if(elWidth > el.parent().width()) {
-    var aniTime = elWidth/(speed * 1000);
-    el.css('transition', aniTime + 's linear 0s').css('left', '-' + elWidth + 'px');
-    setTimeout(() => {
-      el.css('transition', '').css('left', el.parent().width() + 'px');
-      if(typeof callback === "function") {
-        callback();
+function onYouTubeIframeAPIReady() {
+  if(typeof YTID != 'undefined' && YTID != null) {
+    player = new YT.Player('ytPlayer', {
+      videoId: YTID,
+      events: {
+        'onReady': onPlayerReady
       }
-    }, aniTime * 1000)
-  } else {
-    el.css('transition', '').css('left', '0');
+    });
   }
 }
 
-function isVowel(letter) {
-  letter = letter.toLowerCase();
-  return letter === "a" || letter === "e" || letter === "i" || letter === "o" || letter === "u";
-}
-// From: https://stackoverflow.com/a/6632771
-function splitString(len, input) {
-  var curr = len;
-  var prev = 0;
-  output = [];
-  while (input[curr]) {
-    if (input[curr++] == ' ') {
-      output.push(input.substring(prev,curr));
-      prev = curr;
-      curr += len;
-    }
+let ytPlay = false;
+function onPlayerReady(event) {
+  ytReady = true;
+  if(ytPlay) {
+    player.playVideo();
   }
-  output.push(input.substr(prev));
-  return output;
 }
 
-
-function speak(text, vol, rate, pitch) {
-  var msg = new SpeechSynthesisUtterance();
-  msg.text = text;
-  msg.volume = vol;
-  msg.rate = rate;
-  msg.pitch = pitch;
-  msg.lang = "en-UK";
-  msg.onend = function() { console.log('finished')};
-  window.speechSynthesis.speak(msg);
-  console.log(msg);
+let ytVisible;
+function startYT() {
+  console.log('ytStart')
+  if(typeof YTID != 'undefined' && YTID != null) {
+    $('.ytPlayerCont').show();
+    rowsperpage = calcRows();
+    ytVisible = true;
+    ytPlay = true;
+    if(ytReady)
+      player.playVideo();
+  }
 }
-*/
+function stopYT() {
+  console.log('ytStop')
+  if(typeof YTID != 'undefined' && YTID != null) {
+    $('.ytPlayerCont').hide();
+    rowsperpage = calcRows();
+    ytVisible = false;
+    if(ytReady)
+      player.pauseVideo();
+  }
+}
+// End YouTube Player API
 
 
