@@ -63,33 +63,37 @@ function processTrains(response) {
   switch(response) {
     // Errors
     case "Invalid station code":
-      setStatus('.status', -1, `Invalid station code. Codes should be three letters. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
+      setStatus('.status', -2, `Invalid station code. Codes should be three letters. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
       return;
       break;
     case "No station code supplied":
-      setStatus('.status', -1, `No station code supplied. Specify station code as URL parameter 'station'. Codes should be three letters. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
+      setStatus('.status', -2, `No station code supplied. Specify station code as URL parameter 'station'. Codes should be three letters. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
       return;
       break;
     case "No type supplied":
-      setStatus('.status', -1, `No type supplied. Specify board type as URL parameter 'type'. Acceptible values are departures or arrivals.`);
+      setStatus('.status', -2, `No type supplied. Specify board type as URL parameter 'type'. Acceptible values are departures or arrivals.`);
       return;
       break;
     case "No type and station code supplied":
-      setStatus('.status', -1, `No type or station code supplied. Specify type and station code as URL parameters 'type' and 'station'. Acceptible values are departures or arrivals. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
+      setStatus('.status', -2, `No type or station code supplied. Specify type and station code as URL parameters 'type' and 'station'. Acceptible values are departures or arrivals. To find a station code see: http://www.nationalrail.co.uk/stations_destinations/48541.aspx.`);
       return;
       break;
     case "Error":
-      setStatus('.status', -1, `Something went wrong. This error message should never be seen. The problem lies in get/get.php.`);
+      setStatus('.status', -2, `Something went wrong. This error message should never be seen. The problem lies in get/get.php.`);
       return;
       break;
     case 'No response':
     case null:
       parameterError = false;
-      setStatus('.status', -1, `Disconnected. Check internet connection. Your token may be incorrect or rate limit has been exceeded.`);
+      if(services != "" && services != null) 
+        setStatus('.status', -1, `Disconnected. Check internet connection. Your token may be incorrect or rate limit has been exceeded.`);
+      else
+        setStatus('.status', -2, `Disconnected. Check internet connection. Your token may be incorrect or rate limit has been exceeded.`);
       break;
     // Assuming response is valid
     default:
       parameterError = false;
+      setStatus('.status', 0, 'Connected.');
       response.GetStationBoardResult != null && response.GetStationBoardResult.generatedAt != null ? response.GetStationBoardResult.generatedAt = null: false;
       if(JSON.stringify(response) != JSON.stringify(services)) {
         services = response; // If changed, cache the response
@@ -99,7 +103,7 @@ function processTrains(response) {
   }
   $('.dataChanged').removeClass('dataChanged');
 
-  if(services != null && servicesUpdated === true) {
+  if(services != "" && services != null && servicesUpdated === true) {
     rowCounter = 0;
     if(services.GetStationBoardResult != null) { // No services
       $(`${TABLEELEMENT} tbody`).empty();
@@ -283,21 +287,30 @@ function setPage(currentPage, totalPages) {
  *
  * @returns void
  */
+let prevError;
 function setStatus(el, code, reason) {
-  switch(code) {
-    case -1:
-    default:
-      console.error(reason);
-
-      removeModifierClasses(el);
-      $(el).addClass('status--disconnected');
-      addEmptyRows(4);
-      reason = [reason, "See console for more details."];
-      showNotices('Error', reason);
-      addEmptyRows(ROWSPERPAGE - rowCounter);
-      break;
-    case 0:
-      removeModifierClasses(el);
+  if(prevError != code + reason) {
+    prevError = code + reason;
+    switch(code) {
+      case -2:
+        console.error(reason);
+        removeModifierClasses(el);
+        $(el).addClass('status--disconnected');
+        addEmptyRows(4);
+        reason = [reason, "See console for more details."];
+        showNotices('Error', reason);
+        addEmptyRows(ROWSPERPAGE - rowCounter);
+        break;
+      case -1:
+        console.error(reason);
+        removeModifierClasses(el);
+        $(el).addClass('status--disconnected');
+        break;
+      case 0:
+      default:
+        removeModifierClasses(el);
+        break;
+    }
   }
 }
 
@@ -376,13 +389,3 @@ let sync = setInterval(()=> {
     clearInterval(sync);
   }
 }, 50);
-
-// Wait for time to be 10, 20, etc. seconds to start refreshing board, so pages are synced up if using mutliple displays
-// var sync = setInterval(function() {
-  // if(responseError === false && getSecs() % 10 === 0) {
-    // clearInterval(sync);
-    // x = setInterval(getTrains, 10000); // Refresh every 10 seconds
-  // } else if(responseError) {
-    // clearInterval(sync);
-  // }
-// }, 100)
