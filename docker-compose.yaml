@@ -4,14 +4,17 @@ services:
     build:
       context: ./
       dockerfile: laravel.dockerfile
+      args:
+        - WITH_XDEBUG=true
+    env_file: .env
     volumes: 
       - ./htdocs:/var/www/htdocs/
     working_dir: /var/www/htdocs
   web:
     image: nginx:alpine
     ports:
-      - 80
-      - 443
+      - 10080:80
+      - 10443:443
     volumes:
       - ./htdocs:/var/www/htdocs/
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
@@ -19,6 +22,8 @@ services:
       - laravel
   db:
     image: mariadb:10.4
+    ports:
+      - 13306:3306
     restart: always
     environment:
       - MYSQL_DATABASE=laravel
@@ -26,5 +31,4 @@ services:
       - MYSQL_USER=laravel
       - MYSQL_USER_PASSWORD=laravel
     volumes:
-      - ./laravel.sql.gz:/docker-entrypoint-initdb.d/laravel.sql.gz
-
+      - ./.mariadb:/var/lib/mysql
