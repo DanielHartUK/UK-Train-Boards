@@ -1,5 +1,26 @@
 # UK Railway Stations Information Boards
-This project plans to recreate passenger information boards used in UK railway stations. A PHP server is required (with PHP JSON and SOAP), as well as a [National Rail LDBWS token](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/).
+This project plans to recreate passenger information boards used in UK railway stations.
+
+## Requirements
+- PHP Server (with PHP JSON and SOAP) or Docker and Docker Compose
+- Composer
+- NPM
+- a [National Rail LDBWS token](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/).
+
+## Getting Started
+You'll need a PHP server with SOAP to run this project. You can use a PHP server you already have configured, simply take the `app/` directory, and serve the `public` directory.
+
+Alternatively, you can use Docker. Assuming you already have Docker and Docker Compose installed, open the root of the project in a terminal, then run `docker-compose build` followed by `docker-compose up`. Then open `localhost:10080` in your browser.
+
+Rename the `.env.example` file in `app/` to `.env`, add your LDBWS token.
+
+Open `app/` in a terminal, and run the following:
+ - `composer install`
+ - `npm install`
+ - `php artisan key:generate`
+ - `npm run production`
+ 
+ And you should be good to go!
 
 ## Introducing Version 3!
 Here we go again! It's time to rewrite this, again! This time it's in Vue.js and Laravel!
@@ -12,17 +33,17 @@ It was. This project doesn't need to be rebuilt every year and yet here we are. 
 
 As you might've guessed, I spent the last year learning Laravel and Vue.js.
 
-## Additions
+### Additions
 - It's written in Laravel and Vue.js
 - TBC
 
-## Removals
+### Removals
 - TBC
 
-## Known Issues
+### Known Issues
 - TBC
 
-## Notes
+### Notes
 - TBC
 
 ## License
