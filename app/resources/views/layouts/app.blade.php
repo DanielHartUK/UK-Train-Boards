@@ -1,11 +1,11 @@
-<html lang="en">
-    <head>
-        @include('layouts.header')
-    </head>
-    <body>
-        <div class="wrapper">
-            @yield('content')
-        </div>
-        @include('layouts.footer')
-    </body>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    @include('layouts.head')
+</head>
+<body>
+<div id="app">
+    @yield('content')
+</div>
+</body>
 </html>

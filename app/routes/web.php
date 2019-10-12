@@ -13,4 +13,15 @@
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
+
+Route::get('departures/{stn}/{page}', function () {
+    return view('board', ['type' => 'departures']);
+})->name('departures');
+
+Route::get('arrivals/{stn}/{page}', function () {
+    return view('board', ['type' => 'arrivals']);
+})->name('arrivals');
+
+// Localization
+Route::get('/js/lang.js', 'LocalizationController@jsi18n')->name('assets.lang');
