@@ -3,12 +3,12 @@ services:
   laravel:
     build:
       context: ./
-      dockerfile: laravel.dockerfile
+      dockerfile: ./docker/Dockerfile
       args:
         - WITH_XDEBUG=true
     env_file: .env
     volumes: 
-      - ./htdocs:/var/www/htdocs/
+      - ./app:/var/www/htdocs/
     working_dir: /var/www/htdocs
   web:
     image: nginx:alpine
@@ -16,8 +16,8 @@ services:
       - 10080:80
       - 10443:443
     volumes:
-      - ./htdocs:/var/www/htdocs/
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./app:/var/www/htdocs/
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - laravel
   db:
@@ -31,4 +31,4 @@ services:
       - MYSQL_USER=laravel
       - MYSQL_USER_PASSWORD=laravel
     volumes:
-      - ./.mariadb:/var/lib/mysql
+      - ./docker/.mariadb:/var/lib/mysql
