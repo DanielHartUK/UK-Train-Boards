@@ -15,13 +15,8 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('departures/{stn}/{page}', function () {
-    return view('board', ['type' => 'departures']);
-})->name('departures');
-
-Route::get('arrivals/{stn}/{page}', function () {
-    return view('board', ['type' => 'arrivals']);
-})->name('arrivals');
+Route::get('departures/{stn}/{page?}', 'BoardController@departuresBoard')->name('departures');
+Route::get('arrivals/{stn}/{page?}', 'BoardController@arrivalsBoard')->name('arrivals');
 
 // Localization
 Route::get('/js/lang.js', 'LocalizationController@jsi18n')->name('assets.lang');
