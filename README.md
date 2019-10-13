@@ -1,4 +1,6 @@
 # UK Railway Stations Information Boards
+[![Build Status](https://travis-ci.org/DanielHartUK/UK-Railway-Stations-Information-Boards.svg?branch=V3)](https://travis-ci.org/DanielHartUK/UK-Railway-Stations-Information-Boards)
+
 This project plans to recreate passenger information boards used in UK railway stations.
 
 ## Requirements
