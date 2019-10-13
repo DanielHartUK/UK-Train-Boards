@@ -1,0 +1,37 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "npm run routes:generate && cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --https --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "lint": "eslint --ext ./resources/js/,.vue ./resources/js/components  && stylelint ./resources/sass",
+        "prod": "npm run production",
+        "production": "npm run routes:generate && cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "routes:generate": "php artisan ziggy:generate resources/js/routes.js"
+    },
+    "dependencies": {
+        "axios": "^0.19",
+        "lodash": "^4.17.15",
+        "simple-css-grid": "^1.2.0",
+        "vue": "^2.5.17",
+        "laravel-mix": "^4.1.4"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.26.7",
+        "browser-sync-webpack-plugin": "^2.2.2",
+        "cross-env": "^5.2.1",
+        "eslint": "^6.5.1",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-loader": "^3.0.2",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-vue": "^5.2.3",
+        "resolve-url-loader": "2.3.1",
+        "sass": "^1.23.0",
+        "sass-loader": "7.*",
+        "stylelint": "^10.1.0",
+        "stylelint-config-recommended": "^2.2.0",
+        "vue-template-compiler": "^2.6.10"
+    }
+}
