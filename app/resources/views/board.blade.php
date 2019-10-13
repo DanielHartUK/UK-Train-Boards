@@ -3,5 +3,9 @@
 @section('title', __('boards.'.$type))
 
 @section('content')
-    <board type="{{$type}}"></board>
+  <board
+    type="{{$type}}"
+    stn="{{$station}}"
+  >
+  </board>
 @endsection

@@ -1,0 +1,22 @@
+dist: precise
+
+language: php
+
+php:
+  - 7.3
+
+cache:
+  directories:
+    - app/node_modules
+    - app/vendor
+
+before_script:
+  - cd ./app/
+  - composer self-update
+  - composer install --no-interaction
+  - npm install
+
+script:
+  - cd ./app/
+  - npm run lint
+  - vendor/bin/phpunit

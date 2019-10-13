@@ -1854,10 +1854,37 @@ __webpack_require__.r(__webpack_exports__);
     type: {
       type: String,
       "default": null
+    },
+    stn: {
+      type: String,
+      "default": null
     }
   },
+  data: function data() {
+    return {
+      loading: {
+        services: false
+      }
+    };
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.getServices();
+  },
+  methods: {
+    getServices: function getServices() {
+      var _this = this;
+
+      this.loading.services = true;
+      axios.get(this.route('api.departures', {
+        stn: this.stn
+      })).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.error(error, error.response);
+      })["finally"](function () {
+        _this.loading.services = false;
+      });
+    }
   }
 });
 
@@ -31715,56 +31742,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/ziggy.js":
-/*!**************************************!*\
-  !*** ./resources/assets/js/ziggy.js ***!
-  \**************************************/
-/*! exports provided: Ziggy */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Ziggy", function() { return Ziggy; });
-var Ziggy = {
-  namedRoutes: {
-    "home": {
-      "uri": "\/",
-      "methods": ["GET", "HEAD"],
-      "domain": null
-    },
-    "departures": {
-      "uri": "departures\/{stn}\/{page}",
-      "methods": ["GET", "HEAD"],
-      "domain": null
-    },
-    "arrivals": {
-      "uri": "arrivals\/{stn}\/{page}",
-      "methods": ["GET", "HEAD"],
-      "domain": null
-    },
-    "assets.lang": {
-      "uri": "js\/lang.js",
-      "methods": ["GET", "HEAD"],
-      "domain": null
-    }
-  },
-  baseUrl: 'http://localhost/',
-  baseProtocol: 'http',
-  baseDomain: 'localhost',
-  basePort: false,
-  defaultParameters: []
-};
-
-if (typeof window.Ziggy !== 'undefined') {
-  for (var name in window.Ziggy.namedRoutes) {
-    Ziggy.namedRoutes[name] = window.Ziggy.namedRoutes[name];
-  }
-}
-
-
-
-/***/ }),
-
 /***/ "./resources/js sync recursive \\.vue$/":
 /*!***********************************!*\
   !*** ./resources/js sync \.vue$/ ***!
@@ -32020,7 +31997,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ziggy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ziggy */ "./vendor/tightenco/ziggy/dist/js/route.js");
 /* harmony import */ var ziggy__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(ziggy__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _assets_js_ziggy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/js/ziggy */ "./resources/assets/js/ziggy.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 
 
 /**
@@ -32045,12 +32022,79 @@ Vue.mixin({
   methods: {
     /**
      * Add Ziggy to Vue
+     *
+     * @param {String} name Route name.
+     * @param {Object} params Route params.
+     * @param {Boolean} absolute Return absolute url.
+     * @return {String} URL for the route.
      */
-    route: function route(name, params, absolute) {
-      return ziggy__WEBPACK_IMPORTED_MODULE_0___default()(name, params, absolute, _assets_js_ziggy__WEBPACK_IMPORTED_MODULE_1__["Ziggy"]);
+    route: function route(name) {
+      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var absolute = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      return ziggy__WEBPACK_IMPORTED_MODULE_0___default()(name, params, absolute, _routes__WEBPACK_IMPORTED_MODULE_1__["Ziggy"]);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/routes.js":
+/*!********************************!*\
+  !*** ./resources/js/routes.js ***!
+  \********************************/
+/*! exports provided: Ziggy */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Ziggy", function() { return Ziggy; });
+var Ziggy = {
+  namedRoutes: {
+    "api.departures": {
+      "uri": "api\/departures\/{stn}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "api.arrivals": {
+      "uri": "api\/arrivals\/{stn}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "home": {
+      "uri": "\/",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "departures": {
+      "uri": "departures\/{stn}\/{page?}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "arrivals": {
+      "uri": "arrivals\/{stn}\/{page?}",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "assets.lang": {
+      "uri": "js\/lang.js",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    }
+  },
+  baseUrl: 'http://localhost/',
+  baseProtocol: 'http',
+  baseDomain: 'localhost',
+  basePort: false,
+  defaultParameters: []
+};
+
+if (typeof window.Ziggy !== 'undefined') {
+  for (var name in window.Ziggy.namedRoutes) {
+    Ziggy.namedRoutes[name] = window.Ziggy.namedRoutes[name];
+  }
+}
+
+
 
 /***/ }),
 

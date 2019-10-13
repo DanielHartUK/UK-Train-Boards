@@ -16,10 +16,38 @@ export default {
             type: String,
             default: null,
         },
+        stn: {
+            type: String,
+            default: null,
+        },
+    },
+
+    data() {
+        return {
+            loading: {
+                services: false,
+            },
+        };
     },
 
     mounted() {
-        console.log('Component mounted.');
+        this.getServices();
+    },
+
+    methods: {
+        getServices() {
+            this.loading.services = true;
+            axios.get(this.route('api.departures', { stn: this.stn }))
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.error(error, error.response);
+                })
+                .finally(() => {
+                    this.loading.services = false;
+                });
+        },
     },
 };
 </script>

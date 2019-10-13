@@ -1,5 +1,5 @@
 import route from 'ziggy';
-import { Ziggy } from '../assets/js/ziggy';
+import { Ziggy } from './routes';
 
 /**
  * Create a trans function for Vue, which will help use Laravel's language strings in Vue
@@ -22,7 +22,12 @@ Vue.mixin({
     methods: {
         /**
          * Add Ziggy to Vue
+         *
+         * @param {String} name Route name.
+         * @param {Object} params Route params.
+         * @param {Boolean} absolute Return absolute url.
+         * @return {String} URL for the route.
          */
-        route: (name, params, absolute) => route(name, params, absolute, Ziggy),
+        route: (name, params = null, absolute = false) => route(name, params, absolute, Ziggy),
     },
 });
