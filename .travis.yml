@@ -1,4 +1,4 @@
-dist: precise
+dist: bionic
 
 language: php
 
@@ -13,10 +13,10 @@ cache:
 before_script:
   - cd ./app/
   - cp .env.example .env
-  - php artisan key:generate
   - composer self-update
   - composer install --no-interaction
   - npm install
+  - php artisan key:generate
 
 script:
   - cd ./app/
