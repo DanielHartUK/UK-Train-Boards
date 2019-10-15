@@ -1,7 +1,7 @@
 FROM php:7.3-fpm-alpine
 
 # Install PHP Extensions
-RUN apk add --no-cache --virtual .persistent-deps libxml2-dev \
+RUN apk add --no-cache libxml2-dev php-soap \
     && docker-php-ext-configure soap --enable-soap \
     && docker-php-ext-install soap
 
