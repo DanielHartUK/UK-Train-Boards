@@ -3,6 +3,14 @@
     <div class="row">
       <div class="col-12">
         <h1>{{ trans(`boards.${type}`) }}</h1>
+        <div class="services">
+          <Board-Service
+            v-for="service in services"
+            :key="service.serviceID"
+            :service="service"
+            :type="type"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -14,16 +22,17 @@ export default {
     props: {
         type: {
             type: String,
-            default: null,
+            required: true,
         },
         stn: {
             type: String,
-            default: null,
+            required: true,
         },
     },
 
     data() {
         return {
+            services: {},
             loading: {
                 services: false,
             },
@@ -37,8 +46,9 @@ export default {
     methods: {
         getServices() {
             this.loading.services = true;
-            axios.get(this.route('api.departures', { stn: this.stn }))
+            axios.get(this.route(`api.${this.type}`, { stn: this.stn }))
                 .then((response) => {
+                    this.services = response.data;
                     console.log(response);
                 })
                 .catch((error) => {
