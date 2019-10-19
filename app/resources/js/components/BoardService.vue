@@ -3,8 +3,14 @@
     <div class="service__scheduled">
       {{ service.scheduled }}
     </div>
-    <div class="service__location">
-      {{ location }}
+    <div
+      class="service__location"
+      :class="{'service__changed': changed.location}"
+    >
+      {{ location.name }}
+      <span v-if="location.via">
+        {{ location.via }}
+      </span>
     </div>
     <div
       class="service__platform"
@@ -14,7 +20,6 @@
     </div>
     <div
       class="service__expected"
-      :class="{'service__changed': changed.expected}"
     >
       {{ service.expected }}
     </div>
@@ -37,7 +42,7 @@ export default {
 
     data() {
         return {
-            location: null,
+            location: {},
             changed: {
                 destination: false,
                 platform: false,
@@ -67,21 +72,21 @@ export default {
         parseLocation() {
             const location = this.type === 'departures' ? this.service.destination.location : this.service.origin.location;
 
-            const locations = [];
-            // If multiple locations, push the names to an array
+            // If multiple locations, push the names to an array then join them with '&'
             if (Array.isArray(location)) {
+                const locations = [];
                 for (let i = 0; i < location.length; i++) {
-                    let name = location[i].locationName;
-                    if ('via' in location[i]) name += ` ${location[i].via}`;
-                    locations.push(name);
+                    locations.push(location[i].locationName);
                 }
                 location.locationName = locations.join(' & ');
-            } else if ('via' in location) {
-                location.locationName += ` ${location.via}`;
             }
 
-            this.location = location.locationName;
-            if (this.location && location.locationName !== this.location) this.alertChanged('location');
+            const output = {};
+            output.name = location.locationName;
+            output.via = 'via' in location ? location.via : null;
+
+            if (!_.isEmpty(this.location) && this.location.name !== output.name) this.alertChanged('location');
+            this.location = output;
         },
 
         /**
