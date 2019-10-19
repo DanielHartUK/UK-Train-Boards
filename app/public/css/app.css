@@ -1041,7 +1041,33 @@ body {
   box-sizing: border-box;
 }
 
-.row {
+.service {
   font-family: sans-serif;
+  display: flex;
+}
+
+.service__changed {
+  -webkit-animation: changed 1s step-end infinite alternate;
+          animation: changed 1s step-end infinite alternate;
+}
+
+@-webkit-keyframes changed {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes changed {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 

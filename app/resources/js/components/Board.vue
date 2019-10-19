@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             services: {},
+            refreshInterval: 30000,
             loading: {
                 services: false,
             },
@@ -49,10 +50,15 @@ export default {
             axios.get(this.route(`api.${this.type}`, { stn: this.stn }))
                 .then((response) => {
                     this.services = response.data;
-                    console.log(response);
+                    setTimeout(() => {
+                        this.getServices();
+                    }, this.refreshInterval);
                 })
                 .catch((error) => {
                     console.error(error, error.response);
+                    setTimeout(() => {
+                        this.getServices();
+                    }, this.refreshInterval * 3);
                 })
                 .finally(() => {
                     this.loading.services = false;

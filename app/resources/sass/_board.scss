@@ -1,3 +1,29 @@
-.row {
+.service {
   font-family: $font-family-dot;
+  display: flex;
+
+  &__scheduled {
+
+  }
+
+  &__location {
+
+  }
+
+  &__platform {
+
+  }
+
+  &__expected {
+
+  }
+
+  &__changed {
+    animation: changed 1s step-end infinite alternate;
+  }
+}
+
+@keyframes changed {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
 }

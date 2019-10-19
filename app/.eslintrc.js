@@ -26,6 +26,7 @@ module.exports = {
         'import/no-unresolved': 'off',
         'no-underscore-dangle': 'off',
         'prefer-destructuring': 'off',
+        'no-plusplus': 'off',
         'no-restricted-syntax': [
             'error',
             {

@@ -1871,6 +1871,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       services: {},
+      refreshInterval: 30000,
       loading: {
         services: false
       }
@@ -1888,9 +1889,14 @@ __webpack_require__.r(__webpack_exports__);
         stn: this.stn
       })).then(function (response) {
         _this.services = response.data;
-        console.log(response);
+        setTimeout(function () {
+          _this.getServices();
+        }, _this.refreshInterval);
       })["catch"](function (error) {
         console.error(error, error.response);
+        setTimeout(function () {
+          _this.getServices();
+        }, _this.refreshInterval * 3);
       })["finally"](function () {
         _this.loading.services = false;
       });
@@ -1917,6 +1923,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BoardService',
   props: {
@@ -1931,13 +1952,64 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      location: null
+      location: null,
+      changed: {
+        destination: false,
+        platform: false
+      }
     };
   },
-  mounted: function mounted() {
-    this.location = this.type === 'departures' ? this.service.destination : this.service.origin;
+  watch: {
+    service: function service(updated, original) {
+      this.parseLocation();
+
+      if (updated.platform !== original.platform) {
+        this.alertChanged('platform');
+      }
+    }
   },
-  methods: {}
+  beforeMount: function beforeMount() {
+    this.parseLocation();
+  },
+  methods: {
+    /**
+     * Handle the location of the service
+     * Assigns a location string to the location data entry
+     */
+    parseLocation: function parseLocation() {
+      var location = this.type === 'departures' ? this.service.destination.location : this.service.origin.location;
+      var locations = []; // If multiple locations, push the names to an array
+
+      if (Array.isArray(location)) {
+        for (var i = 0; i < location.length; i++) {
+          var name = location[i].locationName;
+          if ('via' in location[i]) name += " ".concat(location[i].via);
+          locations.push(name);
+        }
+
+        location.locationName = locations.join(' & ');
+      } else if ('via' in location) {
+        location.locationName += " ".concat(location.via);
+      }
+
+      this.location = location.locationName;
+      if (this.location && location.locationName !== this.location) this.alertChanged('location');
+    },
+
+    /**
+     * Trigger the changed animation on a property
+     * @param {string} property The property that has changed
+     */
+    alertChanged: function alertChanged(property) {
+      var _this = this;
+
+      this.changed[property] = true;
+      console.log(this.service.scheduled, this.location, property);
+      setTimeout(function () {
+        _this.changed[property] = false;
+      }, 10000);
+    }
+  }
 });
 
 /***/ }),
@@ -19606,14 +19678,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "service" }, [
-    _vm._v(
-      "\n  " +
-        _vm._s(_vm.service.scheduled) +
-        " -\n  " +
-        _vm._s(_vm.location.locationName) +
-        " -\n  " +
-        _vm._s(_vm.service.expected) +
-        "\n"
+    _c("div", { staticClass: "service__scheduled" }, [
+      _vm._v("\n    " + _vm._s(_vm.service.scheduled) + "\n  ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "service__location" }, [
+      _vm._v("\n    " + _vm._s(_vm.location) + "\n  ")
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "service__platform",
+        class: { service__changed: _vm.changed.platform }
+      },
+      [_vm._v("\n    " + _vm._s(_vm.service.platform) + "\n  ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "service__expected",
+        class: { service__changed: _vm.changed.expected }
+      },
+      [_vm._v("\n    " + _vm._s(_vm.service.expected) + "\n  ")]
     )
   ])
 }
