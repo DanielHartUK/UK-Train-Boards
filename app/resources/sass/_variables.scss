@@ -1,9 +1,17 @@
 // Typography
-$font-family-sans-serif: sans-serif;
-$font-family-dot: sans-serif;
-$font-size-base: 0.9rem;
+$font-family-sans-serif: "NewRailAlphabet", sans-serif;
+$font-family-dot: "DotMatrix", $font-family-sans-serif;
 $line-height-base: 1.6;
 
 // Colors
 $body-bg: #000;
 $text-color: #fff;
+$text-color--orange: #ff8f00;
+
+// Grid
+$column-gutter: 0.25rem;
+
+$min_width: 320px;
+$max_width: 1920px;
+$min_font: 14px;
+$max_font: 85px;

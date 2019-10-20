@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'DotMatrix';
+    src: url('dot_matrix_regular-webfont.woff2') format('woff2'),
+         url('dot_matrix_regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DotMatrix';
+    src: url('dot_matrix_bold-webfont.woff2') format('woff2'),
+         url('dot_matrix_bold-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DotMatrix';
+    src: url('dot_matrix_bold_semi_tall-webfont.woff2') format('woff2'),
+         url('dot_matrix_bold_semi_tall-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DotMatrix';
+    src: url('dot_matrix_bold_tall-webfont.woff2') format('woff2'),
+         url('dot_matrix_bold_tall-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}

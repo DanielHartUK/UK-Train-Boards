@@ -1,21 +1,64 @@
-.service {
-  font-family: $font-family-dot;
-  display: flex;
+.services {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 0;
+  text-align: left;
 
-  &__scheduled {
-
+  th {
+    font-size: 0.85rem;
   }
 
-  &__location {
+  th, td {
+    vertical-align: top;
 
+    &:last-child,
+    &:nth-last-child(2) {
+      text-align: right;
+    }
+  }
+
+  &__time {
+    width: 2.5rem;
   }
 
   &__platform {
-
+    width: 3.2rem;
   }
 
   &__expected {
+    width: 5rem;
+  }
 
+  tfoot {
+    font-family: $font-family-dot;
+    font-weight: 500;
+    color: $text-color--orange;
+
+    td:first-child {
+      text-align: left;
+    }
+  }
+}
+
+.service {
+  font-family: $font-family-dot;
+  color: $text-color--orange;
+  border-bottom: 0.5rem solid black;
+  border-top: 0.5rem solid black;
+  line-height: 0.9rem;
+
+  td {
+    background-image: url('../images/ledcol.svg');
+    background-size: 0.1rem;
+    background-repeat-y: no-repeat;
+    background-position: top left;
+  }
+
+  &__location {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &__changed {
@@ -24,6 +67,12 @@
 }
 
 @keyframes changed {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
+
+

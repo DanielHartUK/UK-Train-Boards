@@ -1,9 +1,9 @@
 <template>
-  <div class="service">
-    <div class="service__scheduled">
+  <tr class="service">
+    <td class="service__scheduled">
       {{ service.scheduled }}
-    </div>
-    <div
+    </td>
+    <td
       class="service__location"
       :class="{'service__changed': changed.location}"
     >
@@ -11,19 +11,19 @@
       <span v-if="location.via">
         {{ location.via }}
       </span>
-    </div>
-    <div
+    </td>
+    <td
       class="service__platform"
       :class="{'service__changed': changed.platform}"
     >
       {{ service.platform }}
-    </div>
-    <div
+    </td>
+    <td
       class="service__expected"
     >
       {{ service.expected }}
-    </div>
-  </div>
+    </td>
+  </tr>
 </template>
 
 <script>
@@ -95,7 +95,6 @@ export default {
          */
         alertChanged(property) {
             this.changed[property] = true;
-            console.log(this.service.scheduled, this.location, property);
 
             setTimeout(() => {
                 this.changed[property] = false;

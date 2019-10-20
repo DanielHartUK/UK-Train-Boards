@@ -389,14 +389,14 @@ template {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
 }
 
 .container-fluid {
   width: 100%;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
 }
 
 .row {
@@ -405,14 +405,14 @@ template {
 }
 
 .row:not(.row--no-gutters) {
-  margin-right: -16px;
-  margin-left: -16px;
+  margin-right: -0.25rem;
+  margin-left: -0.25rem;
 }
 
 .row:not(.row--no-gutters) > .col,
 .row:not(.row--no-gutters) > [class^=col-] {
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
 }
 
 .col {
@@ -1025,25 +1025,153 @@ template {
   }
 }
 
+@font-face {
+  font-family: "NewRailAlphabet";
+  src: url(/fonts/NewRailAlphabet-Medium.woff?666e59560c08795423588c4239e198b9) format("woff"), url(/fonts/NewRailAlphabet-Medium.ttf?42d9080b87550407a3d2d77672bfd64a) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NewRailAlphabet";
+  src: url(/fonts/NewRailAlphabet-Bold.woff?7ccd7d7ada0da86c7afbe1037e295ecd) format("woff"), url(/fonts/NewRailAlphabet-Bold.ttf?71132594d6423755adcc9fabdd6f8914) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DotMatrix";
+  src: url(/fonts/dot_matrix_regular-webfont.woff2?6d82b047c746475ea627f5c04217a564) format("woff2"), url(/fonts/dot_matrix_regular-webfont.woff?af49a065e84bcbea31a4ed7c22eb1db5) format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DotMatrix";
+  src: url(/fonts/dot_matrix_bold-webfont.woff2?0c9e924e560f388ddd76a7a55c984687) format("woff2"), url(/fonts/dot_matrix_bold-webfont.woff?6ba278d04deef4b46f6fe7504e940ee3) format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DotMatrix";
+  src: url(/fonts/dot_matrix_bold_semi_tall-webfont.woff2?7f0297663fae70e2deb8a67f22cabf96) format("woff2"), url(/fonts/dot_matrix_bold_semi_tall-webfont.woff?ae5962ade33007fbd326eb7528621b51) format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DotMatrix";
+  src: url(/fonts/dot_matrix_bold_tall-webfont.woff2?9721a919c2501d041e65c82139edb6c4) format("woff2"), url(/fonts/dot_matrix_bold_tall-webfont.woff?2ca1b317df865f664abd0a7e36af3a93) format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
 html,
 body {
   margin: 0;
 }
 
+html {
+  font-size: 13px;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(14px + 71 * ((100vw - 320px) / 1600));
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 85px;
+  }
+}
+
 body {
   background: #000;
   color: #fff;
-  font-family: sans-serif;
-  font-size: 16px;
+  font-family: "NewRailAlphabet", sans-serif;
 }
 
 * {
   box-sizing: border-box;
 }
 
+h1 {
+  font-size: 1.25rem;
+  margin: 0.25rem 0 0;
+}
+
+.services {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 0;
+  text-align: left;
+}
+
+.services th {
+  font-size: 0.85rem;
+}
+
+.services th,
+.services td {
+  vertical-align: top;
+}
+
+.services th:last-child,
+.services th:nth-last-child(2),
+.services td:last-child,
+.services td:nth-last-child(2) {
+  text-align: right;
+}
+
+.services__time {
+  width: 2.5rem;
+}
+
+.services__platform {
+  width: 3.2rem;
+}
+
+.services__expected {
+  width: 5rem;
+}
+
+.services tfoot {
+  font-family: "DotMatrix", "NewRailAlphabet", sans-serif;
+  font-weight: 500;
+  color: #ff8f00;
+}
+
+.services tfoot td:first-child {
+  text-align: left;
+}
+
 .service {
-  font-family: sans-serif;
-  display: flex;
+  font-family: "DotMatrix", "NewRailAlphabet", sans-serif;
+  color: #ff8f00;
+  border-bottom: 0.5rem solid black;
+  border-top: 0.5rem solid black;
+  line-height: 0.9rem;
+}
+
+.service td {
+  background-image: url(/images/ledcol.svg?30d4024189572638d8de49d5a1ddf55b);
+  background-size: 0.1rem;
+  background-repeat-y: no-repeat;
+  background-position: top left;
+}
+
+.service__location {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .service__changed {

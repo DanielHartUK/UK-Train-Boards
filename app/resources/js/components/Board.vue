@@ -3,14 +3,41 @@
     <div class="row">
       <div class="col-12">
         <h1>{{ trans(`boards.${type}`) }}</h1>
-        <div class="services">
-          <Board-Service
-            v-for="service in services"
-            :key="service.serviceID"
-            :service="service"
-            :type="type"
-          />
-        </div>
+        <table class="services">
+          <thead>
+            <tr>
+              <th class="services__time">
+                {{ trans('boards.time') }}
+              </th>
+              <th class="services__location">
+                {{ trans(`boards.${type}-location`) }}
+              </th>
+              <th class="services__platform">
+                {{ trans('boards.plat') }}
+              </th>
+              <th class="services__expected">
+                {{ trans('boards.expected') }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <Board-Service
+              v-for="service in services"
+              :key="service.serviceID"
+              :service="service"
+              :type="type"
+            />
+          </tbody>
+          <tfoot>
+            <tr class="service">
+              <Board-Page
+                :page="1"
+                :pages="2"
+              />
+              <Board-Clock />
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   </div>
@@ -33,6 +60,7 @@ export default {
     data() {
         return {
             services: {},
+            rowsPerPage: 10,
             refreshInterval: 30000,
             loading: {
                 services: false,

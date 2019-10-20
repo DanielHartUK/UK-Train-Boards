@@ -13,5 +13,11 @@ return [
 
     'departures' => 'Departures',
     'arrivals' => 'Arrivals',
-
+    'time' => 'Time',
+    'plat' => 'Plat',
+    'expected' => 'Expected',
+    'page' => 'Page',
+    'of' => 'of',
+    'departures-location' => 'Destination',
+    'arrivals-location' => 'Origin',
 ];

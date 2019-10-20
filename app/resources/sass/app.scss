@@ -1,12 +1,11 @@
-// Framework
-@import '~simple-css-grid/scss/simple-grid.scss';
-
-// Fonts
-
-
 // Variables
 @import 'variables';
-
+// Framework
+@import '~simple-css-grid/scss/simple-grid.scss';
+// Fonts
+@import 'fonts';
+// Mixins
+@import 'mixins';
 // Partials
 @import 'main';
 @import 'board';

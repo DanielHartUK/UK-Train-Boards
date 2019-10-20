@@ -13,10 +13,12 @@
     },
     "dependencies": {
         "axios": "^0.19",
+        "laravel-mix": "^4.1.4",
         "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "moment-timezone": "^0.5.27",
         "simple-css-grid": "^1.2.0",
-        "vue": "^2.5.17",
-        "laravel-mix": "^4.1.4"
+        "vue": "^2.5.17"
     },
     "devDependencies": {
         "browser-sync": "^2.26.7",

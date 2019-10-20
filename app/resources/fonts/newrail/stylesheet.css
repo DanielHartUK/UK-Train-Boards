@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'NewRailAlphabet';
+    src: url('NewRailAlphabet-Medium.woff') format('woff'),
+        url('NewRailAlphabet-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NewRailAlphabet';
+    src: url('NewRailAlphabet-Bold.woff') format('woff'),
+        url('NewRailAlphabet-Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
