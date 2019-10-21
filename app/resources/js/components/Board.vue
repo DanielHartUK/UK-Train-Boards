@@ -1,10 +1,15 @@
 <template>
-  <div class="container-fluid">
+  <div
+    class="container-fluid"
+    v-resize:debounce="calculateRows"
+  >
     <div class="row">
       <div class="col-12">
-        <h1>{{ trans(`boards.${type}`) }}</h1>
+        <h1 ref="title">
+          {{ trans(`boards.${type}`) }}
+        </h1>
         <table class="services">
-          <thead>
+          <thead ref="thead">
             <tr>
               <th class="services__time">
                 {{ trans('boards.time') }}
@@ -20,19 +25,19 @@
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody ref="tbody">
             <Board-Service
-              v-for="service in services"
+              v-for="service in services.slice(0, rowsPerPage)"
               :key="service.serviceID"
               :service="service"
               :type="type"
             />
           </tbody>
-          <tfoot>
+          <tfoot ref="tfoot">
             <tr class="service">
               <Board-Page
-                :page="1"
-                :pages="2"
+                :page="page"
+                :pages="pages"
               />
               <Board-Clock />
             </tr>
@@ -44,8 +49,15 @@
 </template>
 
 <script>
+import resize from 'vue-resize-directive';
+
 export default {
     name: 'Board',
+
+    directives: {
+        resize,
+    },
+
     props: {
         type: {
             type: String,
@@ -59,8 +71,23 @@ export default {
 
     data() {
         return {
-            services: {},
-            rowsPerPage: 10,
+            services: [{
+                origin: {
+                    location: {
+                        locationName: 'Loading',
+                        crs: 'LOD',
+                    },
+                },
+                destination: {
+                    location: {
+                        locationName: 'Loading',
+                        crs: 'LOD',
+                    },
+                },
+            }],
+            rowsPerPage: 8,
+            page: 1,
+            pages: 1,
             refreshInterval: 30000,
             loading: {
                 services: false,
@@ -70,6 +97,7 @@ export default {
 
     mounted() {
         this.getServices();
+        this.calculateRows();
     },
 
     methods: {
@@ -91,6 +119,19 @@ export default {
                 .finally(() => {
                     this.loading.services = false;
                 });
+        },
+
+        calculateRows() {
+            if (!this.$refs.tbody.firstChild) return;
+
+            const rowHeight = this.$refs.tbody.firstChild.offsetHeight;
+            const freeSpace = window.innerHeight
+                - this.$refs.title.offsetHeight
+                - this.$refs.thead.offsetHeight
+                - this.$refs.tfoot.firstChild.offsetHeight;
+
+            this.rowsPerPage = Math.floor(freeSpace / rowHeight);
+            this.pages = Math.ceil(this.services.length / this.rowsPerPage);
         },
     },
 };

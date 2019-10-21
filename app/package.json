@@ -18,7 +18,8 @@
         "moment": "^2.24.0",
         "moment-timezone": "^0.5.27",
         "simple-css-grid": "^1.2.0",
-        "vue": "^2.5.17"
+        "vue": "^2.5.17",
+        "vue-resize-directive": "^1.2.0"
     },
     "devDependencies": {
         "browser-sync": "^2.26.7",
