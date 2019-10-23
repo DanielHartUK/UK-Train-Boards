@@ -19,3 +19,11 @@ services:
       - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - laravel
+  composer:
+    image: composer:latest
+    volumes:
+      - ./app:/app
+    command:
+      - install
+    depends_on:
+      - laravel
