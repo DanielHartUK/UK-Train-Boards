@@ -27,7 +27,7 @@
           </thead>
           <tbody ref="tbody">
             <Board-Service
-              v-for="service in services.slice(0, rowsPerPage)"
+              v-for="service in services.slice(offset, page * rowsPerPage)"
               :key="service.serviceID"
               :service="service"
               :type="type"
@@ -67,42 +67,47 @@ export default {
             type: String,
             required: true,
         },
+        page: {
+            type: Number,
+            default: 1,
+        },
     },
 
-    data() {
-        return {
-            services: [{
-                origin: {
-                    location: {
-                        locationName: 'Loading',
-                        crs: 'LOD',
-                    },
+    data: () => ({
+        services: [{
+            origin: {
+                location: {
+                    locationName: 'Loading',
+                    crs: 'LOD',
                 },
-                destination: {
-                    location: {
-                        locationName: 'Loading',
-                        crs: 'LOD',
-                    },
-                },
-            }],
-            rowsPerPage: 8,
-            page: 1,
-            pages: 1,
-            refreshInterval: 30000,
-            loading: {
-                services: false,
             },
-        };
-    },
+            destination: {
+                location: {
+                    locationName: 'Loading',
+                    crs: 'LOD',
+                },
+            },
+        }],
+        rowsPerPage: 8,
+        pages: 1,
+        offset: 0,
+        refreshInterval: 30000,
+        loading: {
+            services: false,
+        },
+    }),
 
     mounted() {
         this.getServices();
         this.calculateRows();
+
+        this.offset = (this.page - 1) * this.rowsPerPage;
     },
 
     methods: {
         getServices() {
             this.loading.services = true;
+
             axios.get(this.route(`api.${this.type}`, { stn: this.stn }))
                 .then((response) => {
                     this.services = response.data;

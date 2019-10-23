@@ -6,6 +6,7 @@
   <Board
     type="{{$type}}"
     stn="{{$station}}"
+    :page="{{$page}}"
   >
   </Board>
 @endsection

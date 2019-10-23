@@ -40,15 +40,13 @@ export default {
         },
     },
 
-    data() {
-        return {
-            location: {},
-            changed: {
-                destination: false,
-                platform: false,
-            },
-        };
-    },
+    data: () => ({
+        location: {},
+        changed: {
+            destination: false,
+            platform: false,
+        },
+    }),
 
     watch: {
         service(updated, original) {

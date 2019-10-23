@@ -13,16 +13,15 @@ const moment = require('moment-timezone');
 export default {
     name: 'BoardClock',
 
-    data() {
-        return {
-            interval: null,
-            time: {},
-        };
-    },
+    data: () => ({
+        interval: null,
+        time: {},
+    }),
 
     beforeMount() {
         this.interval = setInterval(() => {
-            const time = moment().tz('Europe/London');
+            const time = moment()
+                .tz('Europe/London');
             this.time = {
                 hours: time.format('HH'),
                 minutes: time.format('mm'),
