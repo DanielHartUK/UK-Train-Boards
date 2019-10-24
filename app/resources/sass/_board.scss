@@ -77,6 +77,26 @@
   }
 }
 
+.clock {
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end;
+
+  & > span {
+    display: inline-block;
+    text-align: center;
+  }
+
+  &__hours,
+  &__minutes,
+  &__seconds {
+    min-width: 0.91rem;
+  }
+
+  &__seconds {
+    font-weight: 600;
+  }
+}
 
 
 @keyframes changed {

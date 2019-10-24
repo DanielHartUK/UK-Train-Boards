@@ -1,9 +1,30 @@
 <template>
-  <td
-    class="clock"
-    colspan="2"
-  >
-    {{ time.hours }}:{{ time.minutes }}:<span>{{ time.seconds }}</span>
+  <td colspan="2">
+    <div class="clock">
+      <span
+        v-for="(H, i) in time.hours"
+        :key="`H-${i}`"
+        class="clock__hours"
+      >
+        {{ H }}
+      </span>
+      <span>:</span>
+      <span
+        v-for="(m, i) in time.minutes"
+        :key="`m-${i}`"
+        class="clock__minutes"
+      >
+        {{ m }}
+      </span>
+      <span>:</span>
+      <span
+        v-for="(s, i) in time.seconds"
+        :key="`s-${i}`"
+        class="clock__seconds"
+      >
+        {{ s }}
+      </span>
+    </div>
   </td>
 </template>
 
