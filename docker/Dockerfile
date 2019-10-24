@@ -8,6 +8,8 @@ RUN apk add --no-cache libxml2-dev php-soap \
 RUN apk add --no-cache \
     $PHPIZE_DEPS
 
+RUN chown -R www-data:www-data /var/www
+
 ARG WITH_XDEBUG=false
 
 RUN if [ $WITH_XDEBUG = "true" ] ; then \

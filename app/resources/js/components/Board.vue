@@ -1,7 +1,7 @@
 <template>
   <div
-    class="container-fluid"
     v-resize:debounce="calculateRows"
+    class="container-fluid"
   >
     <div class="row">
       <div class="col-12">

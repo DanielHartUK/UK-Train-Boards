@@ -34,7 +34,8 @@
         "sass": "^1.23.0",
         "sass-loader": "7.*",
         "stylelint": "^10.1.0",
-        "stylelint-config-recommended": "^2.2.0",
+        "stylelint-config-recommended-scss": "^4.0.0",
+        "stylelint-scss": "^3.12.0",
         "vue-template-compiler": "^2.6.10"
     }
 }
