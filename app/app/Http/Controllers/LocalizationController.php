@@ -47,7 +47,7 @@ class LocalizationController extends Controller
             $strings = $this->strings();
         } else {
             $strings = Cache::rememberForever('lang.js', function () {
-                $this->strings();
+                return $this->strings();
             });
         }
 
