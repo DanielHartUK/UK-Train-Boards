@@ -29,6 +29,10 @@
     overflow-x: hidden;
   }
 
+  &__platform {
+    text-transform: uppercase;
+  }
+
   &__changed {
     animation: changed 1s step-end infinite alternate;
   }
