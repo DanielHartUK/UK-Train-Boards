@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use Illuminate\Http\Request;
-use Illuminate\Cache;
+use Illuminate\Support\Facades\Cache;
 
 class LocalizationController extends Controller
 {
