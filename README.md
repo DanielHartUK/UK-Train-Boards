@@ -16,14 +16,13 @@ Alternatively, you can use Docker. Assuming you already have Docker and Docker C
 
 Rename the `.env.example` file in `app/` to `.env`, add your LDBWS token.
 
-Open `app/` in a terminal, and run the following:
- - `composer install`
- - `npm install`
- - `php artisan key:generate`
- - `npm run production`
+Open the project in a terminal, and run the following:
+- `docker-compose exec laravel php artisan key:generate`
  
- And you should be good to go!
+And you should be good to go! Open up `http://localhost:10080` in your browser.
 
+**Note**: if you get a permissions error when running artisan commands, or encounter a 500 error when trying to load the site in a browser, run `docker-compose exec laravel chown -R www-data:www-data /var/www`.
+ 
 ## Introducing Version 3!
 Here we go again! It's time to rewrite this, again! This time it's in Vue.js and Laravel!
 
