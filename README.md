@@ -5,8 +5,6 @@ This project plans to recreate passenger information boards used in UK railway s
 
 ## Requirements
 - PHP Server (with PHP JSON and SOAP) or Docker and Docker Compose
-- Composer
-- NPM
 - a [National Rail LDBWS token](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/).
 
 ## Getting Started
