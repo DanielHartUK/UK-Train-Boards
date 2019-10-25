@@ -32,6 +32,10 @@
               :service="service"
               :type="type"
             />
+            <Board-Service-Filler
+              v-for="filler in fillers"
+              :key="`filler-${filler}`"
+            />
           </tbody>
           <tfoot ref="tfoot">
             <tr class="service">
@@ -97,6 +101,12 @@ export default {
         },
     }),
 
+    computed: {
+        fillers() {
+            return Math.max(0, this.rowsPerPage - this.services.length);
+        },
+    },
+
     mounted() {
         this.getServices();
         this.calculateRows();
@@ -135,8 +145,8 @@ export default {
                 - this.$refs.thead.offsetHeight
                 - this.$refs.tfoot.firstChild.offsetHeight;
 
-            this.rowsPerPage = Math.floor(freeSpace / rowHeight);
-            this.pages = Math.ceil(this.services.length / this.rowsPerPage);
+            this.rowsPerPage = Math.max(1, Math.floor(freeSpace / rowHeight));
+            this.pages = Math.max(1, Math.ceil(this.services.length / this.rowsPerPage));
         },
     },
 };
