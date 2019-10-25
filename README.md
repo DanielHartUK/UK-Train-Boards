@@ -45,5 +45,8 @@ As you might've guessed, I spent the last year learning Laravel and Vue.js.
 ### Notes
 - TBC
 
+## Sponsorship
+I don't need money so if you like this project and want to say thanks with the gift of money give it to dogs instead. Seriously, [help the good boys find a home](https://donate.battersea.org.uk/appeals/default/).
+
 ## License
 [MIT](https://github.com/DanielHartUK/UK-Railway-Stations-Information-Boards/blob/master/license.md)
