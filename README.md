@@ -8,11 +8,11 @@ This project plans to recreate passenger information boards used in UK railway s
 - a [National Rail LDBWS token](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/).
 
 ## Getting Started
-You'll need a PHP server with SOAP to run this project. You can use a PHP server you already have configured, simply take the `app/` directory, and serve the `public` directory.
+Rename the `.env.example` file in `app/` to `.env`, add your LDBWS token.
+
+You'll need a PHP server with SOAP to run this project. You can use a PHP server you already have configured, simply take the `app/` directory, and serve the `public` directory. You'll need to install composer dependencies and generate a app key by running `php artisan key:generate` in `app/`.
 
 Alternatively, you can use Docker. Assuming you already have Docker and Docker Compose installed, open the root of the project in a terminal, then run `docker-compose build` followed by `docker-compose up`. Then open `localhost:10080` in your browser.
-
-Rename the `.env.example` file in `app/` to `.env`, add your LDBWS token.
 
 Open the project in a terminal, and run the following:
 - `docker-compose exec laravel php artisan key:generate`
