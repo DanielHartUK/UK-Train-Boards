@@ -52,7 +52,8 @@ class ServicesController extends Controller
                 // If expected is a time, use it to decide if the service is today
                 if (preg_match("^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$^",
                     $service->expected)) {
-                    if (strtotime($service->scheduled) > $timeNow - (60 * 5)) {
+                    if (strtotime($service->scheduled) > $timeNow - (60 * 5) ||
+                        strtotime($service->expected) > $timeNow - (60 * 5)) {
                         $today[] = $service;
                     } else {
                         $tomorrow[] = $service;
