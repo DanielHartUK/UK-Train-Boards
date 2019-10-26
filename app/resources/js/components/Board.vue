@@ -92,6 +92,7 @@ export default {
                 },
             },
         }],
+        via: true,
         rowsPerPage: 8,
         pages: 1,
         offset: 0,
@@ -121,6 +122,7 @@ export default {
             axios.get(this.route(`api.${this.type}`, { stn: this.stn }))
                 .then((response) => {
                     this.services = response.data;
+                    this.calculatePages();
                     setTimeout(() => {
                         this.getServices();
                     }, this.refreshInterval);
@@ -146,6 +148,10 @@ export default {
                 - this.$refs.tfoot.firstChild.offsetHeight;
 
             this.rowsPerPage = Math.max(1, Math.floor(freeSpace / rowHeight));
+            this.calculatePages();
+        },
+
+        calculatePages() {
             this.pages = Math.max(1, Math.ceil(this.services.length / this.rowsPerPage));
         },
     },
