@@ -93,7 +93,7 @@ export default {
                 },
             },
         }],
-        via: 'alternate',
+        via: 'off',
         rowsPerPage: 8,
         pages: 1,
         offset: 0,
