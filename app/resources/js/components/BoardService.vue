@@ -7,10 +7,7 @@
       class="service__location"
       :class="{'service__changed': changed.location}"
     >
-      {{ location.name }}
-      <span v-if="location.via">
-        {{ location.via }}
-      </span>
+      {{ serviceLocation }}
     </td>
     <td
       class="service__platform"
@@ -38,6 +35,11 @@ export default {
             type: String,
             required: true,
         },
+        via: {
+            type: String,
+            required: false,
+            default: 'off',
+        },
     },
 
     data: () => ({
@@ -46,7 +48,22 @@ export default {
             destination: false,
             platform: false,
         },
+        showVia: false,
     }),
+
+    computed: {
+        serviceLocation() {
+            if (this.via === 'off' || !this.location.via) return this.location.name;
+            if (this.via === 'oneline') return this.location.name + this.location.via;
+
+            if (this.via === 'alternate') {
+                if (this.showVia) return this.location.via;
+                return this.location.name;
+            }
+
+            return this.location.name;
+        },
+    },
 
     watch: {
         service(updated, original) {
@@ -60,6 +77,12 @@ export default {
 
     beforeMount() {
         this.parseLocation();
+    },
+
+    mounted() {
+        if (this.via === 'alternate') {
+            this.alternateLocation();
+        }
     },
 
     methods: {
@@ -97,6 +120,19 @@ export default {
             setTimeout(() => {
                 this.changed[property] = false;
             }, 10000);
+        },
+
+        toggleVia() {
+            this.showVia = !this.showVia;
+            this.alternateLocation();
+        },
+
+        alternateLocation() {
+            if (this.showVia) {
+                setTimeout(this.toggleVia, 5000);
+            } else {
+                setTimeout(this.toggleVia, 10000);
+            }
         },
     },
 };

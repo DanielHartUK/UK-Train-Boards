@@ -31,6 +31,7 @@
               :key="service.serviceID"
               :service="service"
               :type="type"
+              :via="via"
             />
             <Board-Service-Filler
               v-for="filler in fillers"
@@ -92,7 +93,7 @@ export default {
                 },
             },
         }],
-        via: true,
+        via: 'alternate',
         rowsPerPage: 8,
         pages: 1,
         offset: 0,
