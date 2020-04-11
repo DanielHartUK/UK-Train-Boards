@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-rational-order"
+  ],
+  "plugins": [
+    "stylelint-config-rational-order/plugin"
+  ],
+  "rules": {
+    "selector-class-pattern": [
+      "^(([A-Z][a-zA-Z0-9]+))(__(([A-Z][a-zA-Z0-9]+)))?(--(([A-Z][a-zA-Z0-9]+)))?$",
+      {
+        "resolveNestedSelectors": true,
+        "message": "Expect class selector to conform to PascalCase BEM, see https://github.com/Skyscanner/stylelint-config-skyscanner#class-selector-pattern for pattern (selector-class-pattern)"
+      }
+    ],
+    "max-nesting-depth": 2,
+    "order/properties-alphabetical-order": null,
+    "plugin/rational-order": [
+      true,
+      {
+        "border-in-box-model": false,
+        "empty-line-between-groups": false
+      }
+    ]
+  }
+}
