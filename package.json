@@ -1,5 +1,6 @@
 {
-  "name": "train-boards",
+  "name": "uk-train-boards",
+  "productName": "UK Train Boards",
   "version": "4.0.0",
   "description": "Recreate the UK's National Rail Departures Boards where ever you are!",
   "keywords": [
@@ -12,8 +13,14 @@
     "national rail darwin",
     "uk railway stations"
   ],
-  "homepage": "https://github.com/",
+  "homepage": "https://github.com/DanielHartUK/UK-Train-Boards",
   "private": false,
+  "license": "MIT",
+  "author": {
+    "email": "me@danielhart.co.uk",
+    "name": "Daniel Hart",
+    "url": "https://www.danielhart.co.uk"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -30,6 +37,8 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "electron": "^8.2.1",
+    "national-rail-darwin": "^1.0.8",
+    "sqlite3": "^4.1.1",
     "vue": "^2.6.11",
     "vue-cli-plugin-electron-builder": "~1.4.6",
     "vue-i18n": "^8.17.0",
