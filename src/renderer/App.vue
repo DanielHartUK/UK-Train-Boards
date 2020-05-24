@@ -1,14 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">{{ $t('Home') }}</router-link>
-      |
-      <router-link to="/about">{{ $t('About') }}</router-link>
-    </div>
-    <router-view/>
+    <MainView v-if="view === 'main'"/>
+    <BoardView
+      v-if="view === 'board'"
+      :board-data="viewData"
+    />
   </div>
 </template>
 
-<style lang="scss">
-  @use './styles/app';
-</style>
+<script>
+
+import { ipcRenderer } from 'electron';
+import MainView from '@components/MainView.vue';
+import BoardView from '@components/BoardView.vue';
+
+export default {
+  components: {
+    MainView,
+    BoardView,
+  },
+
+  data: () => ({
+    view: 'main',
+    viewData: {},
+  }),
+
+  beforeCreate() {
+    ipcRenderer.once('board-data', (e, data) => {
+      this.view = 'board';
+      this.viewData = data;
+    });
+  },
+};
+
+</script>

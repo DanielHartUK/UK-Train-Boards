@@ -7,10 +7,15 @@ module.exports = {
 
   css: {
     sourceMap: true,
+    loaderOptions: {
+      postcss: {
+        plugins: [],
+      },
+    },
   },
 
   configureWebpack: webpackConfig,
-  lintOnSave: true,
+  lintOnSave: false,
 
   pluginOptions: {
     i18n: {

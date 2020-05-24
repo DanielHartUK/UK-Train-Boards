@@ -1,42 +1,67 @@
-
-import { app, protocol, BrowserWindow } from 'electron';
+import {
+  app, protocol, BrowserWindow, ipcMain,
+} from 'electron';
 import {
   createProtocol,
-  /* installVueDevtools */
+  installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const windowStateKeeper = require('electron-window-state');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win;
+const windows = new Set();
 
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }]);
+protocol.registerSchemesAsPrivileged([{
+  scheme: 'app',
+  privileges: {
+    secure: true,
+    standard: true,
+  },
+}]);
 
-function createWindow() {
-  // Create the browser window.
-  win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
+function newWindow(windowOptions, devTools = true) {
+  const window = new BrowserWindow(windowOptions);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
+    window.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
+    if (!process.env.IS_TEST && devTools) window.webContents.openDevTools();
   } else {
     createProtocol('app');
     // Load the index.html when not in development
-    win.loadURL('app://./index.html');
+    window.loadURL('app://./index.html');
   }
 
-  win.on('closed', () => {
-    win = null;
+  window.on('closed', () => {
+    windows.delete(window);
   });
+
+  windows.add(window);
+  return window;
+}
+
+function createMainWindow() {
+  const mainWindowState = windowStateKeeper({
+    defaultWidth: 465,
+    defaultHeight: 600,
+  });
+
+  // Create the browser window.
+  const mainWindow = newWindow({
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    webPreferences: {
+      nodeIntegration: true,
+      experimentalFeatures: true,
+    },
+  });
+
+  mainWindowState.manage(mainWindow);
 }
 
 // Quit when all windows are closed.
@@ -51,8 +76,8 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
-    createWindow();
+  if (windows.size === 0) {
+    createMainWindow();
   }
 });
 
@@ -68,14 +93,13 @@ app.on('ready', async () => {
     // If you are not using Windows 10 dark mode, you may uncomment these lines
     // In addition, if the linked issue is closed, you can upgrade electron and uncomment these
     // lines
-    // try {
-    //   await installVueDevtools()
-    // } catch (e) {
-    //   console.error('Vue Devtools failed to install:', e.toString())
-    // }
-
+    try {
+      await installVueDevtools();
+    } catch (e) {
+      console.error('Vue Devtools failed to install:', e.toString());
+    }
   }
-  createWindow();
+  createMainWindow();
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -92,3 +116,21 @@ if (isDevelopment) {
     });
   }
 }
+
+
+ipcMain.on('open-board', (e, form) => {
+  console.log(form);
+
+  const boardWindow = newWindow({
+    width: 600,
+    height: 900,
+    webPreferences: {
+      nodeIntegration: true,
+      experimentalFeatures: true,
+    },
+  }, true);
+
+  boardWindow.webContents.on('did-finish-load', () => {
+    boardWindow.webContents.send('board-data', form);
+  });
+});

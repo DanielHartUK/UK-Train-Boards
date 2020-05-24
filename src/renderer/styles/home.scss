@@ -1,0 +1,75 @@
+.NewBoard {
+  padding: 0 var(--Indent);
+}
+
+.NewBoard__BoardContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  width: calc(100vw - var(--SidebarWidth));
+  margin-left: calc(-1 * var(--Indent));
+  padding: 0 var(--Indent);
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin-top: -2px;
+  padding-top: 2px;
+}
+
+.NewBoard__Board {
+  margin-right: var(--Indent);
+
+  &:last-child {
+    padding-right: var(--Indent);
+  }
+
+  input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  label {
+    --BoardShadow: 0;
+    --BoardFontWeight: var(--FontWeight);
+  }
+
+  input:checked ~ label {
+    --BorderColor: var(--BorderColorSelected);
+    --BoardShadow: 0 0 0 2px var(--BorderColorSelected);
+    --BoardFontWeight: var(--FontWeight--Bold);
+  }
+
+  input:focus ~ label > .NewBoard__BoardImage { // stylelint-disable-line
+    border-color: var(--BorderColorSelected);
+    outline: 0;
+    box-shadow: 0 0 0 4px var(--BorderColorSelected);
+  }
+}
+
+.NewBoard__BoardImage {
+  --BoardImageSize: 10px;
+  margin: 2px;
+  background: #000;
+  border: 2px solid var(--BorderColor);
+  border-radius: 4px;
+  box-shadow: var(--BoardShadow);
+
+  &--Vertical {
+    width: calc(var(--BoardImageSize) * 9);
+    height: calc(var(--BoardImageSize) * 16);
+  }
+
+  &--Horizontal {
+    width: calc(var(--BoardImageSize) * 16);
+    height: calc(var(--BoardImageSize) * 9);
+  }
+}
+
+.NewBoard__BoardName {
+  display: block;
+  margin-top: var(--Indent--Xs);
+  font-weight: var(--BoardFontWeight);
+}

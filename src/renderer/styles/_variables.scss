@@ -1,0 +1,18 @@
+:root {
+  --FontSize: 16px;
+  --FontWeight: 400;
+  --FontWeight--Bold: 700;
+  --Background: #222e4d;
+  --SecondaryBackground: #172444;
+  --SecondaryBackground--Hover: #293f75;
+  --BorderColor: #7c8f9f;
+  --BorderColorSelected: #3997e9;
+  --BorderRadius: 4px;
+  --TextColor: #dfe0e0;
+  --Indent: 15px;
+  --Indent--Xs: 7px;
+  --SidebarWidth: 50px;
+  --NavigationIndicatorBackground: var(--TextColor);
+  --LabelFontSize: 1.24rem;
+  --LabelFontWeight: var(--FontWeight--Bold);
+}
