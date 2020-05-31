@@ -25,13 +25,14 @@ module.exports = {
       enableInSFC: true,
     },
     electronBuilder: {
+      nodeIntegration: true,
       chainWebpackMainProcess: (config) => {
         config.module
           .rule('babel')
           .test(/\.m?js$/)
           .include
           .add(path.resolve(__dirname, 'src/background.js'))
-          .add(path.resolve(__dirname, 'src/main/'))
+          .add(path.resolve(__dirname, 'src/background/'))
           .end()
           .use('babel')
           .loader('babel-loader')
