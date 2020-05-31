@@ -1,5 +1,5 @@
 <template>
-  <div class="NewBoard TwelveColumns">
+  <div class="NewBoard Page TwelveColumns">
     <h1>{{ $t('New Board') }}</h1>
     <form
       class="TwelveColumnsFlex"

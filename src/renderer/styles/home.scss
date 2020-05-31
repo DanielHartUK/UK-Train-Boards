@@ -1,19 +1,15 @@
-.NewBoard {
-  padding: 0 var(--Indent);
-}
-
 .NewBoard__BoardContainer {
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-end;
   width: calc(100vw - var(--SidebarWidth));
+  margin-top: -2px;
   margin-left: calc(-1 * var(--Indent));
-  padding: 0 var(--Indent);
+  padding: 2px var(--Indent) 0;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  margin-top: -2px;
-  padding-top: 2px;
+
 }
 
 .NewBoard__Board {
