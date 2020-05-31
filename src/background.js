@@ -1,13 +1,23 @@
-import {
-  app, protocol, BrowserWindow, ipcMain,
-} from 'electron';
-import {
+import './background/settings';
+
+const {
+  app,
+  protocol,
+  BrowserWindow,
+  ipcMain,
+} = require('electron');
+const {
   createProtocol,
   installVueDevtools,
-} from 'vue-cli-plugin-electron-builder/lib';
+} = require('vue-cli-plugin-electron-builder/lib');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const windowStateKeeper = require('electron-window-state');
+const fs = require('fs');
+
+// If it doesn't exist already, create the user data folder
+const userDataPath = app.getPath('userData');
+if (!fs.existsSync(userDataPath)) fs.mkdirSync(userDataPath);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -56,7 +66,7 @@ function createMainWindow() {
     width: mainWindowState.width,
     height: mainWindowState.height,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       experimentalFeatures: true,
     },
   });
@@ -117,10 +127,7 @@ if (isDevelopment) {
   }
 }
 
-
 ipcMain.on('open-board', (e, form) => {
-  console.log(form);
-
   const boardWindow = newWindow({
     width: 600,
     height: 900,

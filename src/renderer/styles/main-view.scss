@@ -109,6 +109,10 @@ body {
   background: var(--ItemBackground);
 }
 
+.Page {
+  padding: 0 var(--Indent);
+}
+
 .TwelveColumns {
   display: grid;
   grid-auto-rows: min-content;
