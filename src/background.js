@@ -1,10 +1,14 @@
-import {
-  app, protocol, BrowserWindow, ipcMain,
-} from 'electron';
-import {
+const {
+  app,
+  protocol,
+  BrowserWindow,
+  ipcMain,
+} = require('electron');
+const {
   createProtocol,
   installVueDevtools,
-} from 'vue-cli-plugin-electron-builder/lib';
+} = require('vue-cli-plugin-electron-builder/lib');
+require('./background/boardListeners');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const windowStateKeeper = require('electron-window-state');
@@ -56,7 +60,7 @@ function createMainWindow() {
     width: mainWindowState.width,
     height: mainWindowState.height,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       experimentalFeatures: true,
     },
   });
@@ -117,10 +121,7 @@ if (isDevelopment) {
   }
 }
 
-
 ipcMain.on('open-board', (e, form) => {
-  console.log(form);
-
   const boardWindow = newWindow({
     width: 600,
     height: 900,

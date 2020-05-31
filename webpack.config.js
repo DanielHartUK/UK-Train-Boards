@@ -15,4 +15,5 @@ module.exports = {
       files: ['{src,public}/**/*.{vue,htm,html,css,sss,less,scss,sass}'],
     }),
   ],
+
 };
