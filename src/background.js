@@ -1,3 +1,5 @@
+import './background/settings';
+
 const {
   app,
   protocol,
@@ -12,6 +14,11 @@ require('./background/boardListeners');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const windowStateKeeper = require('electron-window-state');
+const fs = require('fs');
+
+// If it doesn't exist already, create the user data folder
+const userDataPath = app.getPath('userData');
+if (!fs.existsSync(userDataPath)) fs.mkdirSync(userDataPath);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
