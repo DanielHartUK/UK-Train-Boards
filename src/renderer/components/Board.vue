@@ -24,7 +24,9 @@
         </tr>
       </thead>
       <tbody ref="tbody">
+        <p v-if="error">{{ $t('Error') }}: {{ error }}</p>
         <BoardService
+          v-else
           v-for="service in services.slice(offset, page * rowsPerPage)"
           :key="service.serviceID"
           :service="service"
@@ -38,11 +40,11 @@
       </tbody>
       <tfoot ref="tfoot">
         <tr class="Service">
-<!--          <Board-Page-->
-<!--            :page="page"-->
-<!--            :pages="pages"-->
-<!--          />-->
-<!--          <Board-Clock/>-->
+          <!--          <Board-Page-->
+          <!--            :page="page"-->
+          <!--            :pages="pages"-->
+          <!--          />-->
+          <!--          <Board-Clock/>-->
         </tr>
       </tfoot>
     </table>
@@ -56,7 +58,10 @@ import BoardServiceFiller from '@components/BoardServiceFiller';
 
 export default {
   name: 'Board',
-  components: { BoardServiceFiller, BoardService },
+  components: {
+    BoardServiceFiller,
+    BoardService,
+  },
   directives: {
     resize,
   },
@@ -65,6 +70,10 @@ export default {
     services: {
       type: Array,
       required: true,
+    },
+    error: {
+      type: String,
+      required: false,
     },
     type: {
       type: String,
@@ -84,8 +93,11 @@ export default {
   }),
 
   computed: {
+    servicesCount() {
+      return this.error ? 1 : this.services.length;
+    },
     // fillers() {
-    //   return Math.max(0, this.rowsPerPage - this.services.length);
+    //   return Math.max(0, this.rowsPerPage - this.servicesLength);
     // },
   },
 
@@ -110,7 +122,8 @@ export default {
     },
 
     calculatePages() {
-      this.pages = Math.max(1, Math.ceil(this.services.length / this.rowsPerPage));
+      const l = this.error ? 1 : this.services.length;
+      this.pages = Math.max(1, Math.ceil(this.servicesCount / this.rowsPerPage));
     },
   },
 };

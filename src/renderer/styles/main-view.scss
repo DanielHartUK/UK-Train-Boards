@@ -35,7 +35,9 @@ body {
 
 .Navigation {
   display: grid;
-  grid-template-areas: 'top' 'bottom';
+  grid-template-areas:
+    'top'
+    'bottom';
   grid-template-rows: 1fr 1fr;
 }
 

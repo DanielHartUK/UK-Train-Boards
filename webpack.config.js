@@ -2,6 +2,8 @@ const path = require('path');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
+
   resolve: {
     alias: {
       '@assets': path.resolve(__dirname, 'src/assets/'),

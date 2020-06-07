@@ -38,7 +38,7 @@ module.exports = {
           .loader('babel-loader')
           .options(babelConfig);
       },
-      mainProcessWatch: ['src/main/*'],
+      mainProcessWatch: ['src/background/*'],
     },
   },
 };

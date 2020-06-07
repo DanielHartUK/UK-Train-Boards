@@ -1,6 +1,7 @@
 <template>
   <Board
     :services="departures"
+    :error="error"
     type="departures"
     :page="page"
   />
@@ -27,6 +28,7 @@ export default {
 
   data: () => ({
     departures: [],
+    error: null,
   }),
 
   mounted() {
@@ -41,7 +43,11 @@ export default {
     },
     receiveDepartures(e, services) {
       console.log(services);
-      this.departures = services?.trainServices;
+      if (services.error) {
+        this.error = services.error;
+      } else {
+        this.departures = services;
+      }
     },
   },
 };
