@@ -1,4 +1,4 @@
-import openDb from './db';
+import { openDb } from './db';
 
 const { ipcMain } = require('electron');
 
@@ -31,9 +31,10 @@ async function getSettings(ipcMainEvent) {
   try {
     reply = await Settings.getSettings();
   } catch (error) {
-    reply = { error: 'Failed to get settings' };
+    ipcMainEvent.reply('get-settings', { error: 'Failed to get settings' });
     throw new Error(error);
   }
+
   ipcMainEvent.reply('get-settings', reply);
 }
 
