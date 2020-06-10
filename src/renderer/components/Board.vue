@@ -10,16 +10,16 @@
       <thead ref="thead">
         <tr>
           <th class="Services__Time">
-            {{ $t('time') }}
+            {{ $t('Time') }}
           </th>
           <th class="Services__Location">
             {{ $t(`${type}-location`) }}
           </th>
           <th class="Services__Platform">
-            {{ $t('plat') }}
+            {{ $t('Plat') }}
           </th>
           <th class="Services__Expected">
-            {{ $t('expected') }}
+            {{ $t('Expected') }}
           </th>
         </tr>
       </thead>
@@ -33,10 +33,10 @@
           :type="type"
           :via="via"
         />
-        <BoardServiceFiller
-          v-for="filler in fillers"
-          :key="`filler-${filler}`"
-        />
+<!--        <BoardServiceFiller-->
+<!--          v-for="filler in fillers"-->
+<!--          :key="`filler-${filler}`"-->
+<!--        />-->
       </tbody>
       <tfoot ref="tfoot">
         <tr class="Service">
@@ -122,7 +122,6 @@ export default {
     },
 
     calculatePages() {
-      const l = this.error ? 1 : this.services.length;
       this.pages = Math.max(1, Math.ceil(this.servicesCount / this.rowsPerPage));
     },
   },

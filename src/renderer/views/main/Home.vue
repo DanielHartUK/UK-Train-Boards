@@ -196,5 +196,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @use '@renderer/styles/home.scss';
+  @use '@renderer/styles/main/pages/home.scss';
 </style>

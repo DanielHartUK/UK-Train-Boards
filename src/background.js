@@ -33,17 +33,17 @@ protocol.registerSchemesAsPrivileged([{
   },
 }]);
 
-function newWindow(windowOptions, devTools = true) {
+function newWindow(windowOptions, route = '', devTools = true) {
   const window = new BrowserWindow(windowOptions);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    window.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
+    window.loadURL(`${process.env.WEBPACK_DEV_SERVER_URL}#/${route}`);
     if (!process.env.IS_TEST && devTools) window.webContents.openDevTools();
   } else {
     createProtocol('app');
     // Load the index.html when not in development
-    window.loadURL('app://./index.html');
+    window.loadURL(`app://./index.html/#/${route}`);
   }
 
   window.on('closed', () => {
@@ -70,7 +70,7 @@ function createMainWindow() {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       experimentalFeatures: true,
     },
-  });
+  }, 'main');
 
   mainWindowState.manage(mainWindow);
 }
@@ -136,7 +136,7 @@ ipcMain.on('open-board', (e, form) => {
       nodeIntegration: true,
       experimentalFeatures: true,
     },
-  }, true);
+  }, 'board/departures', true);
 
   boardWindow.webContents.on('did-finish-load', () => {
     boardWindow.webContents.send('board-data', form);

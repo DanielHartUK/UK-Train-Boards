@@ -19,3 +19,19 @@ ipcMain.on('departures', async (e, crs) => {
       e.reply('departures', reply);
     });
 });
+
+ipcMain.on('arrivals', async (e, crs) => {
+  let reply;
+
+  services.getArrivals(crs)
+    .then((result) => {
+      reply = result;
+    })
+    .catch((err) => {
+      const error = err.response?.statusText || err?.message || err;
+      reply = { error };
+    })
+    .finally(() => {
+      e.reply('arrivals', reply);
+    });
+});

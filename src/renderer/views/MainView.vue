@@ -6,19 +6,19 @@
     >
       <div class="Navigation__Top">
         <NavigationItem
-          to="/"
+          to="/main/"
           label="New Board"
           icon="plus"
         />
         <NavigationItem
-          to="/favorites"
+          to="/main/favorites"
           label="Favorites"
           icon="heart"
         />
       </div>
       <div class="Navigation__Bottom">
         <NavigationItem
-          to="/settings"
+          to="/main/settings"
           label="Settings"
           icon="cog"
         />
@@ -35,7 +35,3 @@ export default {
   components: { NavigationItem },
 };
 </script>
-
-<style lang="scss">
-  @use '@renderer/styles/main-view.scss';
-</style>

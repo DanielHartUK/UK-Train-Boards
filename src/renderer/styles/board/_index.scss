@@ -1,0 +1,126 @@
+.Board {
+  --BodyBg: #000;
+  --TextColor: #fff;
+  --TextColorOrange: #ff8f00;
+  --LineHeight: 1.6;
+  --FontFamilyDot: 'Dot Matrix', sans-serif;
+  --FontFamilySansSerif: sans-serif;
+
+  cursor: none;
+}
+
+h1 {
+  text-transform: capitalize;
+}
+
+.Service {
+  color: var(--TextColorOrange);
+  font-family: var(--FontFamilyDot);
+  line-height: 1;
+  border-top: 0.45rem solid #000;
+  border-bottom: 0.45rem solid #000;
+
+  td {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      color: #151515;
+      font-weight: normal;
+      content: '||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||';
+    }
+  }
+}
+
+.Service__Location {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Service__Platform {
+  text-transform: uppercase;
+}
+
+.Service__Changed {
+  animation: changed 1s step-end infinite alternate;
+}
+
+.Services {
+  width: 100%;
+  text-align: left;
+  table-layout: fixed;
+  border: 0;
+  border-collapse: collapse;
+
+  th {
+    font-size: 0.85rem;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+
+    &:last-child,
+    &:nth-last-child(2) {
+      text-align: right;
+    }
+  }
+
+  tfoot {
+    color: var(--TextColorOrange);
+    font-weight: 500;
+    font-family: var(--FontFamilyDot);
+
+    td:first-child {
+      text-align: left;
+    }
+  }
+}
+
+.Services__Time {
+  width: 2.5rem;
+}
+
+.Services__Platform {
+  width: 2rem;
+}
+
+.Services__Expected {
+  width: 5rem;
+}
+
+.Clock {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 700;
+
+  > span {
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.Clock__Hours,
+.Clock__Minutes,
+.Clock__Seconds {
+  min-width: 0.91rem;
+}
+
+.Clock__Seconds {
+  font-weight: 600;
+}
+
+@keyframes changed {
+  50% {
+    color: transparent;
+  }
+}

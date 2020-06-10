@@ -1,0 +1,20 @@
+@use '~normalize.css/normalize';
+@use 'fonts';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.App--Main {
+  @import 'main/index';
+}
+
+.App--Board {
+  @import 'board/index';
+}

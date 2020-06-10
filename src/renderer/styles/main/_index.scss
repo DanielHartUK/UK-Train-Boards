@@ -1,24 +1,31 @@
-@use '~normalize.css/normalize';
-@use 'variables';
-
-html,
-body {
-  color: #fff;
-  font-size: var(--FontSize);
-  font-family: 'Helvetica', 'Arial', sans-serif;
-  background: #000;
-}
-
-* {
-  box-sizing: border-box;
-}
+@use 'pages/home';
 
 .MainView {
+  --FontSize: 16px;
+  --FontWeight: 400;
+  --FontWeight--Bold: 700;
+  --Background: #222e4d;
+  --SecondaryBackground: #172444;
+  --SecondaryBackground--Hover: #293f75;
+  --BorderColor: #7c8f9f;
+  --BorderColorSelected: #3997e9;
+  --BorderRadius: 4px;
+  --TextColor: #dfe0e0;
+  --Indent: 15px;
+  --Indent--Xs: 7px;
+  --SidebarWidth: 50px;
+  --NavigationIndicatorBackground: var(--TextColor);
+  --LabelFontSize: 1.24rem;
+  --LabelFontWeight: var(--FontWeight--Bold);
   display: grid;
   grid-template-areas: 'sidebar body';
   grid-template-columns: var(--SidebarWidth) 1fr;
   height: 100vh;
   overflow: hidden;
+  color: #fff;
+  font-size: var(--FontSize);
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  background: #000;
 }
 
 .MainView__Navigation {

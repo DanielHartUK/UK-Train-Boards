@@ -1,36 +1,31 @@
 <template>
-  <div id="app">
-    <MainView v-if="view === 'main'"/>
-    <BoardView
-      v-if="view === 'board'"
-      :board-data="viewData"
-    />
+  <div
+    id="app"
+    class="App"
+    :class="{
+      'App--Main': routes.includes('/main'),
+      'App--Board': routes.includes('/board'),
+    }"
+  >
+    <router-view />
   </div>
 </template>
 
 <script>
 
-import { ipcRenderer } from 'electron';
-import MainView from '@components/MainView.vue';
-import BoardView from '@components/BoardView.vue';
-
 export default {
-  components: {
-    MainView,
-    BoardView,
-  },
-
   data: () => ({
     view: 'main',
     viewData: {},
   }),
 
-  beforeCreate() {
-    ipcRenderer.once('board-data', (e, data) => {
-      this.view = 'board';
-      this.viewData = data;
-    });
+  computed: {
+    routes() {
+      return this.$route.matched.map((m) => m.path);
+    },
   },
 };
 
 </script>
+
+<style lang="scss" src="@renderer/styles/app.scss"/>

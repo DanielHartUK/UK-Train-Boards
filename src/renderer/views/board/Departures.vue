@@ -1,8 +1,8 @@
 <template>
   <Board
+    type="departures"
     :services="departures"
     :error="error"
-    type="departures"
     :page="page"
   />
 </template>

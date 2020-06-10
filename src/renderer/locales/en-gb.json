@@ -1,2 +1,10 @@
 {
+  "Departures": "Departures",
+  "Arrivals": "Arrivals",
+  "departures-location": "Destination",
+  "arrivals-location": "Origin",
+  "Time": "Time",
+  "Plat": "Plat",
+  "Expected": "Expected",
+  "Error": "Error"
 }

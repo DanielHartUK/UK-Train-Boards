@@ -30,7 +30,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/renderer/locales/**/*.json'",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "stylelint": "stylelint ./src/renderer/styles ./src/renderer/components"
+    "stylelint": "stylelint './src/renderer/**/*.?(s)css'"
   },
   "main": "background.js",
   "dependencies": {
@@ -41,7 +41,8 @@
     "core-js": "^3.6.4",
     "electron": "^9.0.0",
     "electron-window-state": "^5.0.3",
-    "national-rail-darwin-promises": "^2.0.0",
+    "moment": "^2.26.0",
+    "national-rail-darwin-promises": "^2.1.2",
     "normalize.css": "^8.0.1",
     "sqlite": "^4.0.9",
     "sqlite3": "^4.2.0",
@@ -88,7 +89,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.css": "stylelint --fix"
+    "*.?(mjs|js|vue)": "eslint --cache --fix",
+    "*.?(s)css": "stylelint --fix"
   }
 }
