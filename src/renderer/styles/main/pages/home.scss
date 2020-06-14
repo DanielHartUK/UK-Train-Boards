@@ -7,8 +7,7 @@
   flex-wrap: nowrap;
   align-items: flex-end;
   width: calc(100vw - var(--SidebarWidth));
-  margin-top: -2px;
-  margin-left: calc(-1 * var(--Indent));
+  margin: -2px calc(-1 * var(--Indent)) 0;
   padding: 0 var(--Indent);
   padding-top: 2px;
   overflow-x: auto;

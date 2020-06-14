@@ -1,5 +1,8 @@
 @use '~normalize.css/normalize';
+@use '~vuejs-dialog/dist/vuejs-dialog.min';
 @use 'fonts';
+@use 'main';
+@use 'board';
 
 html {
   box-sizing: border-box;
@@ -11,10 +14,6 @@ html {
   box-sizing: inherit;
 }
 
-.App--Main {
-  @import 'main/index';
-}
-
-.App--Board {
-  @import 'board/index';
+a {
+  color: inherit;
 }

@@ -14,11 +14,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '../views/main/Home.vue'),
       },
       {
-        path: 'favorites',
-        name: 'Favorites',
-        component: () => import(/* webpackChunkName: "favorites" */ '../views/main/Favorites.vue'),
-      },
-      {
         path: 'settings',
         name: 'Settings',
         component: () => import(/* webpackChunkName: "settings" */ '../views/main/Settings.vue'),
@@ -33,7 +28,6 @@ const routes = [
         path: 'departures',
         name: 'Departures',
         component: () => import(/* webpackChunkName: "departures" */ '../views/board/Departures.vue'),
-        // props: { location: boardData?.location, page: 1 },
       },
     ],
   },

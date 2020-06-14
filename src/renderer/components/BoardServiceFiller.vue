@@ -1,22 +1,22 @@
 <template>
-  <tr class="service">
-    <td class="service__scheduled">
-      &nbsp;
-    </td>
-    <td class="service__location">
-      &nbsp;
-    </td>
-    <td class="service__platform">
-      &nbsp;
-    </td>
-    <td class="service__expected">
-      &nbsp;
-    </td>
+  <tr class="Service Service--Filler">
+    <td
+      class="Service__Scheduled"
+      colspan="4"
+      v-html="content"
+    />
   </tr>
 </template>
 
 <script>
 export default {
   name: 'BoardServiceFiller',
+
+  props: {
+    content: {
+      type: String,
+      default: '&nbsp;',
+    },
+  },
 };
 </script>

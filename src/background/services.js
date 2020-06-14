@@ -1,5 +1,5 @@
 import { openDb, dbKeyValue } from './db';
-import moment from 'moment';
+import moment from 'moment'; // eslint-disable-line
 
 const Rail = require('national-rail-darwin-promises');
 
@@ -15,11 +15,11 @@ class Services {
       });
   }
 
-  static #sortServices(a, b) {
+  static #sortServices(a, b) { // eslint-disable-line
     return a.scheduled > b.scheduled;
   }
 
-  static #processServices(result) {
+  static #processServices(result) { // eslint-disable-line
     let services = [];
     const serviceTypes = ['trainServices', 'busServices', 'ferryServices'];
 

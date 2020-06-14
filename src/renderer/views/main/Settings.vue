@@ -10,7 +10,13 @@
           for="api-key-field"
           class="FormItem__Label"
         >
-          {{ $t('API Key') }}
+          {{ $t('API Key') }} -
+          <a
+            href="#"
+            @click.prevent="openExternal('http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/')"
+          >
+            {{ $t('Register') }}
+          </a>
         </label>
         <input
           id="api-key-field"
@@ -33,7 +39,7 @@
 </template>
 
 <script>
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 
 export default {
   name: 'Settings',
@@ -51,13 +57,36 @@ export default {
 
   methods: {
     submitSettings() {
-      ipcRenderer.send('save-settings', this.form);
+      let restart = false;
+
+      this.$dialog
+        .confirm(
+          'Some settings require a restart to take effect.',
+          {
+            okText: 'Restart Now',
+            cancelText: 'Restart Later',
+          },
+        )
+        .then(() => {
+          restart = true;
+        })
+        .catch(() => {
+        })
+        .then(() => {
+          ipcRenderer.send('save-settings', {
+            restart,
+            form: this.form,
+          });
+        });
     },
     receiveSettings(e, settings) {
       Object.keys(settings)
         .forEach((key) => {
           this.form[key] = settings[key];
         });
+    },
+    openExternal(url) {
+      shell.openExternal(url);
     },
   },
 };

@@ -74,8 +74,8 @@
 import { ipcRenderer } from 'electron';
 
 function validateStation(value) {
+  if (!value) return false;
   // @TODO Validate station code
-  console.log(value);
   return true;
 }
 
@@ -118,23 +118,23 @@ export default {
           page: commonFields.page,
         },
       },
-      arrivals: {
-        name: 'Arrivals',
-        image: 'arrivals.jpg',
-        type: 'vertical',
-        fields: {
-          location: commonFields.location,
-          page: commonFields.page,
-        },
-      },
-      horizontalTest: {
-        name: 'A Horizontal Board',
-        image: 'horizontal.jpg',
-        type: 'horizontal',
-        fields: {
-          location: commonFields.location,
-        },
-      },
+      // arrivals: {
+      //   name: 'Arrivals',
+      //   image: 'arrivals.jpg',
+      //   type: 'vertical',
+      //   fields: {
+      //     location: commonFields.location,
+      //     page: commonFields.page,
+      //   },
+      // },
+      // horizontalTest: {
+      //   name: 'A Horizontal Board',
+      //   image: 'horizontal.jpg',
+      //   type: 'horizontal',
+      //   fields: {
+      //     location: commonFields.location,
+      //   },
+      // },
     },
     form: {
       board: 'departures',
@@ -186,8 +186,6 @@ export default {
             validatedFields[name] = validationFunc(this.form[name]);
           }
         });
-
-      console.log(validatedFields);
 
       ipcRenderer.send('open-board', this.form);
     },

@@ -1,6 +1,6 @@
 @use 'pages/home';
 
-.MainView {
+.App--Main {
   --FontSize: 16px;
   --FontWeight: 400;
   --FontWeight--Bold: 700;
@@ -17,6 +17,9 @@
   --NavigationIndicatorBackground: var(--TextColor);
   --LabelFontSize: 1.24rem;
   --LabelFontWeight: var(--FontWeight--Bold);
+}
+
+.MainView {
   display: grid;
   grid-template-areas: 'sidebar body';
   grid-template-columns: var(--SidebarWidth) 1fr;

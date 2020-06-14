@@ -6,8 +6,9 @@ const services = new Services();
 
 ipcMain.on('departures', async (e, crs) => {
   let reply;
+  const code = crs.toUpperCase();
 
-  services.getDepartures(crs)
+  services.getDepartures(code)
     .then((result) => {
       reply = result;
     })
@@ -22,8 +23,9 @@ ipcMain.on('departures', async (e, crs) => {
 
 ipcMain.on('arrivals', async (e, crs) => {
   let reply;
+  const code = crs.toUpperCase();
 
-  services.getArrivals(crs)
+  services.getArrivals(code)
     .then((result) => {
       reply = result;
     })

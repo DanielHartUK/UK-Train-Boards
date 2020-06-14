@@ -10,11 +10,6 @@
           label="New Board"
           icon="plus"
         />
-        <NavigationItem
-          to="/main/favorites"
-          label="Favorites"
-          icon="heart"
-        />
       </div>
       <div class="Navigation__Bottom">
         <NavigationItem

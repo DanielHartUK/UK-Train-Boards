@@ -1,24 +1,41 @@
-.Board {
-  --BodyBg: #000;
+@use 'mixins';
+
+.App--Board {
   --TextColor: #fff;
   --TextColorOrange: #ff8f00;
-  --LineHeight: 1.6;
-  --FontFamilyDot: 'Dot Matrix', sans-serif;
-  --FontFamilySansSerif: sans-serif;
 
+  @include mixins.fluid-type(320px, 1920px, 14px, 85px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  color: #fff;
+  font-size: 14px;
+  font-family: Helvetica, Arial, sans-serif;
+  background: #000;
+}
+
+.Board {
+  padding: 0 0.25em;
+  overflow: auto;
+}
+
+.Board--HideCursor {
   cursor: none;
 }
 
-h1 {
+.Board h1 {
+  margin: 0.25em 0 0.07em;
+  font-size: 1.25em;
   text-transform: capitalize;
 }
 
 .Service {
   color: var(--TextColorOrange);
-  font-family: var(--FontFamilyDot);
+  font-family: 'Dot Matrix', sans-serif;
   line-height: 1;
-  border-top: 0.45rem solid #000;
-  border-bottom: 0.45rem solid #000;
+  border-top: 0.45em solid #000;
+  border-bottom: 0.45em solid #000;
 
   td {
     position: relative;
@@ -62,7 +79,7 @@ h1 {
   border-collapse: collapse;
 
   th {
-    font-size: 0.85rem;
+    font-size: 0.85em;
   }
 
   th,
@@ -86,16 +103,29 @@ h1 {
   }
 }
 
+.Service--Filler {
+  td {
+    &:last-child,
+    &:nth-last-child(2) {
+      text-align: left;
+    }
+  }
+}
+
 .Services__Time {
-  width: 2.5rem;
+  width: 2.9em;
 }
 
 .Services__Platform {
-  width: 2rem;
+  width: 2.4em;
 }
 
 .Services__Expected {
-  width: 5rem;
+  width: 5.8em;
+}
+
+.Services__Footer > .Service:last-child {
+  border-bottom: 0;
 }
 
 .Clock {
@@ -112,7 +142,7 @@ h1 {
 .Clock__Hours,
 .Clock__Minutes,
 .Clock__Seconds {
-  min-width: 0.91rem;
+  min-width: 0.91em;
 }
 
 .Clock__Seconds {

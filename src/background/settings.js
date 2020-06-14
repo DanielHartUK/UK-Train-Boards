@@ -1,6 +1,6 @@
 import { openDb } from './db';
 
-const { ipcMain } = require('electron');
+const { app, ipcMain } = require('electron');
 
 class Settings {
   static async getSettings() {
@@ -38,9 +38,14 @@ async function getSettings(ipcMainEvent) {
   ipcMainEvent.reply('get-settings', reply);
 }
 
-ipcMain.on('save-settings', async (e, form) => {
-  await Settings.setSettings(form);
+ipcMain.on('save-settings', async (e, data) => {
+  await Settings.setSettings(data.form);
   await getSettings(e);
+  console.log(data);
+  if (data.restart) {
+    app.relaunch();
+    app.quit();
+  }
 });
 
 ipcMain.on('get-settings', async (e) => {

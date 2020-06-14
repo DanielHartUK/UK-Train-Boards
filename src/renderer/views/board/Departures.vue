@@ -32,7 +32,17 @@ export default {
   }),
 
   mounted() {
+    const refreshRate = 30000;
+
     this.requestDepartures();
+
+    const syncRefreshInterval = setInterval(() => {
+      if (Date.now() % refreshRate <= 500) {
+        this.requestDepartures();
+        setInterval(this.requestDepartures, refreshRate);
+        clearInterval(syncRefreshInterval);
+      }
+    }, 500);
 
     ipcRenderer.on('departures', this.receiveDepartures);
   },
@@ -42,7 +52,6 @@ export default {
       ipcRenderer.send('departures', this.location);
     },
     receiveDepartures(e, services) {
-      console.log(services);
       if (services.error) {
         this.error = services.error;
       } else {
