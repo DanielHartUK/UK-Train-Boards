@@ -1,24 +1,8 @@
-# train-boards
+# UK Train Boards
+This project plans to recreate passenger information boards used in UK railway stations as a desktop application for Mac, Windows, and Linux.
 
-## Project setup
-```
-npm install
-```
+## Features
+- Generate faithful recreations of passenger information boards from UK railway stations on your desktop! 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## License
+[MIT](https://github.com/DanielHartUK/UK-Railway-Stations-Information-Boards/blob/master/license.md)
