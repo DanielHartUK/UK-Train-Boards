@@ -1,0 +1,22 @@
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $unit1: unit($min-vw);
+  $unit2: unit($max-vw);
+  $unit3: unit($min-font-size);
+  $unit4: unit($max-font-size);
+
+  @if $unit1 == $unit2 and $unit1 == $unit3 and $unit1 == $unit4 {
+    font-size: $min-font-size;
+
+    @media screen and (min-width: $min-vw) {
+      font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+    }
+
+    @media screen and (min-width: $max-vw) {
+      font-size: $max-font-size;
+    }
+  }
+}
