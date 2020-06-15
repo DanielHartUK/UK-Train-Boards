@@ -1,15 +1,18 @@
+.NewBoard {
+  padding: 0 var(--Indent);
+}
+
 .NewBoard__BoardContainer {
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-end;
   width: calc(100vw - var(--SidebarWidth));
-  margin-top: -2px;
-  margin-left: calc(-1 * var(--Indent));
-  padding: 2px var(--Indent) 0;
+  margin: -2px calc(-1 * var(--Indent)) 0;
+  padding: 0 var(--Indent);
+  padding-top: 2px;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-
 }
 
 .NewBoard__Board {
@@ -47,8 +50,12 @@
 
 .NewBoard__BoardImage {
   --BoardImageSize: 10px;
+
   margin: 2px;
-  background: #000;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
   border: 2px solid var(--BorderColor);
   border-radius: 4px;
   box-shadow: var(--BoardShadow);

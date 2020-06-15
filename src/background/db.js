@@ -4,7 +4,7 @@ import { open } from 'sqlite';
 const { app } = require('electron');
 const path = require('path');
 
-export default async function () {
+export async function openDb() {
   try {
     const db = await open({
       filename: `${app.getPath('userData')}/db.sqlite`,
@@ -19,4 +19,12 @@ export default async function () {
   } catch (e) {
     throw new Error(e);
   }
+}
+
+export function dbKeyValue(rows) {
+  const res = {};
+  rows.forEach((el) => {
+    res[el.key] = el.value;
+  });
+  return res;
 }

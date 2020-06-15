@@ -1,6 +1,6 @@
-import openDb from './db';
+import { openDb } from './db';
 
-const { ipcMain } = require('electron');
+const { app, ipcMain } = require('electron');
 
 class Settings {
   static async getSettings() {
@@ -31,15 +31,21 @@ async function getSettings(ipcMainEvent) {
   try {
     reply = await Settings.getSettings();
   } catch (error) {
-    reply = { error: 'Failed to get settings' };
+    ipcMainEvent.reply('get-settings', { error: 'Failed to get settings' });
     throw new Error(error);
   }
+
   ipcMainEvent.reply('get-settings', reply);
 }
 
-ipcMain.on('save-settings', async (e, form) => {
-  await Settings.setSettings(form);
+ipcMain.on('save-settings', async (e, data) => {
+  await Settings.setSettings(data.form);
   await getSettings(e);
+  console.log(data);
+  if (data.restart) {
+    app.relaunch();
+    app.quit();
+  }
 });
 
 ipcMain.on('get-settings', async (e) => {

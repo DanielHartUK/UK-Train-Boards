@@ -14,7 +14,20 @@ module.exports = {
     },
   },
 
+  chainWebpack: (config) => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap((options) => {
+        // eslint-disable-next-line no-param-reassign
+        options.compilerOptions.whitespace = 'condense';
+        return options;
+      });
+  },
+
   configureWebpack: webpackConfig,
+
   lintOnSave: false,
 
   pluginOptions: {
@@ -38,7 +51,7 @@ module.exports = {
           .loader('babel-loader')
           .options(babelConfig);
       },
-      mainProcessWatch: ['src/main/*'],
+      mainProcessWatch: ['src/background/*'],
     },
   },
 };

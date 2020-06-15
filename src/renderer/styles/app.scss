@@ -1,0 +1,19 @@
+@use '~normalize.css/normalize';
+@use '~vuejs-dialog/dist/vuejs-dialog.min';
+@use 'fonts';
+@use 'main';
+@use 'board';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+}

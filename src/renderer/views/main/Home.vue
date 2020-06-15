@@ -27,9 +27,9 @@
               <div
                 class="NewBoard__BoardImage"
                 :class="{
-              'NewBoard__BoardImage--Vertical': board.type === 'vertical',
-              'NewBoard__BoardImage--Horizontal': board.type === 'horizontal'
-            }"
+                  'NewBoard__BoardImage--Vertical': board.type === 'vertical',
+                  'NewBoard__BoardImage--Horizontal': board.type === 'horizontal'
+                }"
                 :style="{ backgroundImage: `url(${board.image})`}"
               />
               <span class="NewBoard__BoardName">{{ $t(board.name) }}</span>
@@ -73,9 +73,11 @@
 <script>
 import { ipcRenderer } from 'electron';
 
+const path = require('path');
+
 function validateStation(value) {
+  if (!value) return false;
   // @TODO Validate station code
-  console.log(value);
   return true;
 }
 
@@ -111,30 +113,30 @@ export default {
     boards: {
       departures: {
         name: 'Departures',
-        image: 'departures.jpg',
+        image: path.join(process.env.BASE_URL, 'images/departures.png'),
         type: 'vertical',
         fields: {
           location: commonFields.location,
           page: commonFields.page,
         },
       },
-      arrivals: {
-        name: 'Arrivals',
-        image: 'arrivals.jpg',
-        type: 'vertical',
-        fields: {
-          location: commonFields.location,
-          page: commonFields.page,
-        },
-      },
-      horizontalTest: {
-        name: 'A Horizontal Board',
-        image: 'horizontal.jpg',
-        type: 'horizontal',
-        fields: {
-          location: commonFields.location,
-        },
-      },
+      // arrivals: {
+      //   name: 'Arrivals',
+      //   image: 'arrivals.jpg',
+      //   type: 'vertical',
+      //   fields: {
+      //     location: commonFields.location,
+      //     page: commonFields.page,
+      //   },
+      // },
+      // horizontalTest: {
+      //   name: 'A Horizontal Board',
+      //   image: 'horizontal.jpg',
+      //   type: 'horizontal',
+      //   fields: {
+      //     location: commonFields.location,
+      //   },
+      // },
     },
     form: {
       board: 'departures',
@@ -187,8 +189,6 @@ export default {
           }
         });
 
-      console.log(validatedFields);
-
       ipcRenderer.send('open-board', this.form);
     },
   },
@@ -196,5 +196,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @use '@renderer/styles/home.scss';
+  @use '@renderer/styles/main/pages/home.scss';
 </style>

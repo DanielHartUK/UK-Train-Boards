@@ -1,16 +1,38 @@
-@use '~normalize.css/normalize';
-@use 'variables';
+@use 'pages/home';
 
-html,
-body {
-  color: #fff;
-  font-size: var(--FontSize);
-  font-family: 'Helvetica', 'Arial', sans-serif;
-  background: #000;
+.App--Main {
+  --FontSize: 16px;
+  --FontWeight: 400;
+  --FontWeight--Bold: 700;
+  --Background: #222e4d;
+  --SecondaryBackground: #172444;
+  --SecondaryBackground--Lighter: #293f75;
+  --SecondaryBackground--Darker: #0d172f;
+  --SecondaryBackground--Darkest: #040810;
+  --BorderColor: #7c8f9f;
+  --BorderColorSelected: #3997e9;
+  --BorderRadius: 4px;
+  --TextColor: #dfe0e0;
+  --Indent: 15px;
+  --Indent--Xs: 7px;
+  --SidebarWidth: 50px;
+  --NavigationItemBackground: var(--SecondaryBackground);
+  --NavigationItemColor: var(--TextColor);
+  --LabelFontSize: 1.24rem;
+  --LabelFontWeight: var(--FontWeight--Bold);
+  --InputColor: var(--TextColor);
 }
 
-* {
-  box-sizing: border-box;
+.App--Main.App--Theme125 {
+  --Background: #05405d;
+  --SecondaryBackground: #f9b72b;
+  --SecondaryBackground--Lighter: #ffc743;
+  --SecondaryBackground--Darker: #e8aa25;
+  --SecondaryBackground--Darkest: #d49c25;
+  --BorderColor: #fff;
+  --BorderColorSelected: #f9b72b;
+  --NavigationItemColor: #000;
+  --InputColor: #000;
 }
 
 .MainView {
@@ -19,6 +41,10 @@ body {
   grid-template-columns: var(--SidebarWidth) 1fr;
   height: 100vh;
   overflow: hidden;
+  color: #fff;
+  font-size: var(--FontSize);
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  background: #000;
 }
 
 .MainView__Navigation {
@@ -35,7 +61,9 @@ body {
 
 .Navigation {
   display: grid;
-  grid-template-areas: 'top' 'bottom';
+  grid-template-areas:
+    'top'
+    'bottom';
   grid-template-rows: 1fr 1fr;
 }
 
@@ -56,8 +84,6 @@ body {
 }
 
 .Navigation__Item {
-  --ItemBackground: var(--SecondaryBackground);
-
   position: relative;
   display: flex;
   align-items: center;
@@ -65,13 +91,13 @@ body {
   width: calc(100% - 1px);
   height: var(--SidebarWidth);
   padding: var(--Indent);
-  color: var(--TextColor);
+  color: var(--NavigationItemColor);
   text-align: center;
-  background: var(--ItemBackground);
+  background: var(--NavigationItemBackground);
 
   &:hover,
   &:focus-visible {
-    --ItemBackground: var(--SecondaryBackground--Hover);
+    --NavigationItemBackground: var(--SecondaryBackground--Lighter);
 
     .Navigation__Label {
       display: flex;
@@ -84,7 +110,7 @@ body {
     display: block;
     width: 3px;
     height: 20px;
-    background: var(--NavigationIndicatorBackground);
+    background: var(--NavigationItemColor);
     content: '';
   }
 }
@@ -106,7 +132,7 @@ body {
   line-height: 50px;
   white-space: nowrap;
   vertical-align: middle;
-  background: var(--ItemBackground);
+  background: var(--NavigationItemBackground);
 }
 
 .Page {
@@ -173,8 +199,8 @@ body {
 .FormItem__Input {
   width: 100%;
   padding: 0.4rem 0.3rem;
-  color: var(--TextColor);
-  background: #172444;
+  color: var(--InputColor);
+  background: var(--SecondaryBackground);
   border: 2px solid var(--BorderColor);
   border-radius: var(--BorderRadius);
 
@@ -198,10 +224,10 @@ body {
 .Button {
   width: 100%;
   padding: 0.5rem;
-  color: var(--TextColor);
+  color: var(--InputColor);
   font-weight: var(--FontWeight--Bold);
   text-align: center;
-  background: #0a1329;
+  background: var(--SecondaryBackground--Darker);
   border: 2px solid var(--BorderColor);
   border-radius: var(--BorderRadius);
 
@@ -213,10 +239,10 @@ body {
 
   &:hover,
   &:focus {
-    background: #080f1f;
+    background: var(--SecondaryBackground--Darker);
   }
 
   &:active {
-    background: #040810;
+    background: var(--SecondaryBackground--Darkest);
   }
 }
