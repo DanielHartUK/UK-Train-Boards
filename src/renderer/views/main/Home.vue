@@ -27,9 +27,9 @@
               <div
                 class="NewBoard__BoardImage"
                 :class="{
-              'NewBoard__BoardImage--Vertical': board.type === 'vertical',
-              'NewBoard__BoardImage--Horizontal': board.type === 'horizontal'
-            }"
+                  'NewBoard__BoardImage--Vertical': board.type === 'vertical',
+                  'NewBoard__BoardImage--Horizontal': board.type === 'horizontal'
+                }"
                 :style="{ backgroundImage: `url(${board.image})`}"
               />
               <span class="NewBoard__BoardName">{{ $t(board.name) }}</span>
@@ -73,6 +73,8 @@
 <script>
 import { ipcRenderer } from 'electron';
 
+const path = require('path');
+
 function validateStation(value) {
   if (!value) return false;
   // @TODO Validate station code
@@ -111,7 +113,7 @@ export default {
     boards: {
       departures: {
         name: 'Departures',
-        image: 'departures.jpg',
+        image: path.join(process.env.BASE_URL, 'images/departures.png'),
         type: 'vertical',
         fields: {
           location: commonFields.location,

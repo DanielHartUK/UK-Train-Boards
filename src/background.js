@@ -117,8 +117,8 @@ if (isDevelopment) {
 
 ipcMain.on('open-board', (e, form) => {
   const boardWindow = newWindow({
-    width: 600,
-    height: 900,
+    width: 342,
+    height: 608,
     webPreferences: {
       nodeIntegration: true,
       experimentalFeatures: true,

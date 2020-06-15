@@ -50,8 +50,12 @@
 
 .NewBoard__BoardImage {
   --BoardImageSize: 10px;
+
   margin: 2px;
-  background: #000;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
   border: 2px solid var(--BorderColor);
   border-radius: 4px;
   box-shadow: var(--BoardShadow);
