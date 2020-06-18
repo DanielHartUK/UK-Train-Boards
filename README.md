@@ -13,7 +13,7 @@ This project plans to recreate passenger information boards used in UK railway s
 `sudo apt-get install ruby-full`
 `sudo gem install fpm`
 `export USE_SYSTEM_FPM="true"`
-`npm run electron:build -- --dir --linux --armv7l`
+`npm run electron:build -- --dir --linux appimage --armv7l`
 
 ## License
 [MIT](https://github.com/DanielHartUK/UK-Railway-Stations-Information-Boards/blob/master/license.md)
