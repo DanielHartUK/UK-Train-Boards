@@ -1,4 +1,4 @@
-import './background/settings';
+import Settings from './background/settings';
 
 const {
   app,
@@ -11,20 +11,21 @@ const {
   createProtocol,
   installVueDevtools,
 } = require('vue-cli-plugin-electron-builder/lib');
+
 require('./background/boardListeners');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+
 const windowStateKeeper = require('electron-window-state');
 const fs = require('fs');
-
 // If it doesn't exist already, create the user data folder
 const userDataPath = app.getPath('userData');
-if (!fs.existsSync(userDataPath)) fs.mkdirSync(userDataPath);
 
+if (!fs.existsSync(userDataPath)) fs.mkdirSync(userDataPath);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-const windows = new Set();
 
+const windows = new Set();
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{
   scheme: 'app',
@@ -36,7 +37,6 @@ protocol.registerSchemesAsPrivileged([{
 
 function newWindow(windowOptions, route = '', devTools = true) {
   const window = new BrowserWindow(windowOptions);
-
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     window.loadURL(`${process.env.WEBPACK_DEV_SERVER_URL}#/${route}`);
@@ -46,12 +46,12 @@ function newWindow(windowOptions, route = '', devTools = true) {
     // Load the index.html when not in development
     window.loadURL(`app://./index.html/#/${route}`);
   }
-
   window.on('closed', () => {
     windows.delete(window);
   });
 
   windows.add(window);
+
   return window;
 }
 
@@ -60,7 +60,6 @@ function createMainWindow() {
     defaultWidth: 465,
     defaultHeight: 600,
   });
-
   // Create the browser window.
   const mainWindow = newWindow({
     x: mainWindowState.x,
@@ -101,6 +100,7 @@ app.on('ready', async () => {
 });
 
 // Exit cleanly on request from parent process in development mode.
+
 if (isDevelopment) {
   if (process.platform === 'win32') {
     process.on('message', (data) => {
@@ -114,7 +114,6 @@ if (isDevelopment) {
     });
   }
 }
-
 ipcMain.on('open-board', (e, form) => {
   const boardWindow = newWindow({
     width: 342,
@@ -129,3 +128,14 @@ ipcMain.on('open-board', (e, form) => {
     boardWindow.webContents.send('board-data', form);
   });
 });
+
+const apiKey = app.commandLine.getSwitchValue('apiKey');
+if (apiKey) {
+  Settings.setSettings({ apiKey })
+    .then(() => {
+      console.log('API Key Set!');
+    })
+    .catch((e) => {
+      console.error('Error setting API Key: ', e);
+    });
+}

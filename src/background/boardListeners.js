@@ -2,13 +2,11 @@ import Services from './services';
 
 const { ipcMain } = require('electron');
 
-const services = new Services();
-
 ipcMain.on('departures', async (e, crs) => {
   let reply;
   const code = crs.toUpperCase();
 
-  services.getDepartures(code)
+  Services.getDepartures(code)
     .then((result) => {
       reply = result;
     })
@@ -25,7 +23,7 @@ ipcMain.on('arrivals', async (e, crs) => {
   let reply;
   const code = crs.toUpperCase();
 
-  services.getArrivals(code)
+  Services.getArrivals(code)
     .then((result) => {
       reply = result;
     })

@@ -52,6 +52,7 @@ export default {
       ipcRenderer.send('departures', this.location);
     },
     receiveDepartures(e, services) {
+      this.error = null;
       if (services.error) {
         this.error = services.error;
       } else {

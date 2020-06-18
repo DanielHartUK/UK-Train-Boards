@@ -1,8 +1,8 @@
 import { openDb } from './db';
 
-const { app, ipcMain } = require('electron');
+const { ipcMain } = require('electron');
 
-class Settings {
+export default class Settings {
   static async getSettings() {
     const db = await openDb();
     let settings = await db.all('SELECT * FROM Settings');
@@ -39,13 +39,8 @@ async function getSettings(ipcMainEvent) {
 }
 
 ipcMain.on('save-settings', async (e, data) => {
-  await Settings.setSettings(data.form);
+  await Settings.setSettings(data);
   await getSettings(e);
-  console.log(data);
-  if (data.restart) {
-    app.relaunch();
-    app.quit();
-  }
 });
 
 ipcMain.on('get-settings', async (e) => {

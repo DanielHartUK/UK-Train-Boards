@@ -1,18 +1,22 @@
+/* eslint-disable */
 import { openDb, dbKeyValue } from './db';
-import moment from 'moment'; // eslint-disable-line
+import moment from 'moment';
 
 const Rail = require('national-rail-darwin-promises');
+/* eslint-enable */
 
-class Services {
-  constructor() {
-    openDb()
-      .then(async (db) => {
-        const { apiKey } = dbKeyValue(await db.all('SELECT * FROM Settings WHERE key="apiKey"'));
-        this.rail = new Rail(apiKey);
-      })
-      .catch((e) => {
-        throw new Error(e);
-      });
+export default class Services {
+  static #getRail() { // eslint-disable-line
+    return new Promise((resolve) => {
+      openDb()
+        .then(async (db) => {
+          const { apiKey } = dbKeyValue(await db.all('SELECT * FROM Settings WHERE key="apiKey"'));
+          resolve(new Rail(apiKey));
+        })
+        .catch((e) => {
+          throw new Error(e);
+        });
+    });
   }
 
   static #sortServices(a, b) { // eslint-disable-line
@@ -75,9 +79,11 @@ class Services {
     return services;
   }
 
-  getDepartures(crs) {
+  static async getDepartures(crs) {
+    const rail = await Services.#getRail();
+
     return new Promise((resolve, reject) => {
-      this.rail.getDepartureBoard(crs, { rows: 200 })
+      rail.getDepartureBoard(crs, { rows: 200 })
         .then((res) => {
           resolve(Services.#processServices(res));
         })
@@ -87,9 +93,11 @@ class Services {
     });
   }
 
-  getArrivals(crs) {
+  static async getArrivals(crs) {
+    const rail = await Services.#getRail();
+
     return new Promise((resolve, reject) => {
-      this.rail.getArrivalsBoard(crs, { rows: 200 })
+      rail.getArrivalsBoard(crs, { rows: 200 })
         .then((res) => {
           resolve(Services.#processServices(res));
         })
@@ -99,5 +107,3 @@ class Services {
     });
   }
 }
-
-export default Services;

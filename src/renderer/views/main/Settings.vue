@@ -57,27 +57,7 @@ export default {
 
   methods: {
     submitSettings() {
-      let restart = false;
-
-      this.$dialog
-        .confirm(
-          'Some settings require a restart to take effect.',
-          {
-            okText: 'Restart Now',
-            cancelText: 'Restart Later',
-          },
-        )
-        .then(() => {
-          restart = true;
-        })
-        .catch(() => {
-        })
-        .then(() => {
-          ipcRenderer.send('save-settings', {
-            restart,
-            form: this.form,
-          });
-        });
+      ipcRenderer.send('save-settings', this.form);
     },
     receiveSettings(e, settings) {
       Object.keys(settings)
