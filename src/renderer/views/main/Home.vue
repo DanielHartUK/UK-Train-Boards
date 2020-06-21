@@ -120,23 +120,15 @@ export default {
           page: commonFields.page,
         },
       },
-      // arrivals: {
-      //   name: 'Arrivals',
-      //   image: 'arrivals.jpg',
-      //   type: 'vertical',
-      //   fields: {
-      //     location: commonFields.location,
-      //     page: commonFields.page,
-      //   },
-      // },
-      // horizontalTest: {
-      //   name: 'A Horizontal Board',
-      //   image: 'horizontal.jpg',
-      //   type: 'horizontal',
-      //   fields: {
-      //     location: commonFields.location,
-      //   },
-      // },
+      arrivals: {
+        name: 'Arrivals',
+        image: path.join(process.env.BASE_URL, 'images/arrivals.png'),
+        type: 'vertical',
+        fields: {
+          location: commonFields.location,
+          page: commonFields.page,
+        },
+      },
     },
     form: {
       board: 'departures',
