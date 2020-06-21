@@ -4,7 +4,7 @@
   --TextColor: #fff;
   --TextColorOrange: #ff8f00;
 
-  @include mixins.fluid-type(320px, 1920px, 14px, 85px);
+  @include mixins.fluid-type(320px, 2160px, 14px, 94.6px);
   display: flex;
   flex-direction: column;
   justify-content: center;

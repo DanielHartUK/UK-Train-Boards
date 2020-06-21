@@ -75,6 +75,22 @@ function createMainWindow() {
   mainWindowState.manage(mainWindow);
 }
 
+function createBoard(form) {
+  const boardWindow = newWindow({
+    width: 342,
+    height: 608,
+    webPreferences: {
+      nodeIntegration: true,
+      experimentalFeatures: true,
+    },
+    fullscreen: form.fullscreen,
+  }, `board/${form.board}`, true);
+
+  boardWindow.webContents.on('did-finish-load', () => {
+    boardWindow.webContents.send('board-data', form);
+  });
+}
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -96,7 +112,24 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString());
     }
   }
-  createMainWindow();
+
+  const board = app.commandLine.getSwitchValue('board');
+
+  if (board) {
+    const form = { board };
+    const location = app.commandLine.getSwitchValue('location');
+    const page = app.commandLine.getSwitchValue('page') || 1;
+    const fullscreen = app.commandLine.hasSwitch('fullscreen');
+
+    if (!location) throw new Error('Location must be specified');
+
+    form.location = location;
+    form.page = page;
+    form.fullscreen = fullscreen;
+    createBoard(form);
+  } else {
+    createMainWindow();
+  }
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -114,19 +147,9 @@ if (isDevelopment) {
     });
   }
 }
-ipcMain.on('open-board', (e, form) => {
-  const boardWindow = newWindow({
-    width: 342,
-    height: 608,
-    webPreferences: {
-      nodeIntegration: true,
-      experimentalFeatures: true,
-    },
-  }, 'board/departures', true);
 
-  boardWindow.webContents.on('did-finish-load', () => {
-    boardWindow.webContents.send('board-data', form);
-  });
+ipcMain.on('open-board', (e, form) => {
+  createBoard(form);
 });
 
 const apiKey = app.commandLine.getSwitchValue('apiKey');
