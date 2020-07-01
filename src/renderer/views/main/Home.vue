@@ -73,8 +73,6 @@
 <script>
 import { ipcRenderer } from 'electron';
 
-const path = require('path');
-
 function validateStation(value) {
   if (!value) return false;
   // @TODO Validate station code
@@ -113,7 +111,7 @@ export default {
     boards: {
       departures: {
         name: 'Departures',
-        image: path.join(process.env.BASE_URL, 'images/departures.png'),
+        image: '/images/departures.png',
         type: 'vertical',
         fields: {
           location: commonFields.location,
@@ -122,7 +120,7 @@ export default {
       },
       arrivals: {
         name: 'Arrivals',
-        image: path.join(process.env.BASE_URL, 'images/arrivals.png'),
+        image: '/images/arrivals.png',
         type: 'vertical',
         fields: {
           location: commonFields.location,

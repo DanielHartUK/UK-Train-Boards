@@ -66,6 +66,7 @@ function createMainWindow() {
     y: mainWindowState.y,
     width: mainWindowState.width,
     height: mainWindowState.height,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       experimentalFeatures: true,
@@ -79,6 +80,7 @@ function createBoard(form) {
   const boardWindow = newWindow({
     width: 342,
     height: 608,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       experimentalFeatures: true,
