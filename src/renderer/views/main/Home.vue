@@ -111,7 +111,7 @@ export default {
     boards: {
       departures: {
         name: 'Departures',
-        image: '/images/departures.png',
+        image: '/images/departures.jpg',
         type: 'vertical',
         fields: {
           location: commonFields.location,
@@ -120,7 +120,7 @@ export default {
       },
       arrivals: {
         name: 'Arrivals',
-        image: '/images/arrivals.png',
+        image: '/images/arrivals.jpg',
         type: 'vertical',
         fields: {
           location: commonFields.location,
