@@ -1,8 +1,8 @@
 {
   "name": "uk-train-boards",
   "productName": "UK Train Boards",
-  "version": "4.0.1",
-  "description": "Recreate the UK's National Rail Departures Boards wherever you are!",
+  "version": "4.0.2",
+  "description": "Recreate the UK's National Rail Information Boards wherever you are!",
   "keywords": [
     "electron",
     "national rail",
@@ -13,7 +13,7 @@
     "national rail darwin",
     "uk railway stations"
   ],
-  "homepage": "https://github.com/DanielHartUK/UK-Train-Boards",
+  "homepage": "https://trainboards.co.uk",
   "private": false,
   "license": "MIT",
   "author": {
@@ -40,7 +40,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "core-js": "^3.6.4",
+    "dotenv": "^8.2.0",
     "electron": "^9.0.4",
+    "electron-notarize": "^1.0.0",
     "electron-window-state": "^5.0.3",
     "moment": "^2.26.0",
     "moment-timezone": "^0.5.31",

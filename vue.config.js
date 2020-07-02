@@ -52,9 +52,6 @@ module.exports = {
           .options(babelConfig);
       },
       mainProcessWatch: ['src/background/*'],
-      mac: {
-        hardenedRuntime: true,
-      },
     },
   },
 };
