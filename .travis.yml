@@ -1,0 +1,15 @@
+language: node_js
+
+os:
+  - linux
+  - osx
+  - windows
+
+dist: bionic
+osx_image: xcode12
+
+#if: tag =~ ^v
+
+script:
+  - npm install
+  - npm run electron:build
