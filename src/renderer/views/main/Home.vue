@@ -49,13 +49,14 @@
         >
           {{ $t(field.label) }}
         </label>
-        <input
+        <BoardFormInput
+          v-model="form[name]"
           class="FormItem__Input"
           :id="`${uuid}-${name}-field`"
           :type="field.type"
-          v-model="form[name]"
           :required="field.required"
           :placeholder="field.placeholder"
+          :modifier="field.modifier"
           v-bind="field.attributes"
         />
       </div>
@@ -72,6 +73,7 @@
 
 <script>
 import { ipcRenderer } from 'electron';
+import BoardFormInput from '@components/BoardFormInput';
 
 function validateStation(value) {
   if (!value) return false;
@@ -93,6 +95,7 @@ const commonFields = {
     label: 'Page',
     class: 'Column Column--2',
     type: 'number',
+    modifier: 'number',
     default: 1,
     placeholder: '',
     attributes: {
@@ -105,7 +108,7 @@ const commonFields = {
 export default {
   name: 'Home',
 
-  components: {},
+  components: { BoardFormInput },
 
   data: () => ({
     boards: {

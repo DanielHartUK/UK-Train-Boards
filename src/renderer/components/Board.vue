@@ -122,7 +122,7 @@ export default {
       return this.error ? 1 : this.services.length;
     },
     fillers() {
-      return Math.max(0, this.rowsPerPage - this.servicesCount);
+      return Math.max(0, this.rowsPerPage - (this.servicesCount - this.offset));
     },
   },
 

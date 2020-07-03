@@ -126,7 +126,7 @@ app.on('ready', async () => {
     if (!location) throw new Error('Location must be specified');
 
     form.location = location;
-    form.page = page;
+    form.page = parseInt(page, 10);
     form.fullscreen = fullscreen;
     createBoard(form);
   } else {
