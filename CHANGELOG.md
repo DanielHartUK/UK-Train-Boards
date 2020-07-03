@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.0.3] - 2020-07-03
+### Fixed
+- Fixed an issue where services would be incorrectly sorted
+- Fixed an issue where page number input would be parsed as a string
+
 ## [4.0.2] - 2020-07-02
 
 ### Added
