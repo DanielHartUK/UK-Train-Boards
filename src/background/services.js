@@ -54,18 +54,23 @@ export default class Services {
         // If expected is a time, use it to decide if the service is today
         const timeRegex = '^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$';
         if (service.expected.match(timeRegex)) {
-          if (now.diff(moment(service.scheduled, 'HH:mm'), 'minutes') > 5
-            || now.diff(moment(service.expected, 'HH:mm'), 'minutes') > 5) {
+          if (now.diff(moment(service.scheduled, 'HH:mm'), 'minutes') < 5
+            || now.diff(moment(service.expected, 'HH:mm'), 'minutes') < 5) {
+            service.day = 'today';
             today.push(service);
           } else {
+            service.day = 'tomorrow';
             tomorrow.push(service);
           }
         } else {
           // If service is delayed, or scheduled for a time in the future, add it to today
           if (service.expected === 'Delayed'
-            || now.diff(moment(service.scheduled, 'HH:mm'), 'minutes') > 5) {
+            || now.diff(moment(service.scheduled, 'HH:mm'), 'minutes') < 5) {
+            console.log(service);
+            service.day = 'today';
             today.push(service);
           } else {
+            service.day = 'tomorrow';
             tomorrow.push(service);
           }
         }
@@ -74,7 +79,7 @@ export default class Services {
 
     today.sort(this.#sortServices);
     tomorrow.sort(this.#sortServices);
-    services = tomorrow.concat(today);
+    services = today.concat(tomorrow);
 
     return services;
   }
