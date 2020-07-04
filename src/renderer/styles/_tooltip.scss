@@ -1,0 +1,110 @@
+/* stylelint-disable selector-class-pattern */
+.tooltip {
+  z-index: 10000;
+  display: block !important;
+
+  .tooltip-inner {
+    padding: 5px 10px 4px;
+    color: #fff;
+    background: #000;
+    border-radius: 16px;
+  }
+
+  .tooltip-arrow {
+    position: absolute;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    margin: 5px;
+    border-color: #000;
+    border-style: solid;
+  }
+
+  &[x-placement^='top'] {
+    margin-bottom: 5px;
+
+    .tooltip-arrow {
+      bottom: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+      border-width: 5px 5px 0;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      border-left-color: transparent !important;
+    }
+  }
+
+  &[x-placement^='bottom'] {
+    margin-top: 5px;
+
+    .tooltip-arrow {
+      top: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+      border-width: 0 5px 5px;
+      border-top-color: transparent !important;
+      border-right-color: transparent !important;
+      border-left-color: transparent !important;
+    }
+  }
+
+  &[x-placement^='right'] {
+    margin-left: 5px;
+
+    .tooltip-arrow {
+      top: calc(50% - 5px);
+      left: -5px;
+      margin-right: 0;
+      margin-left: 0;
+      border-width: 5px 5px 5px 0;
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      border-left-color: transparent !important;
+    }
+  }
+
+  &[x-placement^='left'] {
+    margin-right: 5px;
+
+    .tooltip-arrow {
+      top: calc(50% - 5px);
+      right: -5px;
+      margin-right: 0;
+      margin-left: 0;
+      border-width: 5px 0 5px 5px;
+      border-top-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+    }
+  }
+
+  &.popover {
+    $color: #f9f9f9;
+
+    .popover-inner {
+      padding: 24px;
+      color: #000;
+      background: $color;
+      border-radius: 5px;
+      box-shadow: 0 5px 30px rgba(#000, 0.1);
+    }
+
+    .popover-arrow {
+      border-color: $color;
+    }
+  }
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.15s, visibility 0.15s;
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.15s;
+  }
+}

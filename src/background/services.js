@@ -10,8 +10,8 @@ export default class Services {
     return new Promise((resolve) => {
       openDb()
         .then(async (db) => {
-          const { apiKey } = dbKeyValue(await db.all('SELECT * FROM Settings WHERE key="apiKey"'));
-          resolve(new Rail(apiKey));
+          const { nreApiKey } = dbKeyValue(await db.all('SELECT * FROM Settings WHERE key="nreApiKey"'));
+          resolve(new Rail(nreApiKey));
         })
         .catch((e) => {
           throw new Error(e);

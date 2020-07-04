@@ -1,11 +1,13 @@
 @use '~normalize.css/normalize';
 @use '~vuejs-dialog/dist/vuejs-dialog.min';
+@use 'tooltip';
 @use 'fonts';
 @use 'main';
 @use 'board';
 
 html {
   box-sizing: border-box;
+  font-family: 'New Rail Alphabet', 'Helvetica', 'Arial', sans-serif;
 }
 
 *,

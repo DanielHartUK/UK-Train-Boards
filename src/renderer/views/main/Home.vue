@@ -1,6 +1,6 @@
 <template>
-  <div class="NewBoard Page TwelveColumns">
-    <h1>{{ $t('New Board') }}</h1>
+  <div class="NewBoard Page">
+    <h1 class="Page__Title">{{ $t('New Board') }}</h1>
     <form
       class="TwelveColumnsFlex"
       @submit.prevent="generateBoard"
@@ -62,17 +62,30 @@
       </div>
       <div class="FormItem Column Column--12">
         <input
+          v-tooltip="openButtonTooltip"
           class="Button"
           type="submit"
           :value="$t('Open')"
+          :disabled="!apiKeySet"
         />
       </div>
     </form>
+    <div class="Page__FooterCredits">
+      <a
+        v-if="selectedBoard.provider === 'nre'"
+        href="#"
+        class="ProviderLogo"
+        @click.prevent="openExternal('https://www.nationalrail.co.uk/')"
+      >
+        <img src="/images/NRE.png" alt="Powered by National Rail Enquiries">
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
 import { ipcRenderer } from 'electron';
+import { mapState } from 'vuex';
 import BoardFormInput from '@components/BoardFormInput';
 
 function validateStation(value) {
@@ -84,7 +97,7 @@ function validateStation(value) {
 const commonFields = {
   location: {
     label: 'Location',
-    class: 'Column Column--8',
+    class: 'Column Column--6',
     type: 'text',
     default: 'MAN',
     placeholder: 'MAN',
@@ -93,7 +106,7 @@ const commonFields = {
   },
   page: {
     label: 'Page',
-    class: 'Column Column--2',
+    class: 'Column Column--3',
     type: 'number',
     modifier: 'number',
     default: 1,
@@ -116,6 +129,7 @@ export default {
         name: 'Departures',
         image: '/images/departures.jpg',
         type: 'vertical',
+        provider: 'nre',
         fields: {
           location: commonFields.location,
           page: commonFields.page,
@@ -125,6 +139,7 @@ export default {
         name: 'Arrivals',
         image: '/images/arrivals.jpg',
         type: 'vertical',
+        provider: 'nre',
         fields: {
           location: commonFields.location,
           page: commonFields.page,
@@ -137,8 +152,26 @@ export default {
   }),
 
   computed: {
+    ...mapState({
+      settings: (state) => state.settings.settings,
+    }),
     boardFields() {
       return this.boards[this.form.board]?.fields || {};
+    },
+    selectedBoard() {
+      return this.boards[this.form.board];
+    },
+    apiKeySet() {
+      if (this.settings?.[`${this.selectedBoard.provider}ApiKey`]) return true;
+
+      return false;
+    },
+    openButtonTooltip() {
+      const tooltip = {};
+
+      if (!this.apiKeySet) tooltip.content = this.$t('API Key not set. Go to Settings to set one');
+
+      return tooltip;
     },
   },
 

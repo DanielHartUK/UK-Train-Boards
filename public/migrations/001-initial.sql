@@ -7,7 +7,7 @@ CREATE TABLE Settings (
 );
 
 INSERT INTO Settings (key, value)
-VALUES  ('apiKey', 'null');
+VALUES  ('nreApiKey', null);
 
 --------------------------------------------------------------------------------
 -- Down

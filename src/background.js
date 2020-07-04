@@ -154,13 +154,13 @@ ipcMain.on('open-board', (e, form) => {
   createBoard(form);
 });
 
-const apiKey = app.commandLine.getSwitchValue('apiKey');
-if (apiKey) {
-  Settings.setSettings({ apiKey })
+const nreApiKey = app.commandLine.getSwitchValue('nreApiKey');
+if (nreApiKey) {
+  Settings.setSettings({ nreApiKey })
     .then(() => {
-      console.log('API Key Set!');
+      console.log('NRE API Key Set!');
     })
     .catch((e) => {
-      console.error('Error setting API Key: ', e);
+      console.error('Error setting NRE API Key: ', e);
     });
 }

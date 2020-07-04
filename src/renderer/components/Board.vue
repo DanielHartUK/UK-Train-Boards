@@ -28,7 +28,7 @@
       <tbody ref="tbody">
         <BoardServiceFiller
           v-if="error"
-        :content="`${$t('Error')}: ${error}`"
+          :content="`${$t('Error')}: ${error}`"
         />
         <BoardService
           v-else

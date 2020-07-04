@@ -7,17 +7,25 @@
       'App--Board': routes.includes('/board'),
     }"
   >
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
 <script>
+import { ipcRenderer } from 'electron';
 
 export default {
   data: () => ({
     view: 'main',
     viewData: {},
   }),
+
+  mounted() {
+    ipcRenderer.on('get-settings', (e, settings) => {
+      this.$store.commit('settings/setSettings', settings);
+    });
+    ipcRenderer.send('get-settings');
+  },
 
   computed: {
     routes() {

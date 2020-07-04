@@ -136,7 +136,37 @@
 }
 
 .Page {
+  display: grid;
+  grid-gap: var(--Indent);
+  grid-template-areas:
+    'header'
+    'content'
+    'footer';
+  grid-template-rows: min-content 1fr min-content;
+  grid-template-columns: 1fr;
   padding: 0 var(--Indent);
+}
+
+.Page__Title {
+  grid-template-areas: 'header';
+  margin: var(--Indent) 0 0;
+}
+
+.Page__FooterCredits {
+  grid-template-areas: 'footer';
+  margin-bottom: var(--Indent);
+  text-align: right;
+}
+
+.ProviderLogo {
+  display: block;
+  height: 30px;
+
+  img {
+    display: inline-block;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 .TwelveColumns {
@@ -161,6 +191,7 @@
 .TwelveColumnsFlex {
   display: flex;
   flex-wrap: wrap;
+  align-content: start;
   margin-right: calc(-1 * var(--Indent));
   margin-left: calc(-1 * var(--Indent));
 
@@ -177,6 +208,11 @@
   .Column--6 {
     flex-basis: 50%;
     max-width: 50%;
+  }
+
+  .Column--3 {
+    flex-basis: 25%;
+    max-width: 25%;
   }
 
   .Column--2 {

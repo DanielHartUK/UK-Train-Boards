@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.0.4] - 2020-07-04
+### Added
+- Added National Rail Enquiries attribution
+- Disabled open board button when API key not set
+
 ## [4.0.3] - 2020-07-03
 ### Fixed
 - Fixed an issue where services would be incorrectly sorted

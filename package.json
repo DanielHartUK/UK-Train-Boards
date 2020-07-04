@@ -1,7 +1,7 @@
 {
   "name": "uk-train-boards",
   "productName": "UK Train Boards",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Recreate the UK's National Rail Information Boards wherever you are!",
   "keywords": [
     "electron",
@@ -52,6 +52,7 @@
     "normalize.css": "^8.0.1",
     "sqlite": "^4.0.11",
     "sqlite3": "^5.0.0",
+    "v-tooltip": "^2.0.3",
     "vue": "^2.6.11",
     "vue-cli-plugin-electron-builder": "^2.0.0-rc.4",
     "vue-i18n": "^8.18.2",

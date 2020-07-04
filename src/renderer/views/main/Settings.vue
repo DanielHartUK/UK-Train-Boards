@@ -10,7 +10,7 @@
           for="api-key-field"
           class="FormItem__Label"
         >
-          {{ $t('API Key') }} -
+          {{ $t('National Rail API Key') }} -
           <a
             href="#"
             @click.prevent="openExternal('http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/')"
@@ -22,7 +22,7 @@
           id="api-key-field"
           class="FormItem__Input"
           type="text"
-          v-model="form.apiKey"
+          v-model="form.nreApiKey"
           required="true"
           placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         />
@@ -39,34 +39,24 @@
 </template>
 
 <script>
-import { ipcRenderer, shell } from 'electron';
+import { ipcRenderer } from 'electron';
 
 export default {
   name: 'Settings',
 
   data: () => ({
     form: {
-      apiKey: null,
+      nreApiKey: null,
     },
   }),
 
   mounted() {
-    ipcRenderer.on('get-settings', this.receiveSettings);
-    ipcRenderer.send('get-settings');
+    this.form = { ...this.$store.state.settings?.settings };
   },
 
   methods: {
     submitSettings() {
       ipcRenderer.send('save-settings', this.form);
-    },
-    receiveSettings(e, settings) {
-      Object.keys(settings)
-        .forEach((key) => {
-          this.form[key] = settings[key];
-        });
-    },
-    openExternal(url) {
-      shell.openExternal(url);
     },
   },
 };
