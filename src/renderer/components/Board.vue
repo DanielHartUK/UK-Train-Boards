@@ -1,10 +1,10 @@
 <template>
   <div
-    v-resize:debounce="calculateRows"
     class="Board"
     :class="{'Board--HideCursor': mouseHidden}"
     @mouseover="hideMouse"
   >
+    <resize-observer @notify="calculateRows"/>
     <h1 ref="title">
       {{ $t(`${type}`) }}
     </h1>
@@ -60,7 +60,10 @@
 </template>
 
 <script>
-import resize from 'vue-resize-directive';
+// import resize from 'vue-resize-directive';
+import 'vue-resize/dist/vue-resize.css';
+import { ResizeObserver } from 'vue-resize';
+
 import BoardService from '@components/BoardService';
 import BoardServiceFiller from '@components/BoardServiceFiller';
 import BoardPage from '@components/BoardPage';
@@ -79,14 +82,11 @@ export default {
   name: 'Board',
 
   components: {
+    ResizeObserver,
     BoardServiceFiller,
     BoardService,
     BoardPage,
     BoardClock,
-  },
-
-  directives: {
-    resize,
   },
 
   props: {
@@ -110,7 +110,6 @@ export default {
 
   data: () => ({
     rowsPerPage: 8,
-    pages: 1,
     offset: 0,
     via: 'off',
     mouseHidden: false,
@@ -123,6 +122,9 @@ export default {
     },
     fillers() {
       return Math.max(0, this.rowsPerPage - (this.servicesCount - this.offset));
+    },
+    pages() {
+      return Math.max(1, Math.ceil(this.servicesCount / this.rowsPerPage));
     },
   },
 
@@ -143,11 +145,6 @@ export default {
         - outerHeight(this.$refs.tfoot.firstElementChild);
 
       this.rowsPerPage = Math.max(1, Math.floor(freeSpace / rowHeight));
-      this.calculatePages();
-    },
-
-    calculatePages() {
-      this.pages = Math.max(1, Math.ceil(this.servicesCount / this.rowsPerPage));
     },
 
     hideMouse() {

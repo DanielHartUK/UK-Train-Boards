@@ -66,7 +66,6 @@ export default class Services {
           // If service is delayed, or scheduled for a time in the future, add it to today
           if (service.expected === 'Delayed'
             || now.diff(moment(service.scheduled, 'HH:mm'), 'minutes') < 5) {
-            console.log(service);
             service.day = 'today';
             today.push(service);
           } else {
