@@ -75,6 +75,7 @@
     "@vue/cli-plugin-vuex": "^4.4.6",
     "@vue/cli-service": "^4.4.6",
     "@vue/eslint-config-airbnb": "^5.1.0",
+    "electron-devtools-installer": "^3.1.1",
     "eslint": "^7.16.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-vue": "^7.4.0",

@@ -1,4 +1,5 @@
 import Settings from './background/settings';
+import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 
 const {
   app,
@@ -7,10 +8,7 @@ const {
   ipcMain,
 } = require('electron');
 
-const {
-  createProtocol,
-  installVueDevtools,
-} = require('vue-cli-plugin-electron-builder/lib');
+const { createProtocol } = require('vue-cli-plugin-electron-builder/lib');
 
 require('./background/boardListeners');
 
@@ -109,7 +107,7 @@ app.on('activate', () => {
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     try {
-      await installVueDevtools();
+      await installExtension(VUEJS_DEVTOOLS);
     } catch (e) {
       console.error('Vue Devtools failed to install:', e.toString());
     }
