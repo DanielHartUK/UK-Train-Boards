@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.5] - 2020-12-28
+### Added
+- Add New Board task to Windows Taskbar Jump List
+
+### Fixed
+ - Fixed an issue where board resize methods would not be called on vertical resize
+ - Fixed an issue where the incorrect number of rows were being shown on subsequent pages after resizing the window
+
+### Updated
+- Updated Electron and other packages to the latest versions
+
 ## [4.0.4] - 2020-07-04
 ### Added
 - Added National Rail Enquiries attribution
