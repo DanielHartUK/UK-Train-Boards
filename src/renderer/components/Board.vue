@@ -10,50 +10,50 @@
     </h1>
     <table class="Services">
       <thead ref="thead">
-        <tr>
-          <th class="Services__Time">
-            {{ $t('Time') }}
-          </th>
-          <th class="Services__Location">
-            {{ $t(`${type}-location`) }}
-          </th>
-          <th class="Services__Platform">
-            {{ $t('Plat') }}
-          </th>
-          <th class="Services__Expected">
-            {{ $t('Expected') }}
-          </th>
-        </tr>
+      <tr>
+        <th class="Services__Time">
+          {{ $t('Time') }}
+        </th>
+        <th class="Services__Location">
+          {{ $t(`${type}-location`) }}
+        </th>
+        <th class="Services__Platform">
+          {{ $t('Plat') }}
+        </th>
+        <th class="Services__Expected">
+          {{ $t('Expected') }}
+        </th>
+      </tr>
       </thead>
       <tbody ref="tbody">
-        <BoardServiceFiller
-          v-if="error"
-          :content="`${$t('Error')}: ${error}`"
-        />
-        <BoardService
-          v-else
-          v-for="service in services.slice(offset, page * rowsPerPage)"
-          :key="service.serviceId"
-          :service="service"
-          :type="type"
-          :via="via"
-        />
-        <BoardServiceFiller
-          v-for="filler in fillers"
-          :key="`filler-${filler}`"
-        />
+      <BoardServiceFiller
+        v-if="error"
+        :content="`${$t('Error')}: ${error}`"
+      />
+      <BoardService
+        v-else
+        v-for="service in services.slice(offset, page * rowsPerPage)"
+        :key="service.serviceId"
+        :service="service"
+        :type="type"
+        :via="via"
+      />
+      <BoardServiceFiller
+        v-for="filler in fillers"
+        :key="`filler-${filler}`"
+      />
       </tbody>
       <tfoot
         class="Services__Footer"
         ref="tfoot"
       >
-        <tr class="Service">
-          <BoardPage
-            :page="page"
-            :pages="pages"
-          />
-          <BoardClock/>
-        </tr>
+      <tr class="Service">
+        <BoardPage
+          :page="page"
+          :pages="pages"
+        />
+        <BoardClock/>
+      </tr>
       </tfoot>
     </table>
   </div>
@@ -145,6 +145,7 @@ export default {
         - outerHeight(this.$refs.tfoot.firstElementChild);
 
       this.rowsPerPage = Math.max(1, Math.floor(freeSpace / rowHeight));
+      this.offset = (this.page - 1) * this.rowsPerPage;
     },
 
     hideMouse() {
