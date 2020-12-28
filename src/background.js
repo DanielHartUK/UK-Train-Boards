@@ -148,16 +148,18 @@ if (isDevelopment) {
   }
 }
 
-app.setUserTasks([
-  {
-    program: process.execPath,
-    arguments: '',
-    iconPath: process.execPath,
-    iconIndex: 0,
-    title: 'New Board',
-    description: 'Open the New Board screen',
-  },
-]);
+if (process.platform === 'win32') {
+  app.setUserTasks([
+    {
+      program: process.execPath,
+      arguments: '',
+      iconPath: process.execPath,
+      iconIndex: 0,
+      title: 'New Board',
+      description: 'Open the New Board screen',
+    },
+  ]);
+}
 
 ipcMain.on('open-board', (e, form) => {
   createBoard(form);
