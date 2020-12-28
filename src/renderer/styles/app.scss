@@ -10,6 +10,10 @@ html {
   font-family: 'New Rail Alphabet', 'Helvetica', 'Arial', sans-serif;
 }
 
+body {
+  overflow: hidden;
+}
+
 *,
 *::before,
 *::after {
