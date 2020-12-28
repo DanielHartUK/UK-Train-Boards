@@ -6,7 +6,7 @@ Generate faithful recreations of passenger information boards from UK railway st
 
 ## Development
 Install dependencies: \
-`npm install` (add ` --` if using NPM v7+)
+`npm install`
 
 Serve application: \
 `npm run electron:serve`
