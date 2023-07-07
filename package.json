@@ -83,7 +83,7 @@
     "lint-staged": "^10.2.11",
     "sass": "^1.26.9",
     "sass-loader": "^10.1.0",
-    "stylelint": "^13.6.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-sass-guidelines": "^7.0.0",
